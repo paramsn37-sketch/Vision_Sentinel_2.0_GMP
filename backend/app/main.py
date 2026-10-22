@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import asyncio
+import contextlib
 import logging
 from contextlib import asynccontextmanager
 
@@ -13,12 +15,27 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .api import analytics, auth, cameras, incidents, model, reports, system, uploads, ws, xai, zones
 from .logging import setup_logging
+from .services.runtime import retention_cleanup
 from .services.seed import seed_demo
 from .services.state import AppServices
 from .services.uploads import UploadWorker
 from .settings import get_settings
 
 log = logging.getLogger(__name__)
+
+
+async def _retention_loop(svc: AppServices, every_s: float = 3600) -> None:
+    """Hourly: delete snapshots and explanations older than storage.retention_days."""
+    while True:
+        try:
+            n = await asyncio.to_thread(retention_cleanup, svc.paths, svc.settings.storage.retention_days)
+            if n:
+                log.info(
+                    "retention: removed %d files older than %d days", n, svc.settings.storage.retention_days
+                )
+        except Exception:
+            log.exception("retention cleanup failed")
+        await asyncio.sleep(every_s)
 
 
 def create_app(services: AppServices | None = None, *, start_cameras: bool = True) -> FastAPI:
@@ -32,7 +49,11 @@ def create_app(services: AppServices | None = None, *, start_cameras: bool = Tru
         if start_cameras:
             svc.start_cameras()
         app.state.vs = svc
+        janitor = asyncio.create_task(_retention_loop(svc))
         yield
+        janitor.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await janitor
         svc.shutdown()
 
     settings = get_settings()

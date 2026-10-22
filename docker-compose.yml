@@ -7,8 +7,8 @@ services:
       VS_SECRET_KEY: ${VS_SECRET_KEY:-}
       VS_SERVER__CORS_ORIGINS: '["http://localhost:8080"]'
     volumes:
-      - ./data/runtime:/app/data/runtime
-      - ./models:/app/models
+      # Named volume: keeps the database, evidence and uploads across rebuilds, owned by the container user.
+      - runtime:/app/data/runtime
     restart: unless-stopped
   frontend:
     build: { context: ., dockerfile: frontend/Dockerfile }
@@ -16,3 +16,6 @@ services:
     depends_on:
       backend: { condition: service_healthy }
     restart: unless-stopped
+
+volumes:
+  runtime:

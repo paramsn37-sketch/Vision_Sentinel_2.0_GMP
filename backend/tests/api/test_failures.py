@@ -23,3 +23,20 @@ def test_corrupt_upload_is_rejected_cleanly(client, auth) -> None:
     else:
         assert r.status_code in (400, 415, 422) and r.json()["error"]["message"]
     assert client.get("/api/v1/health").json()["status"] == "ok"
+
+
+def test_retention_removes_only_old_files(tmp_path: Path) -> None:
+    import os
+    import time
+
+    from app.services.runtime import retention_cleanup
+    from app.services.storage import Paths
+
+    paths = Paths(tmp_path).ensure()
+    old, new = paths.snapshots / "old.jpg", paths.xai / "new.png"
+    old.write_bytes(b"x")
+    new.write_bytes(b"x")
+    past = time.time() - 40 * 86400
+    os.utime(old, (past, past))
+    assert retention_cleanup(paths, days=30) == 1
+    assert not old.exists() and new.exists()

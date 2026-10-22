@@ -14,7 +14,7 @@ explainable alerts (Grad-CAM). A rebuild from scratch of the v1 college prototyp
 
 ## Running the build
 
-1. Open this repo in Claude Code (Opus 5.5). A GPU machine gives the best model; without one the build trains a
+1. Open this repo in Claude Code. A GPU machine gives the best model; without one the build trains a
    smaller model on a time budget and ships a Colab notebook for the full run.
 2. Optional, for more training data: set `KAGGLE_USERNAME`, `KAGGLE_KEY` and `ROBOFLOW_API_KEY` as environment
    variables (never commit them). Without them the build uses public sources only.

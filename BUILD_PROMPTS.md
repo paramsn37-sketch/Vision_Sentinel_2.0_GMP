@@ -1,6 +1,6 @@
 # Vision Sentinel 2.0 — Unattended Build Prompts
 
-This file drives the whole build. It is written for **Claude Code (Opus 5.5)** running without a human watching.
+This file drives the whole build. It is written for **Claude Code** running without a human watching.
 Read §A (operating rules) once, then execute phases in order. The spec is [`docs/BLUEPRINT.md`](docs/BLUEPRINT.md);
 where this file and the blueprint disagree, the blueprint wins, and you record the conflict in `docs/DECISIONS.md`.
 

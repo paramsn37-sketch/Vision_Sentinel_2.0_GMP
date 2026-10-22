@@ -25,7 +25,8 @@ WORKDIR /app
 COPY --chown=sentinel backend/app backend/app
 COPY --chown=sentinel config config
 COPY --chown=sentinel data/samples data/samples
-RUN mkdir -p models data/runtime && chown -R sentinel /app
+COPY --chown=sentinel models models
+RUN mkdir -p data/runtime && chown -R sentinel /app
 USER sentinel
 ENV PATH=/venv/bin:$PATH PYTHONUNBUFFERED=1 YOLO_CONFIG_DIR=/tmp/ultralytics
 WORKDIR /app/backend
