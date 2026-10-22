@@ -96,12 +96,16 @@
     {
       "id": 5,
       "title": "Explainability: Grad-CAM, EigenCAM, sanity evals",
-      "status": "partial",
+      "status": "done-with-fallbacks",
       "started_at": null,
-      "finished_at": "2026-10-22T15:52:49Z",
-      "commit": "48265b5",
-      "gate_results": {},
-      "notes": "xai_eval pending trained detector"
+      "finished_at": "2026-10-22T23:26:56Z",
+      "commit": "f7ec00f",
+      "gate_results": {
+        "pointing_game": "pass (100%)",
+        "deletion": "pass (95%)",
+        "randomisation": "fail (SSIM 0.669)"
+      },
+      "notes": "Re-run with the trained model; people from COCO model (ADR-0013)"
     },
     {
       "id": 6,
@@ -173,12 +177,16 @@
     {
       "id": 11,
       "title": "Integration, performance, hardening, Docker, CI",
-      "status": "pending",
+      "status": "done-with-fallbacks",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
-      "notes": ""
+      "finished_at": "2026-10-22T23:26:56Z",
+      "commit": "f7ec00f",
+      "gate_results": {
+        "soak_memory": "pass (+3.0%)",
+        "cpu_fps_should": "pass (9.6)",
+        "gpu_fps": "not measured"
+      },
+      "notes": "Docker verified in CI only; image size budget enforced in CI"
     },
     {
       "id": 12,
