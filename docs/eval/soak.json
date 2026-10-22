@@ -1,0 +1,1116 @@
+{
+ "verdict": {
+  "rss_growth_after_warmup": 0.0304,
+  "memory_flat": true,
+  "fd_range": [
+   24,
+   24
+  ],
+  "thread_range": [
+   52,
+   52
+  ],
+  "stalled_cameras": [],
+  "load_avg_1m_end": 5.38
+ },
+ "samples": [
+  {
+   "minute": 0,
+   "at": "2026-10-22T16:57:16+00:00",
+   "rss_mb": 1217.2,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.1,
+    "town-square": 3.1,
+    "ppe-check": 3.1
+   },
+   "frames": {
+    "street-night": 103,
+    "town-square": 103,
+    "ppe-check": 102
+   },
+   "db_mb": 5.68
+  },
+  {
+   "minute": 1,
+   "at": "2026-10-22T16:58:16+00:00",
+   "rss_mb": 1216.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.1,
+    "town-square": 3.0,
+    "ppe-check": 3.1
+   },
+   "frames": {
+    "street-night": 286,
+    "town-square": 285,
+    "ppe-check": 285
+   },
+   "db_mb": 5.68
+  },
+  {
+   "minute": 2,
+   "at": "2026-10-22T16:59:16+00:00",
+   "rss_mb": 1219.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.4,
+    "town-square": 3.5,
+    "ppe-check": 3.6
+   },
+   "frames": {
+    "street-night": 480,
+    "town-square": 481,
+    "ppe-check": 481
+   },
+   "db_mb": 5.72
+  },
+  {
+   "minute": 3,
+   "at": "2026-10-22T17:00:16+00:00",
+   "rss_mb": 1235.3,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.4,
+    "town-square": 3.4,
+    "ppe-check": 3.5
+   },
+   "frames": {
+    "street-night": 671,
+    "town-square": 672,
+    "ppe-check": 672
+   },
+   "db_mb": 5.77
+  },
+  {
+   "minute": 4,
+   "at": "2026-10-22T17:01:16+00:00",
+   "rss_mb": 1244.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 895,
+    "town-square": 895,
+    "ppe-check": 896
+   },
+   "db_mb": 5.82
+  },
+  {
+   "minute": 5,
+   "at": "2026-10-22T17:02:16+00:00",
+   "rss_mb": 1249.0,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 1126,
+    "town-square": 1127,
+    "ppe-check": 1127
+   },
+   "db_mb": 5.91
+  },
+  {
+   "minute": 6,
+   "at": "2026-10-22T17:03:16+00:00",
+   "rss_mb": 1252.0,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 1362,
+    "town-square": 1362,
+    "ppe-check": 1363
+   },
+   "db_mb": 5.96
+  },
+  {
+   "minute": 7,
+   "at": "2026-10-22T17:04:16+00:00",
+   "rss_mb": 1253.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 1599,
+    "town-square": 1600,
+    "ppe-check": 1600
+   },
+   "db_mb": 6.0
+  },
+  {
+   "minute": 8,
+   "at": "2026-10-22T17:05:16+00:00",
+   "rss_mb": 1259.2,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 1834,
+    "town-square": 1834,
+    "ppe-check": 1834
+   },
+   "db_mb": 6.05
+  },
+  {
+   "minute": 9,
+   "at": "2026-10-22T17:06:16+00:00",
+   "rss_mb": 1259.4,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.1,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 2060,
+    "town-square": 2061,
+    "ppe-check": 2061
+   },
+   "db_mb": 6.1
+  },
+  {
+   "minute": 10,
+   "at": "2026-10-22T17:07:16+00:00",
+   "rss_mb": 1259.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.7,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 2280,
+    "town-square": 2280,
+    "ppe-check": 2281
+   },
+   "db_mb": 6.15
+  },
+  {
+   "minute": 11,
+   "at": "2026-10-22T17:08:16+00:00",
+   "rss_mb": 1261.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 2520,
+    "town-square": 2519,
+    "ppe-check": 2521
+   },
+   "db_mb": 6.19
+  },
+  {
+   "minute": 12,
+   "at": "2026-10-22T17:09:16+00:00",
+   "rss_mb": 1262.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.1,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 2743,
+    "town-square": 2744,
+    "ppe-check": 2746
+   },
+   "db_mb": 6.24
+  },
+  {
+   "minute": 13,
+   "at": "2026-10-22T17:10:16+00:00",
+   "rss_mb": 1262.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.6,
+    "town-square": 3.6,
+    "ppe-check": 3.6
+   },
+   "frames": {
+    "street-night": 2959,
+    "town-square": 2959,
+    "ppe-check": 2962
+   },
+   "db_mb": 6.33
+  },
+  {
+   "minute": 14,
+   "at": "2026-10-22T17:11:16+00:00",
+   "rss_mb": 1265.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.5,
+    "town-square": 3.5,
+    "ppe-check": 3.4
+   },
+   "frames": {
+    "street-night": 3173,
+    "town-square": 3173,
+    "ppe-check": 3176
+   },
+   "db_mb": 6.39
+  },
+  {
+   "minute": 15,
+   "at": "2026-10-22T17:12:16+00:00",
+   "rss_mb": 1268.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 3385,
+    "town-square": 3385,
+    "ppe-check": 3388
+   },
+   "db_mb": 6.43
+  },
+  {
+   "minute": 16,
+   "at": "2026-10-22T17:13:16+00:00",
+   "rss_mb": 1272.3,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.7,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 3601,
+    "town-square": 3601,
+    "ppe-check": 3603
+   },
+   "db_mb": 6.48
+  },
+  {
+   "minute": 17,
+   "at": "2026-10-22T17:14:16+00:00",
+   "rss_mb": 1272.4,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.7,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 3817,
+    "town-square": 3817,
+    "ppe-check": 3818
+   },
+   "db_mb": 6.54
+  },
+  {
+   "minute": 18,
+   "at": "2026-10-22T17:15:16+00:00",
+   "rss_mb": 1277.2,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.4,
+    "town-square": 3.4,
+    "ppe-check": 3.4
+   },
+   "frames": {
+    "street-night": 4046,
+    "town-square": 4046,
+    "ppe-check": 4047
+   },
+   "db_mb": 6.57
+  },
+  {
+   "minute": 19,
+   "at": "2026-10-22T17:16:16+00:00",
+   "rss_mb": 1277.4,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 4279,
+    "town-square": 4278,
+    "ppe-check": 4280
+   },
+   "db_mb": 6.62
+  },
+  {
+   "minute": 20,
+   "at": "2026-10-22T17:17:16+00:00",
+   "rss_mb": 1277.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.7,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 4499,
+    "town-square": 4499,
+    "ppe-check": 4500
+   },
+   "db_mb": 6.67
+  },
+  {
+   "minute": 21,
+   "at": "2026-10-22T17:18:16+00:00",
+   "rss_mb": 1277.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 4720,
+    "town-square": 4720,
+    "ppe-check": 4722
+   },
+   "db_mb": 6.71
+  },
+  {
+   "minute": 22,
+   "at": "2026-10-22T17:19:16+00:00",
+   "rss_mb": 1278.0,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 4944,
+    "town-square": 4944,
+    "ppe-check": 4946
+   },
+   "db_mb": 6.81
+  },
+  {
+   "minute": 23,
+   "at": "2026-10-22T17:20:16+00:00",
+   "rss_mb": 1278.1,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.9,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 5173,
+    "town-square": 5172,
+    "ppe-check": 5174
+   },
+   "db_mb": 6.87
+  },
+  {
+   "minute": 24,
+   "at": "2026-10-22T17:21:16+00:00",
+   "rss_mb": 1278.2,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 5398,
+    "town-square": 5398,
+    "ppe-check": 5400
+   },
+   "db_mb": 6.91
+  },
+  {
+   "minute": 25,
+   "at": "2026-10-22T17:22:16+00:00",
+   "rss_mb": 1278.4,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.1,
+    "ppe-check": 4.1
+   },
+   "frames": {
+    "street-night": 5633,
+    "town-square": 5633,
+    "ppe-check": 5635
+   },
+   "db_mb": 6.95
+  },
+  {
+   "minute": 26,
+   "at": "2026-10-22T17:23:16+00:00",
+   "rss_mb": 1278.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.7,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 5871,
+    "town-square": 5871,
+    "ppe-check": 5873
+   },
+   "db_mb": 7.01
+  },
+  {
+   "minute": 27,
+   "at": "2026-10-22T17:24:16+00:00",
+   "rss_mb": 1278.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 6101,
+    "town-square": 6101,
+    "ppe-check": 6103
+   },
+   "db_mb": 7.05
+  },
+  {
+   "minute": 28,
+   "at": "2026-10-22T17:25:16+00:00",
+   "rss_mb": 1278.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 6334,
+    "town-square": 6333,
+    "ppe-check": 6335
+   },
+   "db_mb": 7.09
+  },
+  {
+   "minute": 29,
+   "at": "2026-10-22T17:26:16+00:00",
+   "rss_mb": 1278.8,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.2,
+    "ppe-check": 4.1
+   },
+   "frames": {
+    "street-night": 6568,
+    "town-square": 6567,
+    "ppe-check": 6569
+   },
+   "db_mb": 7.14
+  },
+  {
+   "minute": 30,
+   "at": "2026-10-22T17:27:16+00:00",
+   "rss_mb": 1278.9,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.8,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 6794,
+    "town-square": 6793,
+    "ppe-check": 6795
+   },
+   "db_mb": 7.19
+  },
+  {
+   "minute": 31,
+   "at": "2026-10-22T17:28:16+00:00",
+   "rss_mb": 1281.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 7029,
+    "town-square": 7028,
+    "ppe-check": 7030
+   },
+   "db_mb": 7.24
+  },
+  {
+   "minute": 32,
+   "at": "2026-10-22T17:29:16+00:00",
+   "rss_mb": 1281.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.7,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 7262,
+    "town-square": 7262,
+    "ppe-check": 7263
+   },
+   "db_mb": 7.28
+  },
+  {
+   "minute": 33,
+   "at": "2026-10-22T17:30:16+00:00",
+   "rss_mb": 1281.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 7495,
+    "town-square": 7495,
+    "ppe-check": 7497
+   },
+   "db_mb": 7.33
+  },
+  {
+   "minute": 34,
+   "at": "2026-10-22T17:31:16+00:00",
+   "rss_mb": 1281.9,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 7721,
+    "town-square": 7722,
+    "ppe-check": 7723
+   },
+   "db_mb": 7.43
+  },
+  {
+   "minute": 35,
+   "at": "2026-10-22T17:32:16+00:00",
+   "rss_mb": 1283.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 7946,
+    "town-square": 7947,
+    "ppe-check": 7948
+   },
+   "db_mb": 7.48
+  },
+  {
+   "minute": 36,
+   "at": "2026-10-22T17:33:16+00:00",
+   "rss_mb": 1283.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.3,
+    "town-square": 4.3,
+    "ppe-check": 4.3
+   },
+   "frames": {
+    "street-night": 8181,
+    "town-square": 8182,
+    "ppe-check": 8185
+   },
+   "db_mb": 7.54
+  },
+  {
+   "minute": 37,
+   "at": "2026-10-22T17:34:16+00:00",
+   "rss_mb": 1283.9,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.3,
+    "town-square": 4.3,
+    "ppe-check": 4.3
+   },
+   "frames": {
+    "street-night": 8434,
+    "town-square": 8435,
+    "ppe-check": 8438
+   },
+   "db_mb": 7.57
+  },
+  {
+   "minute": 38,
+   "at": "2026-10-22T17:35:16+00:00",
+   "rss_mb": 1283.9,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 3.9,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 8683,
+    "town-square": 8684,
+    "ppe-check": 8687
+   },
+   "db_mb": 7.61
+  },
+  {
+   "minute": 39,
+   "at": "2026-10-22T17:36:16+00:00",
+   "rss_mb": 1284.1,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 8915,
+    "town-square": 8917,
+    "ppe-check": 8919
+   },
+   "db_mb": 7.67
+  },
+  {
+   "minute": 40,
+   "at": "2026-10-22T17:37:16+00:00",
+   "rss_mb": 1284.3,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 9146,
+    "town-square": 9147,
+    "ppe-check": 9150
+   },
+   "db_mb": 7.71
+  },
+  {
+   "minute": 41,
+   "at": "2026-10-22T17:38:16+00:00",
+   "rss_mb": 1284.3,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 9375,
+    "town-square": 9376,
+    "ppe-check": 9379
+   },
+   "db_mb": 7.76
+  },
+  {
+   "minute": 42,
+   "at": "2026-10-22T17:39:16+00:00",
+   "rss_mb": 1284.5,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 9604,
+    "town-square": 9605,
+    "ppe-check": 9609
+   },
+   "db_mb": 7.86
+  },
+  {
+   "minute": 43,
+   "at": "2026-10-22T17:40:16+00:00",
+   "rss_mb": 1284.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.1,
+    "ppe-check": 4.1
+   },
+   "frames": {
+    "street-night": 9845,
+    "town-square": 9845,
+    "ppe-check": 9849
+   },
+   "db_mb": 7.89
+  },
+  {
+   "minute": 44,
+   "at": "2026-10-22T17:41:16+00:00",
+   "rss_mb": 1284.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 10078,
+    "town-square": 10079,
+    "ppe-check": 10082
+   },
+   "db_mb": 7.95
+  },
+  {
+   "minute": 45,
+   "at": "2026-10-22T17:42:16+00:00",
+   "rss_mb": 1284.8,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.1,
+    "ppe-check": 4.1
+   },
+   "frames": {
+    "street-night": 10314,
+    "town-square": 10315,
+    "ppe-check": 10320
+   },
+   "db_mb": 8.0
+  },
+  {
+   "minute": 46,
+   "at": "2026-10-22T17:43:16+00:00",
+   "rss_mb": 1285.0,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 10547,
+    "town-square": 10548,
+    "ppe-check": 10553
+   },
+   "db_mb": 8.05
+  },
+  {
+   "minute": 47,
+   "at": "2026-10-22T17:44:16+00:00",
+   "rss_mb": 1285.1,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 10781,
+    "town-square": 10781,
+    "ppe-check": 10787
+   },
+   "db_mb": 8.09
+  },
+  {
+   "minute": 48,
+   "at": "2026-10-22T17:45:16+00:00",
+   "rss_mb": 1285.2,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.7,
+    "ppe-check": 3.7
+   },
+   "frames": {
+    "street-night": 11007,
+    "town-square": 11007,
+    "ppe-check": 11013
+   },
+   "db_mb": 8.14
+  },
+  {
+   "minute": 49,
+   "at": "2026-10-22T17:46:16+00:00",
+   "rss_mb": 1285.3,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.5,
+    "town-square": 3.5,
+    "ppe-check": 3.5
+   },
+   "frames": {
+    "street-night": 11236,
+    "town-square": 11235,
+    "ppe-check": 11242
+   },
+   "db_mb": 8.23
+  },
+  {
+   "minute": 50,
+   "at": "2026-10-22T17:47:16+00:00",
+   "rss_mb": 1285.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 4.0
+   },
+   "frames": {
+    "street-night": 11464,
+    "town-square": 11463,
+    "ppe-check": 11469
+   },
+   "db_mb": 8.27
+  },
+  {
+   "minute": 51,
+   "at": "2026-10-22T17:48:16+00:00",
+   "rss_mb": 1285.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 11687,
+    "town-square": 11686,
+    "ppe-check": 11693
+   },
+   "db_mb": 8.32
+  },
+  {
+   "minute": 52,
+   "at": "2026-10-22T17:49:16+00:00",
+   "rss_mb": 1285.8,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.6,
+    "town-square": 3.7,
+    "ppe-check": 3.6
+   },
+   "frames": {
+    "street-night": 11917,
+    "town-square": 11916,
+    "ppe-check": 11923
+   },
+   "db_mb": 8.36
+  },
+  {
+   "minute": 53,
+   "at": "2026-10-22T17:50:16+00:00",
+   "rss_mb": 1285.9,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.0,
+    "town-square": 4.0,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 12147,
+    "town-square": 12146,
+    "ppe-check": 12153
+   },
+   "db_mb": 8.41
+  },
+  {
+   "minute": 54,
+   "at": "2026-10-22T17:51:16+00:00",
+   "rss_mb": 1286.1,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.1,
+    "ppe-check": 4.1
+   },
+   "frames": {
+    "street-night": 12390,
+    "town-square": 12389,
+    "ppe-check": 12396
+   },
+   "db_mb": 8.45
+  },
+  {
+   "minute": 55,
+   "at": "2026-10-22T17:52:16+00:00",
+   "rss_mb": 1286.2,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 12616,
+    "town-square": 12616,
+    "ppe-check": 12622
+   },
+   "db_mb": 8.5
+  },
+  {
+   "minute": 56,
+   "at": "2026-10-22T17:53:16+00:00",
+   "rss_mb": 1286.3,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.7,
+    "town-square": 3.7,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 12839,
+    "town-square": 12838,
+    "ppe-check": 12845
+   },
+   "db_mb": 8.56
+  },
+  {
+   "minute": 57,
+   "at": "2026-10-22T17:54:16+00:00",
+   "rss_mb": 1286.4,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 13068,
+    "town-square": 13067,
+    "ppe-check": 13075
+   },
+   "db_mb": 8.64
+  },
+  {
+   "minute": 58,
+   "at": "2026-10-22T17:55:16+00:00",
+   "rss_mb": 1286.6,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.9,
+    "town-square": 3.9,
+    "ppe-check": 3.9
+   },
+   "frames": {
+    "street-night": 13313,
+    "town-square": 13312,
+    "ppe-check": 13320
+   },
+   "db_mb": 8.69
+  },
+  {
+   "minute": 59,
+   "at": "2026-10-22T17:56:16+00:00",
+   "rss_mb": 1286.7,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 4.1,
+    "town-square": 4.1,
+    "ppe-check": 4.1
+   },
+   "frames": {
+    "street-night": 13552,
+    "town-square": 13551,
+    "ppe-check": 13558
+   },
+   "db_mb": 8.74
+  },
+  {
+   "minute": 60,
+   "at": "2026-10-22T17:57:16+00:00",
+   "rss_mb": 1287.0,
+   "fds": 24,
+   "threads": 52,
+   "fps": {
+    "street-night": 3.8,
+    "town-square": 3.8,
+    "ppe-check": 3.8
+   },
+   "frames": {
+    "street-night": 13778,
+    "town-square": 13776,
+    "ppe-check": 13784
+   },
+   "db_mb": 8.79
+  }
+ ]
+}
