@@ -1,0 +1,16 @@
+# Merged Vision Sentinel dataset (built by training/scripts/merge.py + split.py).
+# `path` is resolved relative to this file's repo; train.py rewrites it to an absolute path at runtime.
+path: ../../data/merged
+train: train/images
+val: val/images
+test: test/images
+names:
+  0: person
+  1: head
+  2: helmet
+  3: vest
+  4: gloves
+  5: hand
+  6: boots
+  7: goggles
+  8: no_goggles

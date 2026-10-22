@@ -1,18 +1,43 @@
 {
   "schema": 1,
   "blueprint_version": "1.0",
-  "env": {},
+  "env": {
+    "cpu": "4 vCPU (~1 core effective)",
+    "ram_gb": 15,
+    "gpu": null,
+    "training_mode": "cpu-budget",
+    "python": "3.12.13",
+    "node": "22.22.0",
+    "ultralytics": "8.4.183",
+    "torch": "2.14.1",
+    "credentials": {
+      "kaggle": false,
+      "roboflow": false
+    },
+    "blocked_hosts": [
+      "huggingface.co",
+      "kaggle.com",
+      "roboflow.com",
+      "motchallenge.net",
+      "pexels.com",
+      "download.pytorch.org"
+    ]
+  },
   "followups": [],
   "phases": [
     {
       "id": 0,
       "title": "Bootstrap, tooling, skills, environment probe",
-      "status": "pending",
-      "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
-      "notes": ""
+      "status": "done",
+      "started_at": "2026-10-22T13:57:32Z",
+      "finished_at": "2026-10-22T13:57:32Z",
+      "commit": "0095a46",
+      "gate_results": {
+        "make lint": "pass",
+        "make test": "pass",
+        "npm run build": "pass"
+      },
+      "notes": "cpu-budget training mode"
     },
     {
       "id": 1,

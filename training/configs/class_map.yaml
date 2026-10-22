@@ -1,0 +1,30 @@
+# Target taxonomy (blueprint §4.2, v2.0 build) and per-source class mapping.
+# Every source class must appear either in `map` or in `drop`; tests enforce it.
+taxonomy: [person, head, helmet, vest, gloves, hand, boots, goggles, no_goggles]
+
+sources:
+  construction_ppe:
+    map:
+      Person: person
+      no_helmet: head
+      helmet: helmet
+      vest: vest
+      gloves: gloves
+      no_gloves: hand
+      boots: boots
+      goggles: goggles
+      no_goggle: no_goggles
+    drop: [none, no_boots]
+
+  openimages_v7:
+    map:
+      Person: person
+      Human head: head
+      Glove: gloves
+      Human hand: hand
+      Boot: boots
+      Goggles: goggles
+    # Images carrying any of these labels are excluded entirely: sport/bike helmets are not hard hats and
+    # would teach the model the wrong thing for both `helmet` and `head`.
+    exclude_images_with: [Helmet, Bicycle helmet, Football helmet]
+    drop: []
