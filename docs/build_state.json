@@ -77,11 +77,13 @@
     {
       "id": 4,
       "title": "Zones, intrusion rules and incident engine",
-      "status": "pending",
+      "status": "done",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
+      "finished_at": "2026-10-22T15:52:49Z",
+      "commit": "6994a6f",
+      "gate_results": {
+        "pytest zones+incidents": "pass"
+      },
       "notes": ""
     },
     {
