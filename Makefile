@@ -19,7 +19,7 @@ frontend:
 	cd $(FRONTEND) && npm run dev
 
 lint:
-	$(UV) ruff check . ../training ../scripts && ruff format --check . ../training ../scripts
+	$(UV) ruff check . ../training ../scripts && uv run ruff format --check . ../training ../scripts
 	cd $(FRONTEND) && npm run lint
 
 typecheck:
