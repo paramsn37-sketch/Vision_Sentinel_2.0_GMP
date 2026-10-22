@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+dist/
+logs/
+data/raw/
+data/merged/
+data/xai/
+training/runs/*/weights/last.pt
+*.mp4.tmp
+.DS_Store

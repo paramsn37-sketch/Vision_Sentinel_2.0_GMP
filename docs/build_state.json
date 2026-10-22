@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "blueprint_version": "1.0",
+  "env": {},
+  "followups": [],
+  "phases": [
+    {
+      "id": 0,
+      "title": "Bootstrap, tooling, skills, environment probe",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 1,
+      "title": "Datasets: acquire, remap, dedup, split, dataset card",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "title": "Detector training, evaluation and records",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "title": "Vision core: sources, detector, tracking, unique counting, PPE state",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "title": "Zones, intrusion rules and incident engine",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "title": "Explainability: Grad-CAM, EigenCAM, sanity evals",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "title": "Backend API, persistence, streaming, auth, reports",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "title": "Design direction and design system",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "title": "Frontend app: shell and screens",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "title": "Flagship interactions: zone editor and explainability panel",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "title": "Playwright refinement loop",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 11,
+      "title": "Integration, performance, hardening, Docker, CI",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    },
+    {
+      "id": 12,
+      "title": "Docs, final audit, release v2.0.0",
+      "status": "pending",
+      "started_at": null,
+      "finished_at": null,
+      "commit": null,
+      "gate_results": {},
+      "notes": ""
+    }
+  ]
+}
