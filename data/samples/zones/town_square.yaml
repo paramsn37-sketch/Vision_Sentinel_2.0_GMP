@@ -1,0 +1,23 @@
+# Demo zones (same as app/services/seed.py). Normalised [x, y] polygon points.
+zones:
+- name: Square centre
+  polygon:
+  - - 0.22
+    - 0.62
+  - - 0.78
+    - 0.6
+  - - 0.95
+    - 1.0
+  - - 0.1
+    - 1.0
+  camera_id: town-square
+  kind: hazard
+  rules:
+    no_entry: false
+    required_ppe: []
+    max_occupancy: 3
+    max_dwell_s: 20
+    active_hours: null
+  severity: medium
+  enabled: true
+  id: town-square-0

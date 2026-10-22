@@ -65,12 +65,14 @@
     {
       "id": 3,
       "title": "Vision core: sources, detector, tracking, unique counting, PPE state",
-      "status": "pending",
+      "status": "done-with-fallbacks",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
-      "notes": ""
+      "finished_at": "2026-10-22T15:52:48Z",
+      "commit": "08306d7",
+      "gate_results": {
+        "pytest tests/core": "pass"
+      },
+      "notes": "count error 20% (target 10% not met, ADR-0009)"
     },
     {
       "id": 4,

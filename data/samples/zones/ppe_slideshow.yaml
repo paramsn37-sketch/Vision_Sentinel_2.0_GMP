@@ -1,0 +1,25 @@
+# Demo zones (same as app/services/seed.py). Normalised [x, y] polygon points.
+zones:
+- name: Site floor
+  polygon:
+  - - 0.0
+    - 0.0
+  - - 1.0
+    - 0.0
+  - - 1.0
+    - 1.0
+  - - 0.0
+    - 1.0
+  camera_id: ppe-check
+  kind: ppe_required
+  rules:
+    no_entry: false
+    required_ppe:
+    - helmet
+    - vest
+    max_occupancy: null
+    max_dwell_s: null
+    active_hours: null
+  severity: high
+  enabled: true
+  id: ppe-check-0

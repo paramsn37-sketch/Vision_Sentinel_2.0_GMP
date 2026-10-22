@@ -1,0 +1,44 @@
+# Demo zones (same as app/services/seed.py). Normalised [x, y] polygon points.
+zones:
+- name: Vehicle lane
+  polygon:
+  - - 0.43
+    - 0.0
+  - - 0.7
+    - 0.0
+  - - 0.8
+    - 1.0
+  - - 0.44
+    - 1.0
+  camera_id: street-night
+  kind: restricted
+  rules:
+    no_entry: true
+    required_ppe: []
+    max_occupancy: null
+    max_dwell_s: null
+    active_hours: null
+  severity: high
+  enabled: true
+  id: street-night-0
+- name: West walkway
+  polygon:
+  - - 0.0
+    - 0.0
+  - - 0.33
+    - 0.0
+  - - 0.3
+    - 1.0
+  - - 0.0
+    - 1.0
+  camera_id: street-night
+  kind: hazard
+  rules:
+    no_entry: false
+    required_ppe: []
+    max_occupancy: 12
+    max_dwell_s: null
+    active_hours: null
+  severity: low
+  enabled: true
+  id: street-night-1
