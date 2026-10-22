@@ -9,3 +9,4 @@
 Frames were re-encoded to H.264 at 960 px width. Used for demos and the counting evaluation only (non-commercial).
 No industrial worker footage with a permissive licence was reachable from the build environment; upload your own
 site footage on the Uploads page or add an RTSP camera.
+| ppe_slideshow.mp4 | 18 still images from the frozen test split of Ultralytics Construction-PPE, each held 4 s | AGPL-3.0 |

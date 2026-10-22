@@ -1,0 +1,316 @@
+{
+  "detector": "yolo26n-coco (fallback, person only)",
+  "imgsz": 640,
+  "tuned_config": {
+    "track_high_thresh": 0.2,
+    "track_low_thresh": 0.1,
+    "new_track_thresh": 0.25,
+    "match_thresh": 0.8,
+    "track_buffer_s": 1.5,
+    "min_hits": 2,
+    "min_age_s": 0.2,
+    "min_hit_ratio": 0.3,
+    "reid_window_s": 0.0,
+    "reid_max_center_dist": 0.75,
+    "reid_size_ratio": [
+      0.6,
+      1.6
+    ],
+    "reid_max_hist_dist": 0.35
+  },
+  "top_trials": [
+    {
+      "params": {
+        "track_high_thresh": 0.2,
+        "new_track_thresh": 0.25,
+        "min_hits": 2,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 1.5,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7179
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.2,
+        "new_track_thresh": 0.25,
+        "min_hits": 2,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 3.0,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7179
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.2,
+        "new_track_thresh": 0.25,
+        "min_hits": 3,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 1.5,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7179
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.2,
+        "new_track_thresh": 0.25,
+        "min_hits": 3,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 3.0,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7179
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.2,
+        "new_track_thresh": 0.25,
+        "min_hits": 5,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 1.5,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7274
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.2,
+        "new_track_thresh": 0.25,
+        "min_hits": 5,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 3.0,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7274
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.3,
+        "new_track_thresh": 0.25,
+        "min_hits": 2,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 1.5,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7416
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.3,
+        "new_track_thresh": 0.25,
+        "min_hits": 2,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 3.0,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7416
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.3,
+        "new_track_thresh": 0.25,
+        "min_hits": 3,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 1.5,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7416
+    },
+    {
+      "params": {
+        "track_high_thresh": 0.3,
+        "new_track_thresh": 0.25,
+        "min_hits": 3,
+        "min_age_s": 0.2,
+        "min_hit_ratio": 0.3,
+        "track_buffer_s": 3.0,
+        "reid_window_s": 0.0
+      },
+      "objective": 0.7416
+    }
+  ],
+  "trials": 216,
+  "report": [
+    {
+      "seq": "MOT17-05",
+      "fps": 14.0,
+      "frames": 418,
+      "naive_1fps": {
+        "gt_unique": 71,
+        "pred_unique": 171,
+        "count_error": 1.408450704225352
+      },
+      "bytetrack_default": {
+        "gt_unique": 71,
+        "pred_unique": 87,
+        "count_error": 0.22535211267605634,
+        "idf1": 0.6249356885611388,
+        "mota": 0.5183199285075961,
+        "id_switches": 42
+      },
+      "bytetrack_tuned": {
+        "gt_unique": 71,
+        "pred_unique": 85,
+        "count_error": 0.19718309859154928,
+        "idf1": 0.6191620879120879,
+        "mota": 0.5195114685731308,
+        "id_switches": 45
+      },
+      "ours": {
+        "gt_unique": 71,
+        "pred_unique": 76,
+        "count_error": 0.07042253521126761,
+        "idf1": 0.6021891261439082,
+        "mota": 0.49151027703306527,
+        "id_switches": 38
+      }
+    },
+    {
+      "seq": "MOT17-09",
+      "fps": 30.0,
+      "frames": 262,
+      "naive_1fps": {
+        "gt_unique": 22,
+        "pred_unique": 58,
+        "count_error": 1.6363636363636365
+      },
+      "bytetrack_default": {
+        "gt_unique": 22,
+        "pred_unique": 36,
+        "count_error": 0.6363636363636364,
+        "idf1": 0.601883390102184,
+        "mota": 0.5658214657867315,
+        "id_switches": 31
+      },
+      "bytetrack_tuned": {
+        "gt_unique": 22,
+        "pred_unique": 38,
+        "count_error": 0.7272727272727273,
+        "idf1": 0.5966828478964401,
+        "mota": 0.5637374088225078,
+        "id_switches": 36
+      },
+      "ours": {
+        "gt_unique": 22,
+        "pred_unique": 31,
+        "count_error": 0.4090909090909091,
+        "idf1": 0.5808219178082191,
+        "mota": 0.5442862104897535,
+        "id_switches": 29
+      }
+    },
+    {
+      "seq": "MOT17-10",
+      "fps": 30.0,
+      "frames": 326,
+      "naive_1fps": {
+        "gt_unique": 36,
+        "pred_unique": 65,
+        "count_error": 0.8055555555555556
+      },
+      "bytetrack_default": {
+        "gt_unique": 36,
+        "pred_unique": 43,
+        "count_error": 0.19444444444444445,
+        "idf1": 0.42375487992428723,
+        "mota": 0.3395238899206483,
+        "id_switches": 15
+      },
+      "bytetrack_tuned": {
+        "gt_unique": 36,
+        "pred_unique": 44,
+        "count_error": 0.2222222222222222,
+        "idf1": 0.4032392521138502,
+        "mota": 0.34239405706567616,
+        "id_switches": 20
+      },
+      "ours": {
+        "gt_unique": 36,
+        "pred_unique": 35,
+        "count_error": 0.027777777777777776,
+        "idf1": 0.38795003673769285,
+        "mota": 0.32230288705048116,
+        "id_switches": 14
+      }
+    },
+    {
+      "seq": "MOT17-11",
+      "fps": 30.0,
+      "frames": 449,
+      "naive_1fps": {
+        "gt_unique": 44,
+        "pred_unique": 100,
+        "count_error": 1.2727272727272727
+      },
+      "bytetrack_default": {
+        "gt_unique": 44,
+        "pred_unique": 50,
+        "count_error": 0.13636363636363635,
+        "idf1": 0.561640280301064,
+        "mota": 0.5614345804737657,
+        "id_switches": 19
+      },
+      "bytetrack_tuned": {
+        "gt_unique": 44,
+        "pred_unique": 48,
+        "count_error": 0.09090909090909091,
+        "idf1": 0.56015625,
+        "mota": 0.5594421075935355,
+        "id_switches": 18
+      },
+      "ours": {
+        "gt_unique": 44,
+        "pred_unique": 37,
+        "count_error": 0.1590909090909091,
+        "idf1": 0.5447922288181327,
+        "mota": 0.5317688731458933,
+        "id_switches": 15
+      }
+    },
+    {
+      "seq": "MOT17-13",
+      "fps": 25.0,
+      "frames": 374,
+      "naive_1fps": {
+        "gt_unique": 44,
+        "pred_unique": 32,
+        "count_error": 0.2727272727272727
+      },
+      "bytetrack_default": {
+        "gt_unique": 44,
+        "pred_unique": 47,
+        "count_error": 0.06818181818181818,
+        "idf1": 0.42857142857142855,
+        "mota": 0.2927756653992395,
+        "id_switches": 28
+      },
+      "bytetrack_tuned": {
+        "gt_unique": 44,
+        "pred_unique": 49,
+        "count_error": 0.11363636363636363,
+        "idf1": 0.42689924259811796,
+        "mota": 0.2858048162230672,
+        "id_switches": 31
+      },
+      "ours": {
+        "gt_unique": 44,
+        "pred_unique": 30,
+        "count_error": 0.3181818181818182,
+        "idf1": 0.3949013949013949,
+        "mota": 0.2569708491761724,
+        "id_switches": 7
+      }
+    }
+  ]
+}

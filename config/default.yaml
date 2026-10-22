@@ -1,0 +1,56 @@
+# Vision Sentinel default configuration. Every key can be overridden with an environment variable:
+# VS_<SECTION>__<KEY>, e.g. VS_TRACKING__MIN_HITS=8. Thresholds are explained in docs/operations.md.
+
+server:
+  cors_origins: ["http://localhost:5173", "http://127.0.0.1:5173"]
+  session_hours: 12
+  stream_fps: 12          # frames per second sent to each browser tile
+  stream_max_width: 1280
+  jpeg_quality: 70
+
+storage:
+  data_dir: data/runtime  # database, snapshots, explanations, uploads
+  retention_days: 30
+  max_upload_mb: 200
+
+privacy:
+  blur_heads_in_snapshots: false
+
+demo:
+  seed: true              # create demo cameras from data/samples on first run
+
+detection:
+  device: auto
+  imgsz: null             # null = the model's own size (models/model.json)
+
+tracking:                 # tuned on MOT17-02/04, see docs/eval/counting_report.md (ADR-0009)
+  track_high_thresh: 0.2
+  track_low_thresh: 0.1
+  new_track_thresh: 0.25
+  match_thresh: 0.8
+  track_buffer_s: 1.5
+  min_hits: 2
+  min_age_s: 0.2
+  min_hit_ratio: 0.5      # product constraint (flicker never counts); tuned value 0.3, see ADR-0009
+  reid_window_s: 0.0      # lost-track merge: did not improve the tuning set; 2.0 enables it
+
+ppe:
+  evidence_tau_s: 0.6
+  absent_below: 0.3
+  present_above: 0.7
+  violation_min_s: 2.0
+  min_person_height_px: 60
+
+zones:
+  enter_frames: 3
+  exit_frames: 5
+  point_mode: foot
+  lost_grace_s: 1.0
+
+incidents:
+  clear_s: 3.0
+  cooldown_s: 30.0
+  overcrowding_min_s: 2.0
+
+site:
+  required_ppe: []        # PPE required everywhere on site, e.g. [helmet, vest]

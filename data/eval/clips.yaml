@@ -26,3 +26,26 @@ pedestrian_street_night:
     unique_pedestrians: 69
     unique_static_persons: 5
   gt_path: data/raw/mot17/MOT17-50/train/MOT17-04/gt/gt.txt
+ppe_slideshow:
+  file: data/samples/ppe_slideshow.mp4
+  images:
+  - construction_ppe__image1193.jpg
+  - construction_ppe__image123.jpg
+  - construction_ppe__image1285.jpg
+  - construction_ppe__image1289.jpg
+  - construction_ppe__image1306.jpg
+  - construction_ppe__image1316.jpg
+  - construction_ppe__image1400.jpg
+  - construction_ppe__image17.jpg
+  - construction_ppe__image179.jpg
+  - construction_ppe__image32.jpg
+  - construction_ppe__image335.jpg
+  - construction_ppe__image345.jpg
+  - construction_ppe__image357.jpg
+  - construction_ppe__image38.jpg
+  - construction_ppe__image573.jpg
+  - construction_ppe__image759.jpg
+  - construction_ppe__image767.jpg
+  - construction_ppe__image956.jpg
+  hold_s: 4.0
+  fps: 10
