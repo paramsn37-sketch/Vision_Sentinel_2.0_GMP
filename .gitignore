@@ -28,3 +28,4 @@ data/runtime/
 *.db-shm
 data/eval/cache/
 data/runtime/
+frontend/e2e/__screenshots__/visual/

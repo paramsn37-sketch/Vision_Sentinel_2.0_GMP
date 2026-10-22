@@ -14,7 +14,7 @@
   --line-strong: #6a6b72;
   --fg: #f2f2f3;
   --fg-muted: #9a9ca3;
-  --fg-subtle: #85878e;
+  --fg-subtle: #8b8d94;
   --fg-on-accent: #0c1420;
 
   /* State (ISO 3864 meanings). Only used when something is in that state. */
@@ -48,7 +48,7 @@
   --line-strong: #85878f;
   --fg: #17171a;
   --fg-muted: #5c5e66;
-  --fg-subtle: #6e7078;
+  --fg-subtle: #64666e;
   --fg-on-accent: #ffffff;
 
   --accent: #1d64c2;

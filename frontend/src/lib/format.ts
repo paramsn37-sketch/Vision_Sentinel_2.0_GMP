@@ -55,6 +55,8 @@ const PPE_LABEL: Record<string, string> = {
   goggles: 'eye protection',
 }
 export const ppeLabel = (item: string) => PPE_LABEL[item] ?? item
+/** Sentence-case PPE name for a standalone label (checkbox, column header). */
+export const ppeTitle = (item: string) => ppeLabel(item).replace(/^./, (c) => c.toUpperCase())
 
 /** Human name of an incident rule: "intrusion", "ppe_missing:helmet", "overcrowding", "dwell". */
 export function ruleLabel(rule: string): string {

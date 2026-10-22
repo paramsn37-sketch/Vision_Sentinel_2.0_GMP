@@ -136,7 +136,7 @@ export default function IncidentsPage() {
         <Select label="Severity" value={severity} onChange={(v) => set('severity', v)} options={SEV_OPTS} />
         <Select label="Camera" value={camera} onChange={(v) => set('camera', v)} options={cameraOpts} />
       </div>
-      <div className="min-h-0 flex-1 overflow-auto rounded-md border border-line bg-sunken">
+      <div className="min-h-0 flex-1 overflow-auto rounded-md border border-line bg-sunken" tabIndex={0} role="region" aria-label="Incident list">
         {list.isPending ? (
           <div className="flex flex-col gap-2 p-4">
             {Array.from({ length: 8 }, (_, i) => (
@@ -168,11 +168,11 @@ export default function IncidentsPage() {
               <tr>
                 <Th>Severity</Th>
                 <Th>What happened</Th>
-                <Th>Zone</Th>
-                <Th>Camera</Th>
-                <Th align="right">Person</Th>
-                <Th>Status</Th>
-                <Th align="right">Duration</Th>
+                <Th className="max-md:hidden">Zone</Th>
+                <Th className="max-lg:hidden">Camera</Th>
+                <Th align="right" className="max-lg:hidden">Person</Th>
+                <Th className="max-sm:hidden">Status</Th>
+                <Th align="right" className="max-md:hidden">Duration</Th>
                 <Th align="right">Started</Th>
               </tr>
             </thead>
@@ -191,22 +191,27 @@ export default function IncidentsPage() {
                   <Td>
                     <StatusPill tone={severityTone(i.severity)}>{severityLabel(i.severity)}</StatusPill>
                   </Td>
-                  <Td className="text-fg">
+                  <Td className="text-fg max-md:py-1.5 max-md:leading-tight">
                     {ruleLabel(i.rule)}
                     {i.reopen_count > 0 && <span className="ml-2 text-xs text-muted">reopened {i.reopen_count}×</span>}
+                    {/* Narrow screens fold the hidden columns into the row's second line. */}
+                    <span className="mt-0.5 block max-w-[200px] truncate text-xs text-muted md:hidden">
+                      {i.zone_name ?? 'whole frame'} · {i.camera_name ?? i.camera_id}
+                      {i.active && <span className="text-danger sm:hidden"> · ongoing</span>}
+                    </span>
                   </Td>
-                  <Td className="text-muted">{i.zone_name ?? '—'}</Td>
-                  <Td className="text-muted">{i.camera_name ?? i.camera_id}</Td>
-                  <Td align="right" className="text-muted">
+                  <Td className="text-muted max-md:hidden">{i.zone_name ?? '—'}</Td>
+                  <Td className="text-muted max-lg:hidden">{i.camera_name ?? i.camera_id}</Td>
+                  <Td align="right" className="text-muted max-lg:hidden">
                     {i.track_id !== null ? `#${i.track_id}` : '—'}
                   </Td>
-                  <Td>
+                  <Td className="max-sm:hidden">
                     <span className="flex items-center gap-2">
                       <StatusPill tone={statusTone(i.status)}>{statusLabel(i.status)}</StatusPill>
                       {i.active && <span className="text-xs text-danger">ongoing</span>}
                     </span>
                   </Td>
-                  <Td align="right">{duration(i.duration_s)}</Td>
+                  <Td align="right" className="max-md:hidden">{duration(i.duration_s)}</Td>
                   <Td align="right" title={absoluteTime(i.started_at)} className={cn('text-muted')}>
                     {relativeTime(i.started_at)}
                   </Td>

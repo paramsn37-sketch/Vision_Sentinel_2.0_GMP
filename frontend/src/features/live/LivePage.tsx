@@ -53,7 +53,7 @@ export default function LivePage() {
   }
 
   return (
-    <div className="flex h-full min-h-0">
+    <div className="flex h-full min-h-0 max-lg:h-auto max-lg:flex-col">
       <section className="flex min-w-0 flex-1 flex-col gap-4 p-4" aria-label="Camera wall">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h1 className="text-xl">Live</h1>
@@ -88,10 +88,10 @@ export default function LivePage() {
         ) : (
           <div
             className={cn(
-              'grid min-h-0 flex-1 gap-4',
+              'grid min-h-0 flex-1 gap-4 max-lg:[&>figure]:h-[clamp(240px,56vw,520px)]',
               layout === '1' && 'grid-cols-1',
               layout === '2' && 'grid-cols-1 2xl:grid-cols-2',
-              layout === '4' && 'grid-cols-2 grid-rows-2',
+              layout === '4' && 'grid-cols-1 md:grid-cols-2 lg:grid-rows-2',
             )}
           >
             {shown.map((c) => (
@@ -155,7 +155,7 @@ function SidePanel({
   const s = summary.data
 
   return (
-    <aside className="flex w-[340px] shrink-0 flex-col overflow-y-auto border-l border-line bg-bg" aria-label="Site overview">
+    <aside className="flex w-[340px] shrink-0 flex-col overflow-y-auto border-l border-line bg-bg max-lg:w-full max-lg:overflow-visible max-lg:border-t max-lg:border-l-0" aria-label="Site overview">
       {selected && <TrackCard meta={selMeta} trackId={selected.trackId} paused={paused} onExplain={onExplain} onClose={onClear} />}
       <section className="grid grid-cols-3 gap-4 border-b border-line px-4 py-4">
         <Metric label="People now" value={s?.people_now ?? '—'} />

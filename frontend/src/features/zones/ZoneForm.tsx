@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Button, Checkbox, Field, Input, Select, Switch } from '@/components/ui'
 import { api, type ZoneIn } from '@/lib/api/client'
-import { ppeLabel } from '@/lib/format'
+import { ppeTitle } from '@/lib/format'
 import type { Pt } from './editor/geometry'
 
 export type FormValues = Omit<ZoneIn, 'polygon'> & { rules: NonNullable<ZoneIn['rules']> & { required_ppe: string[] } }
@@ -108,7 +108,7 @@ export function ZoneForm({
             {PPE.map((item) => (
               <Checkbox
                 key={item}
-                label={ppeLabel(item)}
+                label={ppeTitle(item)}
                 checked={value.rules.required_ppe.includes(item)}
                 onChange={(on) => rule({ required_ppe: on ? [...value.rules.required_ppe, item] : value.rules.required_ppe.filter((x) => x !== item) })}
               />

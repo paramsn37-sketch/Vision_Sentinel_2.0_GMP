@@ -1,15 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { login } from './helpers'
+import { ROUTES } from './routes'
 
-const ROUTES = [
-  ['/live', 'Live'],
-  ['/incidents', 'Incidents'],
-  ['/zones', 'Zones'],
-  ['/analytics', 'Analytics'],
-  ['/uploads', 'Uploads'],
-  ['/model', 'Model'],
-  ['/settings', 'Settings'],
-] as const
 
 test('live shows frames with person boxes within 10 s', async ({ page }) => {
   await login(page)

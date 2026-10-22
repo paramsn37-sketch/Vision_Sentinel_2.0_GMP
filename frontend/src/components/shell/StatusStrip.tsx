@@ -13,9 +13,9 @@ const LEVEL: Record<AlertLevel, { label: string; cls: string; dot: string }> = {
   red: { label: 'Danger', cls: 'text-danger', dot: 'bg-danger' },
 }
 
-function Item({ label, children, title }: { label: string; children: React.ReactNode; title?: string }) {
+function Item({ label, children, title, className }: { label: string; children: React.ReactNode; title?: string; className?: string }) {
   return (
-    <div className="flex items-baseline gap-1.5 whitespace-nowrap" title={title}>
+    <div className={cn('flex items-baseline gap-1.5 whitespace-nowrap', className)} title={title}>
       <span className="text-xs text-muted">{label}</span>
       <span className="num text-sm text-fg">{children}</span>
     </div>
@@ -46,7 +46,7 @@ export function StatusStrip() {
   const meanFps = fps.length ? fps.reduce((a, c) => a + c.fps, 0) / fps.length : null
 
   return (
-    <header className="flex h-(--strip-height) shrink-0 items-center gap-6 border-b border-line bg-bg px-4">
+    <header className="flex h-(--strip-height) min-w-0 shrink-0 items-center gap-4 overflow-hidden border-b border-line bg-bg px-4 lg:gap-6">
       <div
         key={lastAlertAt}
         className={cn('-ml-2 flex h-7 items-center gap-2 rounded-sm px-2', lastAlertAt > 0 && 'vs-pulse-once')}
@@ -57,38 +57,40 @@ export function StatusStrip() {
         <span className="text-xs text-muted">Site</span>
         <span className={cn('text-sm font-medium', level.cls)}>{level.label}</span>
       </div>
-      <Item label="Cameras">
+      <Item label="Cameras" className="max-md:hidden">
         {summary ? `${summary.cameras_online}/${summary.cameras_total}` : '—'}
       </Item>
-      <Item label="People now">{summary?.people_now ?? '—'}</Item>
-      <Item label="Unique today" title="Distinct confirmed people since midnight, all cameras">
+      <Item label="People now" className="max-sm:hidden">{summary?.people_now ?? '—'}</Item>
+      <Item label="Unique today" className="max-lg:hidden" title="Distinct confirmed people since midnight, all cameras">
         {summary?.unique_people ?? '—'}
       </Item>
       <Item label="Open incidents">
         {summary ? (
           <>
             {summary.open_incidents}
-            {summary.open_high > 0 && <span className="ml-1 text-danger">({summary.open_high} high)</span>}
+            {summary.open_high > 0 && <span className="ml-1 text-danger max-sm:hidden">({summary.open_high} high)</span>}
           </>
         ) : (
           '—'
         )}
       </Item>
-      <div className="ml-auto flex items-center gap-6">
-        <Item label="Model" title={health?.model_error ?? undefined}>
+      <div className="ml-auto flex items-center gap-4 lg:gap-6">
+        <Item label="Model" className="max-xl:hidden" title={health?.model_error ?? undefined}>
           <span className="font-sans">{health?.model ?? (health ? 'not loaded' : '—')}</span>
         </Item>
-        <Item label="Avg fps">{meanFps === null ? '—' : meanFps.toFixed(1)}</Item>
+        <Item label="Avg fps" className="max-lg:hidden">{meanFps === null ? '—' : meanFps.toFixed(1)}</Item>
         <button
           type="button"
           onClick={() => setPalette(true)}
-          className="press flex h-7 items-center gap-2 rounded-sm border border-line px-2 text-xs text-muted hover:bg-hover hover:text-fg"
+          className="press flex h-7 shrink-0 items-center gap-2 rounded-sm whitespace-nowrap border border-line px-2 text-xs text-muted hover:bg-hover hover:text-fg"
         >
           <Search className="size-3.5" aria-hidden />
-          Go to
-          <Kbd>⌘K</Kbd>
+          <span className="max-sm:sr-only">Go to</span>
+          <Kbd className="max-sm:hidden">⌘K</Kbd>
         </button>
-        <Clock />
+        <span className="max-md:hidden">
+          <Clock />
+        </span>
       </div>
     </header>
   )

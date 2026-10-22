@@ -48,7 +48,7 @@ Tokens (both themes define every one; dark is the default because of the use sce
 | boundary | `--line-strong` | #6a6b72 | #85878f | input, switch, checkbox outlines (≥ 3:1) |
 | text | `--fg` | #f2f2f3 | #17171a | primary text and figures |
 | secondary | `--fg-muted` | #9a9ca3 | #5c5e66 | labels, captions |
-| tertiary | `--fg-subtle` | #85878e | #6e7078 | placeholders, timestamps |
+| tertiary | `--fg-subtle` | #8b8d94 | #64666e | placeholders, timestamps |
 | on accent | `--fg-on-accent` | #0c1420 | #ffffff | primary button label |
 | information / selection | `--accent`, `--accent-bg` | #5b9be6 | #1d64c2 | selection line, links, info |
 | danger (ISO red) | `--danger`, `--danger-bg` | #f2626f | #c3283d | open high incidents, no-entry |
@@ -73,7 +73,9 @@ word ("Open", "Missing helmet"), never colour alone.
 | dark | `--fg-muted` on `--bg` | 6.53 | 4.5 | pass | secondary text |
 | dark | `--fg-muted` on `--bg-sunken` | 6.82 | 4.5 | pass | secondary text in panels |
 | dark | `--fg-muted` on `--bg-hover` | 5.49 | 4.5 | pass | secondary text on hovered row |
-| dark | `--fg-subtle` on `--bg-sunken` | 5.21 | 4.5 | pass | placeholders, timestamps |
+| dark | `--fg-subtle` on `--bg-sunken` | 5.64 | 4.5 | pass | placeholders, timestamps |
+| dark | `--fg-subtle` on `--bg` | 5.40 | 4.5 | pass | hints on the ground |
+| dark | `--fg-subtle` on `--bg-hover` | 4.54 | 4.5 | pass | timestamps on hovered row |
 | dark | `--accent` on `--bg-sunken` | 6.48 | 4.5 | pass | links, selected tab label |
 | dark | `--accent` on `--accent-bg` | 5.49 | 4.5 | pass | info pill |
 | dark | `--danger` on `--bg-sunken` | 6.01 | 4.5 | pass | danger text |
@@ -93,7 +95,9 @@ word ("Open", "Missing helmet"), never colour alone.
 | light | `--fg-muted` on `--bg` | 5.83 | 4.5 | pass | secondary text |
 | light | `--fg-muted` on `--bg-sunken` | 6.47 | 4.5 | pass | secondary text in panels |
 | light | `--fg-muted` on `--bg-hover` | 5.33 | 4.5 | pass | secondary text on hovered row |
-| light | `--fg-subtle` on `--bg-sunken` | 4.94 | 4.5 | pass | placeholders, timestamps |
+| light | `--fg-subtle` on `--bg-sunken` | 5.73 | 4.5 | pass | placeholders, timestamps |
+| light | `--fg-subtle` on `--bg` | 5.16 | 4.5 | pass | hints on the ground |
+| light | `--fg-subtle` on `--bg-hover` | 4.72 | 4.5 | pass | timestamps on hovered row |
 | light | `--accent` on `--bg-sunken` | 5.75 | 4.5 | pass | links, selected tab label |
 | light | `--accent` on `--accent-bg` | 4.86 | 4.5 | pass | info pill |
 | light | `--danger` on `--bg-sunken` | 5.69 | 4.5 | pass | danger text |
@@ -175,6 +179,17 @@ Tooltip, Toast (Sonner), Kbd, EmptyState, Skeleton, Field (label + hint + error)
 
 Every interactive primitive has default, hover, focus-visible, active (press), disabled and, where it applies,
 loading and error states.
+
+## 9a. Responsive behaviour (as shipped)
+
+- The icon rail stays at every width; the status strip drops items by priority as space runs out: model name
+  (< 1280 px), average fps and unique-today (< 1024 px), cameras and clock (< 768 px), people-now and the high-severity
+  count (< 640 px). It never wraps or scrolls.
+- Below 1024 px multi-pane screens stack in reading order: Live (camera wall, then site overview), Zones (list,
+  canvas at a fixed height, form). Video tiles keep a fixed height so the frame stays legible.
+- Tables drop columns by importance instead of scrolling sideways; on phones the zone and camera fold into a second
+  line of the "What happened" cell.
+- Charts draw hours with no data as gaps, never as zero; an isolated reading gets a dot.
 
 ## 10. Do and don't
 

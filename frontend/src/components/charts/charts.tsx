@@ -6,7 +6,7 @@ import { cn } from '@/components/ui'
 
 export interface Point {
   t: string // ISO time
-  v: number
+  v: number | null // null = no data for this bucket (drawn as a gap, never as zero)
 }
 
 const niceMax = (m: number) => {
@@ -50,8 +50,8 @@ export function TimeChart({ data, label, unit, height = 200, formatX, formatTip,
   const [ref, width] = useWidth()
   const [hover, setHover] = useState<number | null>(null)
   const id = useId()
-  const pad = { l: 36, r: 8, t: 8, b: 22 }
-  const max = niceMax(Math.max(0, ...data.map((d) => d.v)))
+  const pad = { l: 36, r: 8, t: 22, b: 22 } // top padding leaves room for the unit label
+  const max = niceMax(Math.max(0, ...data.map((d) => d.v ?? 0)))
   const iw = width - pad.l - pad.r
   const ih = height - pad.t - pad.b
   const n = data.length
@@ -59,7 +59,7 @@ export function TimeChart({ data, label, unit, height = 200, formatX, formatTip,
   const x = (i: number) => pad.l + band * i + band / 2
   const y = (v: number) => pad.t + ih - (v / max) * ih
   const every = Math.max(1, Math.ceil(n / Math.max(1, Math.floor(iw / 64))))
-  const total = data.reduce((a, d) => a + d.v, 0)
+  const total = data.reduce((a, d) => a + (d.v ?? 0), 0)
   const bw = Math.max(1, Math.min(24, band - 2))
 
   return (
@@ -76,7 +76,7 @@ export function TimeChart({ data, label, unit, height = 200, formatX, formatTip,
         ))}
         {kind === 'bars'
           ? data.map((d, i) =>
-              d.v > 0 ? (
+              d.v ? (
                 <path
                   key={d.t}
                   d={roundedTop(x(i) - bw / 2, y(d.v), bw, y(0) - y(d.v), Math.min(4, bw / 2))}
@@ -87,13 +87,17 @@ export function TimeChart({ data, label, unit, height = 200, formatX, formatTip,
           : (
               <>
                 <path
-                  d={data.map((d, i) => `${i ? 'L' : 'M'}${x(i)},${y(d.v)}`).join('')}
+                  d={data.map((d, i) => (d.v === null ? '' : `${i && data[i - 1].v !== null ? 'L' : 'M'}${x(i)},${y(d.v)}`)).join('')}
                   fill="none"
                   stroke="var(--fg-muted)"
                   strokeWidth={2}
                   strokeLinejoin="round"
                 />
-                {hover !== null && data[hover] && <circle cx={x(hover)} cy={y(data[hover].v)} r={4} fill="var(--fg)" stroke="var(--bg-sunken)" strokeWidth={2} />}
+                {/* An observed point with no observed neighbour has no line segment; mark it so it is not invisible. */}
+                {data.map((d, i) =>
+                  d.v !== null && data[i - 1]?.v == null && data[i + 1]?.v == null ? <circle key={d.t} cx={x(i)} cy={y(d.v)} r={3} fill="var(--fg-muted)" /> : null,
+                )}
+                {hover !== null && data[hover]?.v != null && <circle cx={x(hover)} cy={y(data[hover].v!)} r={4} fill="var(--fg)" stroke="var(--bg-sunken)" strokeWidth={2} />}
               </>
             )}
         {hover !== null && <line x1={x(hover)} x2={x(hover)} y1={pad.t} y2={pad.t + ih} stroke="var(--line-strong)" strokeDasharray="2 3" />}
@@ -119,7 +123,8 @@ export function TimeChart({ data, label, unit, height = 200, formatX, formatTip,
         >
           {formatTip ? formatTip(data[hover]) : (
             <>
-              <span className="text-muted">{formatX(data[hover].t)}</span> <span className="num text-fg">{data[hover].v}</span> {label}
+              <span className="text-muted">{formatX(data[hover].t)}</span>{' '}
+              {data[hover].v === null ? <span className="text-muted">no data (no camera running)</span> : <><span className="num text-fg">{data[hover].v}</span> {label}</>}
             </>
           )}
         </div>
@@ -131,7 +136,7 @@ export function TimeChart({ data, label, unit, height = 200, formatX, formatTip,
           {data.map((d) => (
             <tr key={d.t}>
               <th scope="row">{formatX(d.t)}</th>
-              <td>{d.v}</td>
+              <td>{d.v ?? 'no data'}</td>
             </tr>
           ))}
         </tbody>

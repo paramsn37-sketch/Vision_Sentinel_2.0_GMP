@@ -42,7 +42,7 @@ export function Rail({ onLogout, openCount }: { onLogout: () => void; openCount:
           const link = (
             <Link
               to={to}
-              aria-label={railOpen ? undefined : label}
+              aria-label={to === '/incidents' && openCount > 0 ? `${label}, ${openCount > 99 ? '99+' : openCount} open` : railOpen ? undefined : label}
               aria-current={isActive ? 'page' : undefined}
               className={cn(
                   'relative flex h-9 items-center gap-3 rounded-sm px-[10px] transition-colors duration-(--dur-fast)',
@@ -57,9 +57,9 @@ export function Rail({ onLogout, openCount }: { onLogout: () => void; openCount:
                 <span
                   className={cn(
                     'num rounded-sm bg-danger-bg px-1 text-[11px] leading-4 text-danger',
-                    !railOpen && 'absolute top-0.5 right-0.5',
+                    !railOpen && 'absolute -top-1 left-[22px]',
                   )}
-                  aria-label={`${openCount} open incidents`}
+                  aria-hidden
                 >
                   {openCount > 99 ? '99+' : openCount}
                 </span>

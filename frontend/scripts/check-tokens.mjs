@@ -40,6 +40,8 @@ const pairs = [
   ['--fg-muted', '--bg-sunken', 4.5, 'secondary text in panels'],
   ['--fg-muted', '--bg-hover', 4.5, 'secondary text on hovered row'],
   ['--fg-subtle', '--bg-sunken', 4.5, 'placeholders, timestamps'],
+  ['--fg-subtle', '--bg', 4.5, 'hints on the ground'],
+  ['--fg-subtle', '--bg-hover', 4.5, 'timestamps on hovered row'],
   ['--accent', '--bg-sunken', 4.5, 'links, selected tab label'],
   ['--accent', '--accent-bg', 4.5, 'info pill'],
   ['--danger', '--bg-sunken', 4.5, 'danger text'],

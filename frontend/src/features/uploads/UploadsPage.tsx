@@ -59,7 +59,6 @@ export default function UploadsPage() {
       <div
         role="button"
         tabIndex={0}
-        aria-label="Upload a file: drop it here or press Enter to choose"
         onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && input.current?.click()}
         onClick={() => input.current?.click()}
         onDragOver={(e) => {

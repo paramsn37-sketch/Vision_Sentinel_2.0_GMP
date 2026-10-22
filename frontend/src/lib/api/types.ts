@@ -26,6 +26,7 @@ export interface TimePoint {
   incidents: number
   compliant: number
   noncompliant: number
+  observed: boolean // false: no camera was running in this bucket (no data, not zero)
 }
 export interface Timeseries {
   bucket: 'hour' | 'minute'

@@ -88,11 +88,13 @@ def timeseries(s: DB, user: User, since: datetime | None = None, until: datetime
             "incidents": 0,
             "compliant": 0,
             "noncompliant": 0,
+            "observed": False,  # any camera ran in this bucket; False = no data, not zero
         }
         t += step
     for r in s.exec(q).all():
         b = buckets.get(key(r.minute))
         if b is not None:
+            b["observed"] = True
             b["new_people"] += r.new_people
             b["peak_people"] = max(b["peak_people"], r.peak_current)
             b["compliant"] += r.compliant_people

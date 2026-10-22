@@ -72,10 +72,10 @@ export default function AnalyticsPage() {
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <Panel title="New people per hour" bodyClassName="p-4">
-          {series.isPending ? <Skeleton className="h-[200px]" /> : <TimeChart data={pts.map((p) => ({ t: p.t, v: p.new_people }))} label="new people" unit="people / hour" formatX={hourFmt} />}
+          {series.isPending ? <Skeleton className="h-[200px]" /> : <TimeChart data={pts.map((p) => ({ t: p.t, v: p.observed ? p.new_people : null }))} label="new people" unit="people / hour" formatX={hourFmt} />}
         </Panel>
         <Panel title="Peak people on site" bodyClassName="p-4">
-          {series.isPending ? <Skeleton className="h-[200px]" /> : <TimeChart kind="line" data={pts.map((p) => ({ t: p.t, v: p.peak_people }))} label="people at once (peak minute)" unit="people" formatX={hourFmt} />}
+          {series.isPending ? <Skeleton className="h-[200px]" /> : <TimeChart kind="line" data={pts.map((p) => ({ t: p.t, v: p.observed ? p.peak_people : null }))} label="people at once (peak minute)" unit="people" formatX={hourFmt} />}
         </Panel>
         <Panel title="Incidents per hour" bodyClassName="p-4">
           {series.isPending ? <Skeleton className="h-[200px]" /> : <TimeChart data={pts.map((p) => ({ t: p.t, v: p.incidents }))} label="incidents opened" unit="incidents / hour" formatX={hourFmt} />}

@@ -209,7 +209,7 @@ export function ZoneCanvas({
       ? 'Click to add points. Click the first point or press Enter to close. Arrow keys move the cursor and Space adds a point. Backspace removes the last point, Esc cancels.'
       : state.mode === 'editing'
         ? 'Drag a point to move it, click an edge to add a point, drag inside to move the zone. [ and ] select points, arrows nudge (Shift for larger steps), Delete removes the selected point. Ctrl+Z undoes.'
-        : 'Choose a zone on the left or draw a new one.'
+        : 'Choose a zone from the list or draw a new one.'
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
@@ -251,7 +251,8 @@ export function ZoneCanvas({
                 </g>
               ))}
               {people.map((p) => (
-                <circle key={p.id} cx={p.foot[0] * W} cy={p.foot[1] * H} r={r * 0.8} fill={p.inside ? 'var(--ov-danger)' : 'var(--ov-person)'} stroke="#000" strokeWidth={1} vectorEffect="non-scaling-stroke" />
+                // Feet of people in the latest frame: small solid dots, deliberately unlike the hollow vertex handles.
+                <circle key={p.id} cx={p.foot[0] * W} cy={p.foot[1] * H} r={r * 0.38} fill={p.inside ? 'var(--ov-danger)' : 'var(--ov-person)'} fillOpacity={0.9} />
               ))}
               {state.points.length > 0 &&
                 (state.mode === 'drawing' ? (

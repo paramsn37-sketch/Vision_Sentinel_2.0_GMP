@@ -107,8 +107,8 @@ export default function ZonesPage() {
   const others = list.filter((z) => z.id !== selectedId).map((z) => ({ id: z.id, name: z.name, color: KIND_VAR[z.kind], points: z.polygon as Pt[] }))
 
   return (
-    <div className="flex h-full min-h-0">
-      <aside className="flex w-64 shrink-0 flex-col border-r border-line bg-bg" aria-label="Zones on this camera">
+    <div className="flex h-full min-h-0 max-lg:h-auto max-lg:flex-col">
+      <aside className="flex w-64 shrink-0 flex-col border-r border-line bg-bg max-lg:w-full max-lg:border-r-0 max-lg:border-b" aria-label="Zones on this camera">
         <div className="flex flex-col gap-3 border-b border-line p-4">
           <h1 className="text-xl">Zones</h1>
           <Select
@@ -124,7 +124,7 @@ export default function ZonesPage() {
             New zone
           </Button>
         </div>
-        <ul className="min-h-0 flex-1 overflow-y-auto py-1">
+        <ul className="min-h-0 flex-1 overflow-y-auto py-1 max-lg:max-h-56">
           {zones.isPending && <Skeleton className="mx-4 my-2 h-10" />}
           {zones.data && list.length === 0 && selectedId !== 'new' && <li className="px-4 py-3 text-sm text-muted">No zones on this camera yet. Draw one with New zone.</li>}
           {selectedId === 'new' && (
@@ -169,8 +169,8 @@ export default function ZonesPage() {
         </div>
       </aside>
 
-      <section className="flex min-w-0 flex-1 flex-col gap-2 p-4" aria-label="Editor">
-        <div className="flex items-center justify-between">
+      <section className="flex min-w-0 flex-1 flex-col gap-2 p-4 max-lg:h-[clamp(320px,75vw,640px)] max-lg:flex-none" aria-label="Editor">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-sm text-muted">
             {ed.mode === 'drawing' ? `Drawing: ${ed.points.length} point${ed.points.length === 1 ? '' : 's'}` : ed.mode === 'editing' ? `${ed.points.length} points` : 'Frame from the camera'}
             {meta && ed.points.length >= 3 && (
@@ -201,7 +201,7 @@ export default function ZonesPage() {
         />
       </section>
 
-      <aside className="w-[340px] shrink-0 overflow-y-auto border-l border-line bg-bg" aria-label="Zone settings">
+      <aside className="w-[340px] shrink-0 overflow-y-auto border-l border-line bg-bg max-lg:w-full max-lg:border-t max-lg:border-l-0" aria-label="Zone settings">
         {form ? (
           <ZoneForm
             value={form}
