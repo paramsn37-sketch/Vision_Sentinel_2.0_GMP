@@ -12,7 +12,7 @@
         "device": "cpu",
         "cpu": "x86_64"
       },
-      "status": "running",
+      "status": "promoted",
       "model": "yolo26n.pt",
       "hyp": {
         "imgsz": 480,
@@ -37,7 +37,82 @@
         "amp": false
       },
       "hyp_file": "hyp_cpu_budget.yaml",
-      "device": "cpu"
+      "device": "cpu",
+      "finished_at": "2026-10-22T17:55:00+00:00",
+      "wall_time_h": 3.79,
+      "run_dir": "training/runs/vs2-y26n-cpu480",
+      "note": "Stopped after epoch 26 when the build container was reclaimed; the 8 h budget was not used up. best.pt is from the last completed epoch.",
+      "epochs_completed": 26,
+      "best_epoch": 26,
+      "val": {
+        "mAP50": 0.53908,
+        "mAP50-95": 0.27009,
+        "precision": 0.71773,
+        "recall": 0.50304
+      },
+      "test_metrics": {
+        "per_class": {
+          "person": {
+            "precision": 0.6897,
+            "recall": 0.7018,
+            "mAP50": 0.6829,
+            "mAP50-95": 0.3677
+          },
+          "head": {
+            "precision": 0.6536,
+            "recall": 0.6021,
+            "mAP50": 0.5792,
+            "mAP50-95": 0.3152
+          },
+          "helmet": {
+            "precision": 0.7848,
+            "recall": 0.839,
+            "mAP50": 0.8668,
+            "mAP50-95": 0.4535
+          },
+          "vest": {
+            "precision": 0.8065,
+            "recall": 0.8143,
+            "mAP50": 0.8491,
+            "mAP50-95": 0.503
+          },
+          "gloves": {
+            "precision": 0.7643,
+            "recall": 0.4676,
+            "mAP50": 0.5138,
+            "mAP50-95": 0.2322
+          },
+          "hand": {
+            "precision": 0.4437,
+            "recall": 0.0599,
+            "mAP50": 0.15,
+            "mAP50-95": 0.0583
+          },
+          "boots": {
+            "precision": 0.7371,
+            "recall": 0.5913,
+            "mAP50": 0.6826,
+            "mAP50-95": 0.3749
+          },
+          "goggles": {
+            "precision": 0.6329,
+            "recall": 0.3193,
+            "mAP50": 0.3797,
+            "mAP50-95": 0.1381
+          },
+          "no_goggles": {
+            "precision": 1.0,
+            "recall": 0.0,
+            "mAP50": 0.0158,
+            "mAP50-95": 0.0035
+          }
+        },
+        "mean": {
+          "mAP50": 0.5244,
+          "mAP50-95": 0.2718
+        }
+      },
+      "promoted_as": "vs2-y26n"
     },
     {
       "id": "baseline-yolo26n-coco",

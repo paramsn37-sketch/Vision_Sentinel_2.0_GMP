@@ -163,3 +163,21 @@ An executive summary is added at the top when the build finishes (Phase 12).
   change every frame, so pixel baselines would only measure the clock; the review set is regenerated instead and
   kept out of git (13 MB). Canvas draw time and long-task measurement moved to Phase 11's performance pass.
 - **Next phase:** 11
+
+## Phase 2 — Detector training, evaluation and records
+- **Status:** done-with-fallbacks
+- **What was built:** `training/scripts/{train,evaluate,export,benchmark,error_analysis}.py`, run registry
+  (`training/registry.json`), baselines (v1 YOLO11m and stock YOLO26n on the frozen test split), the trained model
+  `models/vs2-y26n.{pt,onnx}` with `models/model.json` (classes, per-class thresholds chosen on val, test metrics,
+  sha256), `MODEL_CARD.md`, `training/reports/training_report.md`, error-analysis grids, latency table, Colab
+  notebook for the full GPU plan.
+- **Headline numbers (test split, 559 images):** mean mAP50 0.524; person 0.683 (stock YOLO26n 0.720, v1 YOLO11m
+  0.745); helmet 0.867; vest 0.849; boots 0.683; head 0.579; hand 0.150 and no_goggles 0.016 unusable. CPU latency
+  29.9 ms p50 (PyTorch, 480 px), 27.6 ms (ONNX).
+- **Gate results:** `pytest -m model` 5 passed (class list matches the taxonomy; a person is found in ≥ 90 % of
+  fixture images) · person mAP50 within 5 points of the stock model (3.7) · registry, curves, PR/F1/confusion plots
+  and error analysis committed.
+- **Fallbacks used / deviations from blueprint:** CPU-only training of the nano model at 480 px (ADR-0007); the run
+  was interrupted after 26 of ~55 planned epochs by a machine restart and shipped as is (ADR-0012). Person and head
+  miss their SHOULD targets (0.80 / 0.70).
+- **Next phase:** re-run counting and XAI evaluations with this model (Phase 5 completion), then 11–12.

@@ -11,8 +11,10 @@ import argparse
 import json
 import os
 import platform
+import shutil
 import statistics
 import sys
+import tempfile
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -61,7 +63,10 @@ def main() -> None:
         for device in devices:
             rows.append({"runtime": "pytorch", "imgsz": imgsz, "device": device,
                          **measure(YOLO(str(args.weights)), images, imgsz, device)})  # fmt: skip
-        onnx = YOLO(str(args.weights)).export(format="onnx", imgsz=imgsz, dynamic=False, simplify=True)
+        # Export from a temporary copy so the promoted models/*.onnx (and its sha256 in model.json) is untouched.
+        tmp = Path(tempfile.mkdtemp()) / args.weights.name
+        shutil.copy2(args.weights, tmp)
+        onnx = YOLO(str(tmp)).export(format="onnx", imgsz=imgsz, dynamic=False, simplify=True)
         rows.append({"runtime": "onnxruntime", "imgsz": imgsz, "device": "cpu",
                      **measure(YOLO(onnx, task="detect"), images, imgsz, "cpu")})  # fmt: skip
         print(rows[-2:], flush=True)

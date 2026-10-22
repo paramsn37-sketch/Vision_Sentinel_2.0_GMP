@@ -1,0 +1,98 @@
+{
+  "name": "vs2-y26n",
+  "weights": "vs2-y26n.pt",
+  "onnx": "vs2-y26n.onnx",
+  "classes": [
+    "person",
+    "head",
+    "helmet",
+    "vest",
+    "gloves",
+    "hand",
+    "boots",
+    "goggles",
+    "no_goggles"
+  ],
+  "imgsz": 480,
+  "thresholds": {
+    "person": 0.361,
+    "head": 0.303,
+    "helmet": 0.287,
+    "vest": 0.317,
+    "gloves": 0.253,
+    "hand": 0.09,
+    "boots": 0.213,
+    "goggles": 0.271,
+    "no_goggles": 0.038
+  },
+  "metrics_test": {
+    "person": {
+      "precision": 0.6897,
+      "recall": 0.7018,
+      "mAP50": 0.6829,
+      "mAP50-95": 0.3677
+    },
+    "head": {
+      "precision": 0.6536,
+      "recall": 0.6021,
+      "mAP50": 0.5792,
+      "mAP50-95": 0.3152
+    },
+    "helmet": {
+      "precision": 0.7848,
+      "recall": 0.839,
+      "mAP50": 0.8668,
+      "mAP50-95": 0.4535
+    },
+    "vest": {
+      "precision": 0.8065,
+      "recall": 0.8143,
+      "mAP50": 0.8491,
+      "mAP50-95": 0.503
+    },
+    "gloves": {
+      "precision": 0.7643,
+      "recall": 0.4676,
+      "mAP50": 0.5138,
+      "mAP50-95": 0.2322
+    },
+    "hand": {
+      "precision": 0.4437,
+      "recall": 0.0599,
+      "mAP50": 0.15,
+      "mAP50-95": 0.0583
+    },
+    "boots": {
+      "precision": 0.7371,
+      "recall": 0.5913,
+      "mAP50": 0.6826,
+      "mAP50-95": 0.3749
+    },
+    "goggles": {
+      "precision": 0.6329,
+      "recall": 0.3193,
+      "mAP50": 0.3797,
+      "mAP50-95": 0.1381
+    },
+    "no_goggles": {
+      "precision": 1.0,
+      "recall": 0.0,
+      "mAP50": 0.0158,
+      "mAP50-95": 0.0035
+    }
+  },
+  "metrics_test_mean": {
+    "mAP50": 0.5244,
+    "mAP50-95": 0.2718
+  },
+  "trained_from": "yolo26n.pt",
+  "run": "vs2-y26n-cpu480",
+  "training_mode": "cpu-budget",
+  "epochs_completed": 26,
+  "data_manifest": "959596097b843262",
+  "sha256": {
+    "vs2-y26n.pt": "f7d1d75f701972f60e6176b143bb5b65c18143caaaa1e99757c2ad73f79394d9",
+    "vs2-y26n.onnx": "29edcdae02b2386632e23f4deaa39379a1356b6b578e5f3f215c0da2be88534f"
+  },
+  "licence_note": "AGPL-3.0. Trained on Ultralytics Construction-PPE (AGPL-3.0) and Open Images V7 (annotations CC BY 4.0, images CC BY 2.0); see data/DATASET_CARD.md."
+}

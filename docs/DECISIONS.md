@@ -94,3 +94,14 @@ Short ADRs. Format: context → decision → consequences. Newest at the bottom.
   a migration step is added when version 2 exists. PDF reports use `fpdf2` (pure Python).
 - **Consequences:** no system packages beyond ffmpeg in the Docker image. Alembic is a follow-up if the schema starts
   changing between releases.
+
+## ADR-0012 — Ship the interrupted CPU training run
+- **Context:** the 8-hour CPU run `vs2-y26n-cpu480` stopped after 26 epochs (3.8 h) when the build machine was
+  restarted. Ultralytics' `resume` would restart the 8-hour clock, and the remaining phases (evaluations,
+  performance pass, release) need the same CPU.
+- **Decision:** promote the epoch-26 checkpoint (best by validation fitness) as `vs2-y26n`, record the run as
+  `interrupted` in the registry, and state in the model card and training report that it is under-trained.
+  Optimizer state is stripped from the weights (26 MB → 5.4 MB).
+- **Consequences:** person mAP50 0.683 (stock nano 0.720, within the 5-point allowance); helmet 0.867 and vest 0.849
+  meet the blueprint's 0.70; head 0.579 and person do not meet their SHOULD targets. A full GPU run via
+  `train_colab.ipynb` is the first follow-up.
