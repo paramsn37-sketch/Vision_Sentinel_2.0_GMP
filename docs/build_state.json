@@ -155,12 +155,15 @@
     {
       "id": 10,
       "title": "Playwright refinement loop",
-      "status": "pending",
+      "status": "done-with-fallbacks",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
-      "notes": ""
+      "finished_at": "2026-10-22T16:40:34Z",
+      "commit": "9afa377",
+      "gate_results": {
+        "playwright": "20 passed",
+        "axe serious/critical": "0"
+      },
+      "notes": "no pixel baselines (live data); review set regenerated"
     },
     {
       "id": 11,
