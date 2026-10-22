@@ -2,7 +2,9 @@
 # Stage 1 resolves dependencies into /venv with the CPU-only torch wheels (keeps the image well under 2.5 GB).
 FROM python:3.12-slim AS build
 ENV UV_LINK_MODE=copy PIP_DISABLE_PIP_VERSION_CHECK=1
-RUN pip install --no-cache-dir uv
+# Ultralytics pulls in the GUI build of OpenCV, which needs these X/GL libraries just to import.
+RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgomp1 libxcb1 libgl1 \
+ && rm -rf /var/lib/apt/lists/* && pip install --no-cache-dir uv
 WORKDIR /src
 COPY backend/pyproject.toml backend/uv.lock ./
 RUN uv venv /venv \
@@ -16,7 +18,7 @@ RUN mkdir -p /root/.cache/vision-sentinel && cd /root/.cache/vision-sentinel \
 
 # Stage 2: runtime, non-root.
 FROM python:3.12-slim
-RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgomp1 \
+RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgomp1 libxcb1 libgl1 \
  && rm -rf /var/lib/apt/lists/* \
  && useradd --create-home --uid 10001 sentinel
 COPY --from=build /venv /venv

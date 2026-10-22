@@ -110,6 +110,24 @@ export function VideoTile({
     setPaused(paused.current)
     onPausedChange?.(paused.current, meta.current)
   }
+  const toggleRef = useRef(togglePause)
+  useEffect(() => {
+    toggleRef.current = togglePause
+  })
+
+  // Space pauses the tile whose person is selected (the "Pause to inspect" shortcut), unless typing.
+  const hasSelection = selTrack !== null
+  useEffect(() => {
+    if (!hasSelection) return
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement
+      if (e.key !== ' ' || e.repeat || t.closest('input, textarea, select, button, [role="application"]')) return
+      e.preventDefault()
+      toggleRef.current()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [hasSelection])
 
   const onClick = (e: React.MouseEvent) => {
     const m = meta.current
