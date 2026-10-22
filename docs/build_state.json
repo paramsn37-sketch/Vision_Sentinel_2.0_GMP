@@ -24,7 +24,8 @@
     ]
   },
   "followups": [
-    "full GPU training run via train_colab.ipynb"
+    "full GPU training run via train_colab.ipynb",
+    "owner: create and push tag v2.0.0 on claude/project-thread-0fl5hs"
   ],
   "phases": [
     {
@@ -198,7 +199,7 @@
         "final_audit": "pass",
         "make_test": "pass",
         "make_e2e": "pass (20)",
-        "tag_v2.0.0": "pass"
+        "tag_v2.0.0": "blocked (tag push refused with HTTP 403; owner to create)"
       },
       "notes": "See docs/FINAL_AUDIT.md for partial and failed targets"
     }

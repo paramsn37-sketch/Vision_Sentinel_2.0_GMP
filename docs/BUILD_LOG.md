@@ -237,11 +237,13 @@ improvement. One explanation sanity check fails. GPU speed was never measured.
 - **Status:** done-with-fallbacks
 - **What was built:** README rewrite (quick start, honest feature status, results), `docs/report-appendix.md`,
   `docs/FINAL_AUDIT.md`, `MODEL_CARD.md`, `training/reports/training_report.md`, `docs/eval/performance.md`,
-  per-class mAP figure, AGPL-3.0 licence text (the file was missing), CHANGELOG 2.0.0, this summary, tag `v2.0.0`.
+  per-class mAP figure, AGPL-3.0 licence text (the file was missing), CHANGELOG 2.0.0, this summary.
 - **Fixes found in the final pass:** the Model screen crashed with real results; a scrollable panel was not keyboard
   reachable; `make lint` called a bare `ruff`; mypy on `app/core` had 13 errors (now 0); the Docker image carried
   CUDA wheels.
 - **Gate results:** FINAL_AUDIT covers every §13 item and every MUST · `make lint` clean (2 oxlint warnings) ·
   `make typecheck` clean · `make test` green (backend 70, Vitest 25) · `pytest -m model` 6 passed · `make e2e` 20
   passed · coverage `app/core` 86 % · all phases `done` or `done-with-fallbacks`.
-- **Fallbacks used / deviations from blueprint:** see FINAL_AUDIT "Partial" and "Fail" rows.
+- **Fallbacks used / deviations from blueprint:** the `v2.0.0` tag could not be pushed (the session may push only its
+  branch; HTTP 403), so the owner creates it (command in FINAL_AUDIT). Other deviations: FINAL_AUDIT "Partial" and
+  "Fail" rows.
