@@ -1,0 +1,18 @@
+# docker compose up --build  →  UI on http://localhost:8080 (sign in as admin; see README for the password).
+services:
+  backend:
+    build: { context: ., dockerfile: backend/Dockerfile }
+    environment:
+      VS_ADMIN_PASSWORD: ${VS_ADMIN_PASSWORD:-}
+      VS_SECRET_KEY: ${VS_SECRET_KEY:-}
+      VS_SERVER__CORS_ORIGINS: '["http://localhost:8080"]'
+    volumes:
+      - ./data/runtime:/app/data/runtime
+      - ./models:/app/models
+    restart: unless-stopped
+  frontend:
+    build: { context: ., dockerfile: frontend/Dockerfile }
+    ports: ["8080:80"]
+    depends_on:
+      backend: { condition: service_healthy }
+    restart: unless-stopped

@@ -10,12 +10,14 @@ A runtime owns its source, pipeline, zone engine and incident manager. It
 from __future__ import annotations
 
 import logging
+import shutil
 import threading
 import time
 import uuid
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -37,6 +39,17 @@ from .storage import Paths, blur_heads, encode_jpeg
 from .writer import DBWriter
 
 log = logging.getLogger(__name__)
+
+MIN_FREE_BYTES = 200 * 1024 * 1024  # stop writing evidence below this much free disk
+
+
+def disk_has_room(path: Path, need: int = MIN_FREE_BYTES) -> bool:
+    try:
+        return shutil.disk_usage(path).free >= need
+    except OSError:
+        return False
+
+
 RING = 120  # recent frames kept for "explain this" on a paused live view
 
 
@@ -83,6 +96,7 @@ class CameraRuntime:
         self.cfg.zones.point_mode = camera.point_mode
         self.bus, self.writer, self.xai, self.paths = bus, writer, xai, paths
         self.jpeg_quality, self.stream_max_width, self.blur = jpeg_quality, stream_max_width, blur
+        self._disk_alerted = False
         self.zone_engine = ZoneEngine(zones, self.cfg.zones, camera.id)
         self.incidents = IncidentManager(
             camera.id,
@@ -323,7 +337,19 @@ class CameraRuntime:
         if self.blur and self.latest_result is not None:
             img = blur_heads(img, [p.xyxy for p in self.latest_result.confirmed_persons])
         path = self.paths.snapshots / f"{inc.id}.jpg"
-        path.write_bytes(encode_jpeg(img, 88))
+        # A full disk must not stop detection: skip the evidence, keep the incident, raise one system alert.
+        try:
+            if not disk_has_room(self.paths.snapshots):
+                raise OSError("less than 200 MB free")
+            path.write_bytes(encode_jpeg(img, 88))
+        except OSError as exc:
+            if not self._disk_alerted:
+                self._disk_alerted = True
+                log.error("evidence not saved for %s: %s", inc.id, exc)
+                self.bus.publish({"type": "system", "level": "error", "camera_id": inc.camera_id,
+                                  "message": f"Evidence frames are not being saved: {exc}. Free disk space."})  # fmt: skip
+            return
+        self._disk_alerted = False
         rel = str(path)
         self.writer.submit(lambda s: _update_incident(s, inc.id, {"snapshot_path": rel}))
         if self.xai is None or inc.box is None:

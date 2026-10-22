@@ -90,6 +90,8 @@ function useEventStream() {
           qc.invalidateQueries({ queryKey: keys.uploads })
         } else if (e.type === 'incident_xai') {
           qc.invalidateQueries({ queryKey: ['incident'] })
+        } else if (e.type === 'system') {
+          toast.error('System problem', { description: String(e.message), duration: Infinity })
         }
       },
       (s) => {
