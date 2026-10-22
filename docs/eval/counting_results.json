@@ -1,5 +1,5 @@
 {
-  "detector": "yolo26n-coco (fallback, person only)",
+  "detector": "vs2-y26n + yolo26n (people)",
   "imgsz": 640,
   "tuned_config": {
     "track_high_thresh": 0.2,
@@ -9,7 +9,7 @@
     "track_buffer_s": 1.5,
     "min_hits": 2,
     "min_age_s": 0.2,
-    "min_hit_ratio": 0.3,
+    "min_hit_ratio": 0.5,
     "reid_window_s": 0.0,
     "reid_max_center_dist": 0.75,
     "reid_size_ratio": [
@@ -169,11 +169,11 @@
       },
       "ours": {
         "gt_unique": 71,
-        "pred_unique": 76,
-        "count_error": 0.07042253521126761,
-        "idf1": 0.6021891261439082,
-        "mota": 0.49151027703306527,
-        "id_switches": 38
+        "pred_unique": 74,
+        "count_error": 0.04225352112676056,
+        "idf1": 0.6005767844268205,
+        "mota": 0.48704200178731005,
+        "id_switches": 36
       }
     },
     {
@@ -205,9 +205,9 @@
         "gt_unique": 22,
         "pred_unique": 31,
         "count_error": 0.4090909090909091,
-        "idf1": 0.5808219178082191,
-        "mota": 0.5442862104897535,
-        "id_switches": 29
+        "idf1": 0.5810696095076401,
+        "mota": 0.5394234109065648,
+        "id_switches": 24
       }
     },
     {
@@ -239,8 +239,8 @@
         "gt_unique": 36,
         "pred_unique": 35,
         "count_error": 0.027777777777777776,
-        "idf1": 0.38795003673769285,
-        "mota": 0.32230288705048116,
+        "idf1": 0.38777013752455797,
+        "mota": 0.3226405537734256,
         "id_switches": 14
       }
     },
@@ -271,11 +271,11 @@
       },
       "ours": {
         "gt_unique": 44,
-        "pred_unique": 37,
-        "count_error": 0.1590909090909091,
-        "idf1": 0.5447922288181327,
-        "mota": 0.5317688731458933,
-        "id_switches": 15
+        "pred_unique": 36,
+        "count_error": 0.18181818181818182,
+        "idf1": 0.5467099918765231,
+        "mota": 0.5293336285145007,
+        "id_switches": 14
       }
     },
     {
@@ -305,10 +305,10 @@
       },
       "ours": {
         "gt_unique": 44,
-        "pred_unique": 30,
-        "count_error": 0.3181818181818182,
-        "idf1": 0.3949013949013949,
-        "mota": 0.2569708491761724,
+        "pred_unique": 29,
+        "count_error": 0.3409090909090909,
+        "idf1": 0.3888888888888889,
+        "mota": 0.25253485424588085,
         "id_switches": 7
       }
     }

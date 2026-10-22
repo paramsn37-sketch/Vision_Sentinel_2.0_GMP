@@ -27,6 +27,7 @@ from app.core.detection.detector import Detector, ModelInfo, load_model_info
 from app.core.geometry import iou
 from app.core.tracking.tracker import PersonTracker
 from app.core.types import Detection
+from app.settings import DetectionCfg
 
 REPO = Path(__file__).resolve().parents[2]
 MOT = REPO / "data" / "raw" / "mot17" / "MOT17-50" / "train"
@@ -195,8 +196,15 @@ def main() -> None:
         info = ModelInfo(
             name=Path(args.weights).stem, weights=args.weights, classes=["person"], thresholds={}
         )
-    detector = Detector(info, imgsz=args.imgsz)
-    tag = f"{Path(str(info.weights)).stem}_{detector.imgsz}"
+    cfg_det = DetectionCfg()
+    detector = Detector(info, imgsz=args.imgsz, person_model=cfg_det.person_model or None,
+                        person_imgsz=cfg_det.person_imgsz)  # fmt: skip
+    # Only person boxes matter here, so the cache key is whichever network produced them.
+    tag = (
+        f"{detector.person_model_name}_{detector.person_imgsz}"
+        if detector.person_model
+        else f"{Path(str(info.weights)).stem}_{detector.imgsz}"
+    )
 
     cache = {}
     for name in TUNE + REPORT_SEQS:
@@ -223,7 +231,7 @@ def main() -> None:
         rows.append({"seq": name, "fps": inf["fps"], "frames": inf["frames"], "naive_1fps": naive,
                      "bytetrack_default": bt, "bytetrack_tuned": bt_tuned, "ours": ours})  # fmt: skip
 
-    result = {"detector": info.name, "imgsz": detector.imgsz, "tuned_config": asdict(cfg),
+    result = {"detector": detector.name, "imgsz": detector.person_imgsz if detector.person_model else detector.imgsz, "tuned_config": asdict(cfg),
               "top_trials": trials[:10], "trials": len(trials), "report": rows}  # fmt: skip
     RESULTS.parent.mkdir(parents=True, exist_ok=True)
     RESULTS.write_text(json.dumps(result, indent=2))

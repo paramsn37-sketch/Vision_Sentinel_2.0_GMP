@@ -105,3 +105,15 @@ Short ADRs. Format: context → decision → consequences. Newest at the bottom.
 - **Consequences:** person mAP50 0.683 (stock nano 0.720, within the 5-point allowance); helmet 0.867 and vest 0.849
   meet the blueprint's 0.70; head 0.579 and person do not meet their SHOULD targets. A full GPU run via
   `train_colab.ipynb` is the first follow-up.
+
+## ADR-0013 — People from the COCO model, PPE from the trained model
+- **Context:** with the trained model's own `person` class, the MOT17 unique-count error rose from 20.0 % to
+  41.3 % at 480 px and 32.9 % at 640 px (`counting_eval.py`, same thresholds and tuning). The training data has few
+  small, distant pedestrians, so the fine-tuned model misses them; tracks break and people are undercounted.
+- **Decision:** when a PPE model is active, `Detector` runs two networks per frame: the stock COCO `yolo26n.pt` at
+  640 px for `person` (tracking, counting, zones) and the trained model at 480 px for PPE items only. Setting
+  `detection.person_model: ""` restores the single-network mode.
+- **Consequences:** counting error back to 20.0 % (target 10 % still not met, ADR-0009). Two forward passes per
+  frame cost about 30 ms more on the CPU (measured in `docs/eval/performance.md`). Grad-CAM for a person box uses
+  the trained model's person head, which may explain a slightly different box; EigenCAM is the fallback when no
+  anchor matches.

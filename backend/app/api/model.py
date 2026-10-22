@@ -38,6 +38,7 @@ def active(svc: Svc, user: User) -> dict:
     return {
         "loaded": True,
         "name": info.name,
+        "person_detector": svc.detector.person_model_name,
         "is_ppe_model": info.is_ppe_model,
         "classes": info.classes,
         "imgsz": svc.detector.imgsz,

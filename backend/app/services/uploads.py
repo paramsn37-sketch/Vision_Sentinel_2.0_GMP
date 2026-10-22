@@ -129,7 +129,7 @@ class UploadWorker:
             "ppe_summary": ppe_summary,
             "incidents": [i.to_dict() for i in incidents.all()],
             "keyframes": keyframes,
-            "model": self.detector.info.name,
+            "model": self.detector.name,
         }
         self._update(uid, status="done", progress=1.0, result=result, output_path=str(out_path))
 

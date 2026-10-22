@@ -127,3 +127,10 @@ What the grids show:
 2. Add CCTV-style data with complete labels (SH17, site footage) and drop or relabel Open Images close-ups.
 3. Merge or drop the `hand` and `no_goggles` classes unless better data is found.
 4. Add "hard hat not worn" and "hi-vis jacket" as hard negatives or as accepted vest variants.
+
+## Effect on counting
+
+With this model's own `person` class the MOT17 unique-count error was 41.3 % at 480 px and 32.9 % at 640 px,
+against 20.0 % with the stock COCO model: the fine-tuning data has few small, distant pedestrians. The app therefore
+takes people from the COCO model and PPE from this one (ADR-0013). Better pedestrian data (CCTV-style, crowds) is
+needed before this model can replace the COCO person detector.

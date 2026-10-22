@@ -22,6 +22,8 @@ demo:
 detection:
   device: auto
   imgsz: null             # null = the model's own size (models/model.json)
+  person_model: yolo26n.pt  # people from this COCO model when a PPE model is active ("" = trained model only), ADR-0013
+  person_imgsz: 640
 
 tracking:                 # tuned on MOT17-02/04, see docs/eval/counting_report.md (ADR-0009)
   track_high_thresh: 0.2

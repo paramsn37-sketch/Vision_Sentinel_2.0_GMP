@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
+from typing import Any
 
 import cv2
 import numpy as np
@@ -101,11 +102,11 @@ def box_stats(heat: np.ndarray, box: Box) -> tuple[float, bool]:
 class YoloCAM:
     """Wraps a YOLO `DetectionModel` (``YOLO(weights).model``). Not thread-safe; the XAI worker serialises calls."""
 
-    def __init__(self, model: torch.nn.Module, class_names: dict[int, str], imgsz: int = 640) -> None:
+    def __init__(self, model: Any, class_names: dict[int, str], imgsz: int = 640) -> None:
         self.model = model.float().eval()
         for p in self.model.parameters():
             p.requires_grad_(False)
-        self.head = self.model.model[-1]
+        self.head: Any = self.model.model[-1]
         self.names = class_names
         self.ids = {v: k for k, v in class_names.items()}
         self.imgsz = imgsz
@@ -166,13 +167,13 @@ class YoloCAM:
                 cam = F.relu((g.mean(dim=(2, 3), keepdim=True) * f).sum(dim=1, keepdim=True))
             else:
                 cam = F.relu((g * f).sum(dim=1, keepdim=True))
-            cam = (
+            cam_np: np.ndarray = (
                 F.interpolate(cam, size=(h, w), mode="bilinear", align_corners=False)[0, 0]
                 .detach()
                 .cpu()
                 .numpy()
             )
-            cams.append(_normalise(cam))
+            cams.append(_normalise(cam_np))
             energies.append(float(g.abs().sum()))
             layers.append(
                 f"P{i + 3}/stride{int(self.head.stride[i]) if hasattr(self.head, 'stride') else '?'}"

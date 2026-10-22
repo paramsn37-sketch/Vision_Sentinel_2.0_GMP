@@ -44,7 +44,7 @@ def run(args: argparse.Namespace) -> dict:
             img = draw(frame.image, res, zone_polys)
             if writer is None:
                 h, w = img.shape[:2]
-                writer = cv2.VideoWriter(args.out, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
+                writer = cv2.VideoWriter(args.out, cv2.VideoWriter.fourcc(*"mp4v"), fps, (w, h))
             writer.write(img)
     if writer is not None:
         writer.release()
@@ -54,7 +54,7 @@ def run(args: argparse.Namespace) -> dict:
         "unique_total": last.counts.unique_total if last else 0,
         "raw_track_ids": len(pipe.tracker.raw_ids_seen),
         "wall_s": round(time.perf_counter() - t0, 1),
-        "model": detector.info.name,
+        "model": detector.name,
     }
     if incidents is not None:
         summary["incidents"] = [i.to_dict() for i in incidents.all()]

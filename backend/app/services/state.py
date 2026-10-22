@@ -54,9 +54,11 @@ class AppServices:
 
     def load_model(self) -> None:
         try:
+            det = self.settings.detection
             self.detector = Detector(
-                load_model_info(), device=self.settings.detection.device, imgsz=self.settings.detection.imgsz
-            )
+                load_model_info(), device=det.device, imgsz=det.imgsz,
+                person_model=det.person_model or None, person_imgsz=det.person_imgsz,
+            )  # fmt: skip
             self.detector.warmup()
             self.xai = XAIWorker(
                 YoloCAM(_cam_model(self.detector), self.detector.model.names, self.detector.imgsz),

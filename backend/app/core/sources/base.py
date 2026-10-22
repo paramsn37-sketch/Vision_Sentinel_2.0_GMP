@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import threading
 import time
+from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -32,7 +33,7 @@ class FrameSource:
     def close(self) -> None:
         pass
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Frame]:
         while (f := self.read()) is not None:
             yield f
 

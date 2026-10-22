@@ -69,7 +69,7 @@ frozen test split of 559 images; counting on MOT17 sequences not used for tuning
 |---|---|
 | v1: people per frame, sampled once a second | 107.9 % |
 | ByteTrack, default thresholds | 25.2 % |
-| Ours: tuned ByteTrack + track confirmation | 19.7 % |
+| Ours: tuned ByteTrack + track confirmation | 20.0 % |
 
 Details: [counting report](docs/eval/counting_report.md), [detector results](docs/eval/detector_results.json),
 [model card](MODEL_CARD.md), [training report](training/reports/training_report.md).

@@ -56,6 +56,8 @@ Evidence frames stop being written when less than 200 MB of disk is free; detect
 |---|---|---|
 | `device` | `auto` | `auto` (GPU if available), `cpu`, `cuda:0`, … |
 | `imgsz` | `null` | Inference size; `null` uses the size recorded in `models/model.json`. |
+| `person_model` | `yolo26n.pt` | When a PPE model is active, people (for tracking, counting and zones) come from this COCO model and only PPE items from the trained model (ADR-0013). `""` uses the trained model's own `person` class: one network instead of two, but worse counting. |
+| `person_imgsz` | `640` | Inference size of the person model. |
 
 ### `tracking` (counting people)
 

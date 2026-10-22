@@ -12,7 +12,7 @@ RUN uv venv /venv \
  && grep -vE '^(torch|torchvision)==' req.txt > req-notorch.txt \
  && VIRTUAL_ENV=/venv uv pip install --no-cache --index-url https://download.pytorch.org/whl/cpu torch torchvision \
  && VIRTUAL_ENV=/venv uv pip install --no-cache -r req-notorch.txt
-# Fetch the fallback person model at build time so the container starts offline.
+# Fetch the COCO person model (people detector, and fallback without a trained model) so the container starts offline.
 RUN mkdir -p /root/.cache/vision-sentinel && cd /root/.cache/vision-sentinel \
  && /venv/bin/python -c "from ultralytics import YOLO; YOLO('yolo26n.pt')"
 

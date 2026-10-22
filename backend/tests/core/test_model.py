@@ -39,3 +39,18 @@ def test_person_found_in_fixture_images() -> None:
         r = model.predict(str(p), imgsz=info.imgsz, conf=info.thresholds["person"], verbose=False)[0]
         found += any(int(c) == 0 for c in r.boxes.cls)
     assert found / len(with_person) >= 0.9, f"person found in {found}/{len(with_person)} fixture images"
+
+
+def test_people_come_from_the_person_model_and_ppe_from_the_trained_model() -> None:
+    import cv2
+
+    from app.core.detection.detector import Detector
+
+    det = Detector(load_model_info(), device="cpu", person_model="yolo26n.pt")
+    assert det.person_model is not None and "person" not in det._keep.values()
+    seen: set[str] = set()
+    for p in sorted(FIXTURES.glob("*.jpg"))[:12]:
+        seen |= {d.cls for d in det.detect(cv2.imread(str(p)))}
+    assert "person" in seen and seen - {"person"}, f"classes seen: {seen}"
+    solo = Detector(load_model_info(), device="cpu", person_model=None)
+    assert solo.person_model is None and "person" in solo._keep.values()

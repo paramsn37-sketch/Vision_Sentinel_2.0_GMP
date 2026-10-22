@@ -41,6 +41,10 @@ class DemoCfg(BaseModel):
 class DetectionCfg(BaseModel):
     device: str = "auto"
     imgsz: int | None = None
+    # People for tracking and counting come from this COCO model when a PPE model is active (ADR-0013);
+    # "" uses the PPE model's own person class instead.
+    person_model: str = "yolo26n.pt"
+    person_imgsz: int = 640
 
 
 class SiteCfg(BaseModel):

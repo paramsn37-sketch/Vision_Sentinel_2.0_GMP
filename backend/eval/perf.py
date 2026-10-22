@@ -27,6 +27,7 @@ from app.core.sources.base import FileSource
 from app.core.zones.engine import ZoneEngine
 from app.core.zones.model import load_zones_yaml
 from app.services.storage import encode_jpeg
+from app.settings import DetectionCfg
 
 REPO = Path(__file__).resolve().parents[2]
 SAMPLES = REPO / "data" / "samples"
@@ -99,7 +100,10 @@ def main() -> None:
     ap.add_argument("--label", default="default")
     args = ap.parse_args()
 
-    detector = Detector(imgsz=args.imgsz)
+    det = DetectionCfg()
+    detector = Detector(
+        imgsz=args.imgsz, person_model=det.person_model or None, person_imgsz=det.person_imgsz
+    )
     runs = [run(int(n), args.seconds, detector) for n in args.cams.split(",")]
     machine = {
         "cpu": platform.processor() or platform.machine(),
@@ -112,7 +116,7 @@ def main() -> None:
     data = json.loads(out_json.read_text()) if out_json.exists() else {}
     data[args.label] = {
         "measured_at": datetime.now(UTC).isoformat(timespec="seconds"),
-        "model": detector.info.name,
+        "model": detector.name,
         "imgsz": detector.imgsz,
         "device": detector.device,
         "machine": machine,
