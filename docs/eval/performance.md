@@ -28,7 +28,7 @@ total throughput stays flat while each camera's share drops.
 | Detection → incident visible in the UI < 1.0 s (MUST) | pipeline p95 126 ms (one camera), 461 ms (four cameras); the WebSocket hop was not instrumented separately | met for the pipeline; end-to-end not measured |
 | Grad-CAM < 300 ms per explanation on GPU | 142 ms p50, 224 ms p95 on the CPU ([xai_report.md](xai_report.md)) | met on CPU |
 | Frontend initial JS < 250 KB gzip | 173.7 KB (Phase 8 build) | met |
-| Backend image < 2.5 GB | 6.14 GB in CI before this pass: the lock file pulled CUDA wheels into the CPU image. Fixed by excluding `nvidia-*`, `cuda-*` and `triton`; CI now fails if the image is over budget | see CI `docker` job |
+| Backend image < 2.5 GB | 1.82 GB (was 6.14 GB: the lock file pulled CUDA wheels into the CPU image; `nvidia-*`, `cuda-*` and `triton` are now excluded and CI fails if the image is over budget) | met |
 
 ## Bottlenecks and what was done
 
@@ -40,7 +40,7 @@ total throughput stays flat while each camera's share drops.
 3. **ONNX Runtime** was benchmarked (`training/benchmarks/latency.json`): 27.6 ms vs 29.9 ms p50 at 480 px for the
    trained model, an 8 % gain. Not switched: the explanation feature needs the PyTorch graph for gradients, and
    loading the model twice in two runtimes costs more memory than the gain is worth.
-4. **Image size:** the 6.14 GB backend image was the largest footprint problem; see the table above.
+4. **Image size:** the backend image went from 6.14 GB to 1.82 GB by keeping CUDA wheels out of the CPU image.
 
 Not done: half precision and TensorRT (GPU only), frame skipping (it would change counting behaviour, which is
 tuned at full frame rate).

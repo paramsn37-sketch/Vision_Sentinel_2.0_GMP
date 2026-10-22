@@ -225,7 +225,7 @@ improvement. One explanation sanity check fails. GPU speed was never measured.
   is 97 % of frame time ([performance.md](eval/performance.md)). 60-minute soak with three cameras: memory +3.0 %
   after warm-up, open files and threads flat ([soak.md](eval/soak.md)).
 - **Fixes found here:** the backend image was 6.14 GB because CUDA wheels from the lock file were installed into the
-  CPU image; excluded, and CI now enforces the 2.5 GB budget. The benchmark script overwrote the promoted ONNX file
+  CPU image; excluded (now 1.82 GB), and CI enforces the 2.5 GB budget. The benchmark script overwrote the promoted ONNX file
   (and so its checksum); it now exports from a temporary copy. Docker: bind-mounted data was not writable by the
   non-root user (named volume); OpenCV needed `libxcb1`/`libgl1`.
 - **Fallbacks used / deviations from blueprint:** Docker is not available inside the build container, so images are

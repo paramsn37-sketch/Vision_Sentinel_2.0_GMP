@@ -29,7 +29,7 @@ Audited on 2026-10-22 against commit history up to the `v2.0.0` tag.
 | Counting | Unique-count error ≤ 10 %; IDF1 reported | **Fail** | 20.0 % mean on 5 held-out MOT17 sequences (IDF1 reported). Worst on MOT17-09 (41 %, moving camera) and MOT17-13 (34 %). Appearance re-identification was tried and undercounted (ADR-0009). |
 | Detector (SHOULD) | person ≥ 0.80, helmet/head/vest ≥ 0.70 mAP50 | **Partial** | helmet 0.867 and vest 0.849 met; person 0.683 and head 0.579 not met (under-trained CPU run, ADR-0012). |
 | Grad-CAM | < 300 ms on GPU; pointing game reported | **Pass** (CPU) | 142 ms p50 / 224 ms p95 on CPU; pointing game 100 %. GPU not measured. |
-| Footprint | Backend image < 2.5 GB; initial JS < 250 KB gzip | **Partial** | JS 173.7 KB. The backend image was 6.14 GB because CUDA wheels were installed into the CPU image; fixed in Phase 11 and CI now fails the build over 2.5 GB. |
+| Footprint | Backend image < 2.5 GB; initial JS < 250 KB gzip | **Pass** | Backend image 1.82 GB (CI `docker` job; was 6.14 GB until CUDA wheels were excluded, and CI now fails the build over 2.5 GB); frontend image 49 MB; initial JS 173.7 KB. |
 | Install | `docker compose up` or two commands without Docker | **Pass** | README quick start: `docker compose up --build`, or `make setup` + `make dev`. |
 | Privacy | No faces stored by default; head blur setting (SHOULD); retention | **Pass** | No face or identity model; `privacy.blur_heads_in_snapshots`; `storage.retention_days` with an hourly job (`tests/api/test_failures.py`). |
 | Accessibility | WCAG 2.2 AA contrast, keyboard operable, reduced motion | **Pass** | Contrast table in `DESIGN.md` (44 pairs pass), axe on every route in both themes, keyboard-only zone creation e2e, reduced-motion e2e check. |
