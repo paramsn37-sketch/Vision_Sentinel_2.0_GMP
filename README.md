@@ -26,19 +26,19 @@ VS_ADMIN_PASSWORD='choose-a-password' make dev   # API on :8000, UI on http://lo
 ```
 
 If you do not set `VS_ADMIN_PASSWORD`, a random password is written to `data/runtime/ADMIN_PASSWORD.txt` on first
-start. The first start downloads the stock detector weights if `models/` has no trained model.
+start. The first start downloads the stock COCO person model (5 MB) unless it is cached.
 
 ## What it does
 
 | Feature | Status |
 |---|---|
 | Sources: video file, webcam, RTSP/HTTP stream, photo/video upload | Working |
-| Person + PPE detection with a model trained for this project | Working; accuracy below the target, see results |
+| Person + PPE detection with a model trained for this project | Working; helmet and vest reliable, gloves and goggles not yet |
 | Tracking and unique-person counting (confirmed tracks, not per-frame counts) | Working; ~20 % count error on MOT17, target 10 % not met |
 | Per-person PPE state with temporal smoothing (worn / missing / unknown) | Working when a PPE model is active |
 | Polygon zones: no entry, PPE required, max occupancy, max dwell, active hours | Working |
 | Incidents: open → acknowledged → resolved, evidence frame, timeline, notes | Working |
-| Explanations: Grad-CAM per detection, EigenCAM for the whole frame | Working |
+| Explanations: Grad-CAM per detection, EigenCAM for the whole frame | Working; one of three sanity checks fails |
 | Analytics, PDF and CSV shift reports | Working |
 | Single admin sign-in, audit log, CSRF protection, login throttling | Working |
 | Zone editor with full keyboard support, undo/redo, live preview of who is inside | Working |
@@ -53,15 +53,17 @@ Face recognition, cross-camera re-identification and alert delivery by SMS/email
 All numbers are measured by scripts in this repository on data it never trained on. The detector is evaluated on a
 frozen test split of 559 images; counting on MOT17 sequences not used for tuning.
 
-<!-- results:detector -->
-**Detector, person class, test split (mAP50)**
+**Detector, frozen test split (mAP50)**
 
-| Model | Person mAP50 | PPE classes | CPU inference |
-|---|---|---|---|
-| v1 setup: YOLO11m, COCO weights | 0.745 | not detected | ~735 ms/image |
-| Stock YOLO26n, COCO weights | 0.720 | not detected | ~183 ms/image |
-| Ours: YOLO26n trained on person + PPE | evaluation pending | evaluation pending | evaluation pending |
-<!-- /results:detector -->
+| Model | Person | Helmet | Vest | Head (no helmet) | Boots | Mean of 9 classes |
+|---|---|---|---|---|---|---|
+| v1 setup: YOLO11m, COCO weights | 0.745 | — | — | — | — | person only |
+| Stock YOLO26n, COCO weights | 0.720 | — | — | — | — | person only |
+| **Ours: YOLO26n fine-tuned on person + PPE (480 px)** | 0.683 | **0.867** | **0.849** | 0.579 | 0.683 | 0.524 |
+
+Trained on CPU only and stopped after 26 epochs by a machine restart, so it is under-trained
+([model card](MODEL_CARD.md)). Gloves, goggles and bare hands are not reliable yet. In the app, people come from the
+stock COCO model (better on small, distant people, which counting depends on) and PPE from ours (ADR-0013).
 
 **Unique-person counting, MOT17 (mean absolute count error, lower is better)**
 
@@ -71,8 +73,22 @@ frozen test split of 559 images; counting on MOT17 sequences not used for tuning
 | ByteTrack, default thresholds | 25.2 % |
 | Ours: tuned ByteTrack + track confirmation | 20.0 % |
 
-Details: [counting report](docs/eval/counting_report.md), [detector results](docs/eval/detector_results.json),
-[model card](MODEL_CARD.md), [training report](training/reports/training_report.md).
+The blueprint's 10 % target is not met yet.
+
+**Other measurements**
+
+| What | Result |
+|---|---|
+| Speed, one camera, 4-core CPU, no GPU | 9.6 FPS (both networks), 21.3 FPS (trained model only) |
+| Explanations: hottest pixel inside the box (pointing game) | 100 % of 214 test detections |
+| Explanations: hiding the hot region lowers the score more than hiding a random region | 95 % of cases |
+| Explanations: model-randomisation sanity check | **fails** (SSIM 0.67, needs < 0.5); see the report |
+| Explanation time on CPU | 142 ms p50 |
+| 60-minute soak, three cameras | memory +3.0 % after warm-up, no leaks in files or threads |
+
+Details: [counting report](docs/eval/counting_report.md), [explanation report](docs/eval/xai_report.md),
+[performance](docs/eval/performance.md), [soak](docs/eval/soak.md), [model card](MODEL_CARD.md),
+[training report](training/reports/training_report.md).
 
 ## Screens
 

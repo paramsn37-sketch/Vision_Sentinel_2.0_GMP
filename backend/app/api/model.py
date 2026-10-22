@@ -9,6 +9,7 @@ from .deps import ApiError, Svc, User
 
 router = APIRouter(prefix="/model", tags=["model"])
 FIGURE_DIRS = {
+    "summary": REPO / "training" / "reports" / "figures",
     "training": REPO / "training" / "runs" / "{run}",
     "test": REPO / "training" / "reports" / "eval" / "{run}",
     "errors": REPO / "training" / "reports" / "error_analysis",
