@@ -60,7 +60,17 @@ def test_analytics_and_model(client) -> None:
     assert isinstance(client.get("/api/v1/analytics/zones").json(), list)
     m = client.get("/api/v1/model/active").json()
     assert m["loaded"] and "person" in m["classes"]
-    assert "runs" in client.get("/api/v1/model/runs").json()
+    runs = client.get("/api/v1/model/runs").json()["runs"]
+    assert all({"id", "status", "val_map50", "test_person_map50"} <= r.keys() for r in runs)
+    ev = client.get("/api/v1/model/evaluations").json()
+    if ev["detector"]:  # flat shapes the Model screen relies on
+        assert all({"name", "per_class", "mean"} <= m.keys() for m in ev["detector"]["models"])
+        assert all({"class", "precision", "recall", "map50", "map50_95"} <= c.keys()
+                   for m in ev["detector"]["models"] for c in m["per_class"])  # fmt: skip
+    if ev["latency"]:
+        assert all({"model", "runtime", "imgsz", "p50_ms", "p95_ms"} <= r.keys() for r in ev["latency"])
+    if ev["xai"]:
+        assert {"pointing_game", "deletion_top_beats_random", "randomisation_ssim"} <= ev["xai"].keys()
     figs = client.get("/api/v1/model/figures").json()
     assert "class_distribution.png" in figs["dataset"]
     assert client.get("/api/v1/model/figures/dataset/class_distribution.png").status_code == 200

@@ -1,6 +1,16 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { api, type Camera, type CameraIn, type Incident, type IncidentPage, type Thresholds, type Upload, type Zone, type ZoneIn } from './client'
+import {
+  api,
+  type Camera,
+  type CameraIn,
+  type Incident,
+  type IncidentPage,
+  type Thresholds,
+  type Upload,
+  type Zone,
+  type ZoneIn,
+} from './client'
 import type { ActiveModel, Health, IncidentsByHour, Summary, Timeseries, ZoneStat } from './types'
 
 export const keys = {
@@ -44,7 +54,11 @@ export interface IncidentFilters {
 const errorToast = (title: string) => (e: Error) => toast.error(title, { description: e.message })
 
 export const useMe = () =>
-  useQuery({ queryKey: keys.me, queryFn: () => api.get<{ user: string; csrf_token: string }>('/auth/me'), retry: false })
+  useQuery({
+    queryKey: keys.me,
+    queryFn: () => api.get<{ user: string; csrf_token: string }>('/auth/me'),
+    retry: false,
+  })
 
 export const useCameras = () =>
   useQuery({ queryKey: keys.cameras, queryFn: () => api.get<Camera[]>('/cameras'), refetchInterval: 5000 })
@@ -71,7 +85,11 @@ export const useIncident = (id: string | null) =>
   })
 
 export const useSummary = (range?: Range) =>
-  useQuery({ queryKey: keys.summary(range), queryFn: () => api.get<Summary>('/analytics/summary', { ...range }), refetchInterval: 5000 })
+  useQuery({
+    queryKey: keys.summary(range),
+    queryFn: () => api.get<Summary>('/analytics/summary', { ...range }),
+    refetchInterval: 5000,
+  })
 
 export const useTimeseries = (range: Range & { bucket: 'hour' | 'minute'; camera_id?: string }) =>
   useQuery({
@@ -82,30 +100,43 @@ export const useTimeseries = (range: Range & { bucket: 'hour' | 'minute'; camera
   })
 
 export const useIncidentsByHour = (range?: Range) =>
-  useQuery({ queryKey: keys.byHour(range), queryFn: () => api.get<IncidentsByHour>('/analytics/incidents-by-hour', { ...range }) })
+  useQuery({
+    queryKey: keys.byHour(range),
+    queryFn: () => api.get<IncidentsByHour>('/analytics/incidents-by-hour', { ...range }),
+  })
 
 export const useZoneStats = (range?: Range) =>
-  useQuery({ queryKey: keys.zoneStats(range), queryFn: () => api.get<ZoneStat[]>('/analytics/zones', { ...range }) })
+  useQuery({
+    queryKey: keys.zoneStats(range),
+    queryFn: () => api.get<ZoneStat[]>('/analytics/zones', { ...range }),
+  })
 
 export const useHealth = () =>
   useQuery({ queryKey: keys.health, queryFn: () => api.get<Health>('/health'), refetchInterval: 10000 })
 
-export const useActiveModel = () => useQuery({ queryKey: keys.model, queryFn: () => api.get<ActiveModel>('/model/active') })
+export const useActiveModel = () =>
+  useQuery({ queryKey: keys.model, queryFn: () => api.get<ActiveModel>('/model/active') })
 
 export const useRuns = () =>
-  useQuery({ queryKey: keys.runs, queryFn: () => api.get<{ runs: Record<string, unknown>[] }>('/model/runs') })
+  useQuery({ queryKey: keys.runs, queryFn: () => api.get<{ runs: TrainingRun[] }>('/model/runs') })
 
 export const useEvaluations = () =>
   useQuery({
     queryKey: keys.evaluations,
     queryFn: () =>
-      api.get<{ counting: CountingResults | null; xai: XaiResults | null; detector: DetectorResults | null; latency: LatencyResults | null }>(
-        '/model/evaluations',
-      ),
+      api.get<{
+        counting: CountingResults | null
+        xai: XaiResults | null
+        detector: DetectorResults | null
+        latency: LatencyResults | null
+      }>('/model/evaluations'),
   })
 
 export const useDataset = () =>
-  useQuery({ queryKey: keys.dataset, queryFn: () => api.get<{ card: string | null; split: unknown }>('/model/dataset') })
+  useQuery({
+    queryKey: keys.dataset,
+    queryFn: () => api.get<{ card: string | null; split: unknown }>('/model/dataset'),
+  })
 
 export const useFigures = () =>
   useQuery({ queryKey: keys.figures, queryFn: () => api.get<Record<string, string[]>>('/model/figures') })
@@ -113,10 +144,14 @@ export const useFigures = () =>
 export const useUploads = () =>
   useQuery({ queryKey: keys.uploads, queryFn: () => api.get<Upload[]>('/uploads'), refetchInterval: 4000 })
 
-export const useThresholds = () => useQuery({ queryKey: keys.thresholds, queryFn: () => api.get<Thresholds>('/settings/thresholds') })
+export const useThresholds = () =>
+  useQuery({ queryKey: keys.thresholds, queryFn: () => api.get<Thresholds>('/settings/thresholds') })
 
 export const useAudit = () =>
-  useQuery({ queryKey: keys.audit, queryFn: () => api.get<Record<string, unknown>[]>('/audit', { limit: 50 }) })
+  useQuery({
+    queryKey: keys.audit,
+    queryFn: () => api.get<Record<string, unknown>[]>('/audit', { limit: 50 }),
+  })
 
 /** Acknowledge / resolve / note. Optimistic on every cached incident list, rolled back on error. */
 export function usePatchIncident() {
@@ -190,7 +225,9 @@ export function useSaveThresholds() {
     mutationFn: (t: Thresholds) => api.put<Thresholds>('/settings/thresholds', t),
     onSuccess: (t) => {
       qc.setQueryData(keys.thresholds, t)
-      toast.success('Thresholds saved', { description: 'Running cameras use the new values from the next frame.' })
+      toast.success('Thresholds saved', {
+        description: 'Running cameras use the new values from the next frame.',
+      })
     },
     onError: errorToast('Could not save thresholds'),
   })
@@ -218,6 +255,52 @@ export interface CountRow {
   mota: number
   id_switches: number
 }
-export type XaiResults = Record<string, unknown>
-export type DetectorResults = Record<string, unknown>
-export type LatencyResults = Record<string, unknown>
+// Normalised by the backend (app/api/model.py) from docs/eval/*.json and training/benchmarks/latency.json.
+export interface XaiResults {
+  model: string
+  method: string
+  samples: number
+  pointing_game: number | null
+  deletion_top_beats_random: number | null
+  deletion_drop_top20: number | null
+  deletion_drop_random20: number | null
+  randomisation_ssim: number | null
+  latency_p50_ms: number | null
+  latency_p95_ms: number | null
+}
+export interface ClassMetrics {
+  class: string
+  precision: number | null
+  recall: number | null
+  map50: number | null
+  map50_95: number | null
+}
+export interface DetectorResults {
+  active: string | null
+  models: {
+    name: string
+    kind: string | null
+    imgsz: number | null
+    per_class: ClassMetrics[]
+    mean: { map50: number | null; map50_95: number | null }
+  }[]
+}
+export type LatencyResults = {
+  model: string
+  runtime: string
+  imgsz: number
+  device: string | null
+  p50_ms: number
+  p95_ms: number
+}[]
+export interface TrainingRun {
+  id: string
+  model: string
+  status: string
+  created_at: string
+  imgsz: number | null
+  epochs_completed: number | null
+  val_map50: number | null
+  test_person_map50: number | null
+  note: string | null
+}

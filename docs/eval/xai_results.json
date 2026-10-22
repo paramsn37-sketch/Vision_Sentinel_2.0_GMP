@@ -1,0 +1,52 @@
+{
+  "model": "vs2-y26n.pt",
+  "variant": "hirescam",
+  "samples": 214,
+  "pointing_game": 1.0,
+  "pointing_by_class": {
+    "person": 1.0,
+    "head": 1.0,
+    "helmet": 1.0,
+    "vest": 1.0,
+    "boots": 1.0,
+    "goggles": 1.0,
+    "hand": 1.0,
+    "gloves": 1.0
+  },
+  "energy_in_box_by_class": {
+    "person": 0.9549274862091008,
+    "head": 0.9427437679010999,
+    "helmet": 0.9399433789550201,
+    "vest": 0.9631649227137213,
+    "boots": 0.929781205058853,
+    "goggles": 0.9855623892911128,
+    "hand": 0.9694843031706349,
+    "gloves": 0.9469917568182424
+  },
+  "n_by_class": {
+    "person": 33,
+    "head": 33,
+    "helmet": 33,
+    "vest": 33,
+    "boots": 33,
+    "goggles": 21,
+    "hand": 7,
+    "gloves": 21
+  },
+  "pointing_eigencam_first60": 0.16666666666666666,
+  "pointing_classic_gradcam_first60": 0.6333333333333333,
+  "deletion": {
+    "n": 100,
+    "mean_drop_top20": 0.5089944211542988,
+    "mean_drop_random20": 0.10892888491849134,
+    "share_top_beats_random": 0.95
+  },
+  "randomisation": {
+    "n": 30,
+    "mean_ssim": 0.6685390729466969
+  },
+  "latency_ms": {
+    "p50": 141.7507610000257,
+    "p95": 223.8834688500333
+  }
+}

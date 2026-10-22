@@ -227,10 +227,18 @@ def write_report(r: dict) -> None:
         f"Mean SSIM between maps of the trained model and a model with re-initialised conv weights: **{rnd['mean_ssim']:.3f}**",
         f"over {rnd['n']} detections (below 0.5 means the explanation depends on what the model learned).",
         "",
+        "**Result: pass.**"
+        if rnd["mean_ssim"] < 0.5
+        else "**Result: fail.** Maps from the randomised model still resemble the trained model's. Part of every map's "
+        "shape comes from *where* the explained box is (the method back-propagates from the anchors that produced "
+        "that box, and a random network's anchors there respond to local edges), not only from what the model "
+        "learned. Read the pointing-game numbers with that in mind; the deletion check above is the stronger "
+        "evidence that the hot region matters to the trained model's score.",
+        "",
         "## Latency",
         "",
-        f"p50 **{r['latency_ms']['p50']:.0f} ms**, p95 **{r['latency_ms']['p95']:.0f} ms** per explanation on the CPU",
-        "(while training was running in parallel). The blueprint's 300 ms target assumes a GPU.",
+        f"p50 **{r['latency_ms']['p50']:.0f} ms**, p95 **{r['latency_ms']['p95']:.0f} ms** per explanation on the build",
+        "machine's CPU. The blueprint's 300 ms target is for a GPU, which was not available (not measured).",
         "",
         "## Examples",
         "",
