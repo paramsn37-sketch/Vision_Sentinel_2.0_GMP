@@ -101,11 +101,14 @@
     {
       "id": 6,
       "title": "Backend API, persistence, streaming, auth, reports",
-      "status": "pending",
+      "status": "done",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
+      "finished_at": "2026-10-22T15:52:49Z",
+      "commit": "cf04a13",
+      "gate_results": {
+        "make lint": "pass",
+        "pytest": "62 passed"
+      },
       "notes": ""
     },
     {

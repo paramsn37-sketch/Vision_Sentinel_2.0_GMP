@@ -1,0 +1,129 @@
+/* Vision Sentinel design tokens. DESIGN.md is the spec; scripts/check-tokens.mjs verifies that every token named
+   there exists here and that the text/background pairs meet their contrast targets. Dark is the default theme. */
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Neutrals: the interface is grey; cards sit darker than the ground (the "data terminal" move). */
+  --bg: #171719;
+  --bg-sunken: #121215;
+  --bg-raised: #1f1f23;
+  --bg-hover: #26262b;
+  --line: #26262b;
+  --line-strong: #6a6b72;
+  --fg: #f2f2f3;
+  --fg-muted: #9a9ca3;
+  --fg-subtle: #85878e;
+  --fg-on-accent: #0c1420;
+
+  /* State (ISO 3864 meanings). Only used when something is in that state. */
+  --accent: #5b9be6;
+  --accent-bg: #172334;
+  --danger: #f2626f;
+  --danger-bg: #331a1f;
+  --warning: #e0a84a;
+  --warning-bg: #2e2416;
+  --ok: #4fb58f;
+  --ok-bg: #16291f;
+  --neutral-bg: #26262b;
+
+  /* Zones (fill at 20 % on video, outline at full strength). */
+  --zone-restricted: #f2626f;
+  --zone-hazard: #e0a84a;
+  --zone-ppe: #5b9be6;
+
+  /* Elevation: borders and tone steps; one shadow for things that float. */
+  --shadow-float: 0 12px 28px rgb(0 0 0 / 0.35), 0 2px 6px rgb(0 0 0 / 0.25);
+  --scrim: rgb(0 0 0 / 0.55);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f3f3f4;
+  --bg-sunken: #ffffff;
+  --bg-raised: #ffffff;
+  --bg-hover: #e9e9eb;
+  --line: #e1e1e4;
+  --line-strong: #85878f;
+  --fg: #17171a;
+  --fg-muted: #5c5e66;
+  --fg-subtle: #6e7078;
+  --fg-on-accent: #ffffff;
+
+  --accent: #1d64c2;
+  --accent-bg: #e3edfa;
+  --danger: #c3283d;
+  --danger-bg: #fbe6e8;
+  --warning: #8a5c00;
+  --warning-bg: #f8eed9;
+  --ok: #1b7656;
+  --ok-bg: #e0f1ea;
+  --neutral-bg: #e9e9eb;
+
+  --zone-restricted: #c3283d;
+  --zone-hazard: #b07a0c;
+  --zone-ppe: #1d64c2;
+
+  --shadow-float: 0 12px 28px rgb(20 20 30 / 0.14), 0 2px 6px rgb(20 20 30 / 0.08);
+  --scrim: rgb(20 20 30 / 0.35);
+}
+
+:root {
+  /* Video overlays are drawn on camera pixels, so they do not change with the theme. */
+  --ov-person: #f2f2f3;
+  --ov-ok: #4fd1a0;
+  --ov-danger: #ff5c6a;
+  --ov-label-bg: rgb(10 10 12 / 0.78);
+
+  /* Type */
+  --font-sans: 'Public Sans Variable', 'Public Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --text-2xl: 26px;
+  --leading-tight: 1.25;
+  --leading-normal: 1.45;
+
+  /* Space: 8 px grid with 4 px half-steps */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Shape and density */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-full: 999px;
+  --row-height: 36px;
+  --control-height: 32px;
+  --rail-width: 56px;
+  --rail-width-open: 208px;
+  --strip-height: 40px;
+
+  /* Motion */
+  --dur-press: 100ms;
+  --dur-fast: 140ms;
+  --dur-ui: 180ms;
+  --dur-panel: 260ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --press-scale: 0.97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-press: 0ms;
+    --dur-fast: 0ms;
+    --dur-ui: 0ms;
+    --dur-panel: 0ms;
+    --press-scale: 1;
+  }
+}

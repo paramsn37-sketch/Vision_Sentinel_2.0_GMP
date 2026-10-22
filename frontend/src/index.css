@@ -1,1 +1,170 @@
+@import '@fontsource-variable/public-sans';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
 @import 'tailwindcss';
+@import './styles/tokens.css';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-sunken: var(--bg-sunken);
+  --color-raised: var(--bg-raised);
+  --color-hover: var(--bg-hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-on-accent: var(--fg-on-accent);
+  --color-accent: var(--accent);
+  --color-accent-bg: var(--accent-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-neutral-bg: var(--neutral-bg);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-md: var(--text-md);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+
+  --shadow-float: var(--shadow-float);
+  --ease-out: var(--ease-out);
+  --ease-in: var(--ease-in);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--accent-bg);
+    color: var(--fg);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+  input,
+  textarea {
+    caret-color: var(--accent);
+  }
+  a {
+    color: inherit;
+    text-underline-offset: 3px;
+  }
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    text-wrap: balance;
+  }
+}
+
+@utility num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+@utility press {
+  transition: transform var(--dur-press) var(--ease-out);
+  &:active:not(:disabled) {
+    transform: scale(var(--press-scale));
+  }
+}
+
+/* Overlay motion. Radix keeps exiting content mounted until its animation ends, so overlays use keyframes;
+   enters use --ease-out, exits are shorter and use --ease-in. Popovers grow from their trigger. */
+@keyframes vs-pop-in {
+  from { opacity: 0; transform: scale(0.96); }
+}
+@keyframes vs-pop-out {
+  to { opacity: 0; transform: scale(0.97); }
+}
+@keyframes vs-fade-in {
+  from { opacity: 0; }
+}
+@keyframes vs-fade-out {
+  to { opacity: 0; }
+}
+@keyframes vs-drawer-in {
+  from { transform: translateX(24px); opacity: 0; }
+}
+@keyframes vs-drawer-out {
+  to { transform: translateX(24px); opacity: 0; }
+}
+@keyframes vs-dialog-in {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); }
+}
+@keyframes vs-dialog-out {
+  to { opacity: 0; transform: translate(-50%, -49%) scale(0.98); }
+}
+@keyframes vs-row-in {
+  from { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes vs-pulse-once {
+  0% { box-shadow: inset 0 0 0 0 transparent; }
+  30% { box-shadow: inset 0 0 0 999px color-mix(in srgb, var(--danger) 18%, transparent); }
+  100% { box-shadow: inset 0 0 0 0 transparent; }
+}
+@keyframes vs-shimmer {
+  50% { opacity: 0.55; }
+}
+
+.vs-pop {
+  transform-origin: var(--radix-tooltip-content-transform-origin, var(--radix-select-content-transform-origin, var(--radix-dropdown-menu-content-transform-origin, center)));
+  &[data-state='delayed-open'], &[data-state='instant-open'], &[data-state='open'] {
+    animation: vs-pop-in var(--dur-fast) var(--ease-out);
+  }
+  &[data-state='closed'] { animation: vs-pop-out 100ms var(--ease-in); }
+}
+.vs-fade {
+  &[data-state='open'] { animation: vs-fade-in var(--dur-ui) var(--ease-out); }
+  &[data-state='closed'] { animation: vs-fade-out 140ms var(--ease-in); }
+}
+.vs-drawer {
+  &[data-state='open'] { animation: vs-drawer-in var(--dur-panel) var(--ease-out); }
+  &[data-state='closed'] { animation: vs-drawer-out var(--dur-ui) var(--ease-in); }
+}
+.vs-dialog {
+  &[data-state='open'] { animation: vs-dialog-in var(--dur-panel) var(--ease-out); }
+  &[data-state='closed'] { animation: vs-dialog-out var(--dur-ui) var(--ease-in); }
+}
+.vs-row-in { animation: vs-row-in var(--dur-ui) var(--ease-out); }
+.vs-pulse-once { animation: vs-pulse-once 900ms var(--ease-out) 1; }
+.vs-skeleton { animation: vs-shimmer 1.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-pop, .vs-fade, .vs-drawer, .vs-dialog, .vs-row-in, .vs-pulse-once, .vs-skeleton { animation: none !important; }
+}
