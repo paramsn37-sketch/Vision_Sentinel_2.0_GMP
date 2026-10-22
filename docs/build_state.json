@@ -24,7 +24,8 @@
     ]
   },
   "followups": [
-    "run eval.xai_eval with trained model"
+    "run eval.xai_eval with trained model",
+    "full GPU training run via train_colab.ipynb"
   ],
   "phases": [
     {
@@ -57,12 +58,16 @@
     {
       "id": 2,
       "title": "Detector training, evaluation and records",
-      "status": "in_progress",
+      "status": "done-with-fallbacks",
       "started_at": "2026-10-22T14:09:36Z",
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
-      "notes": "training running: vs2-y26n-cpu480 (8 h budget)"
+      "finished_at": "2026-10-22T22:25:30Z",
+      "commit": "c99ca8f",
+      "gate_results": {
+        "person_within_5pts_of_stock": "pass (3.7)",
+        "pytest_model": "pass",
+        "person_mAP50_0.80": "fail (0.683)"
+      },
+      "notes": "Interrupted after 26 epochs, shipped as is (ADR-0012)"
     },
     {
       "id": 3,
