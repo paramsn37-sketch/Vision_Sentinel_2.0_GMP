@@ -1,0 +1,23 @@
+# CPU-budget run (training mode `cpu-budget`, ADR-0004/0007). Ultralytics `time` (hours) overrides `epochs` and
+# fits the LR schedule to the budget.
+model: yolo26n.pt
+imgsz: 480
+epochs: 60
+time: 8.0
+batch: 16
+patience: 15
+optimizer: AdamW
+lr0: 0.002
+cos_lr: true
+close_mosaic: 5
+mosaic: 1.0
+mixup: 0.0
+degrees: 0.0
+fliplr: 0.5
+hsv_h: 0.015
+hsv_s: 0.6
+hsv_v: 0.4
+seed: 0
+deterministic: false
+workers: 3
+amp: false

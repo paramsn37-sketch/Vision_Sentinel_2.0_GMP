@@ -37,3 +37,29 @@ Short ADRs. Format: context → decision → consequences. Newest at the bottom.
   Taste supplies the typography/spacing/colour checklist used in every review round; Emil's skills define motion
   tokens (durations, easings), toasts (Sonner) and review recorded interactions; Playwright captures screenshots at
   four widths and two themes, runs axe and holds visual baselines.
+
+## ADR-0006 — Final taxonomy and Open Images selection
+- **Context:** only Construction-PPE and Open Images V7 are reachable. Open Images `Helmet` covers bike/sport
+  helmets, its labels are not exhaustive, and there is no mask class in either source.
+- **Decision:** 9 classes (`person, head, helmet, vest, gloves, hand, boots, goggles, no_goggles`). From Open Images,
+  take images with a non-group `Person` *and* a `Human head` box (so heads are labelled wherever people are) plus
+  images with `Glove`/`Goggles`/`Boot` next to a person; exclude any image labelled with a helmet class; skip
+  depictions and group boxes. Caps: 1,800 person images, 300 per PPE class.
+- **Consequences:** heads and people from many places (street, office, home, sport) complement the construction
+  images; `mask` moves to the roadmap; some unlabelled gloves/hands in Open Images are accepted label noise.
+  No hard-negative set: "no Person box" in Open Images does not guarantee "no person", so it would add wrong labels.
+
+## ADR-0007 — CPU training configuration
+- **Context:** ~1 effective CPU core. Measured ≈0.35 s per training image at 480 px for YOLO26n.
+- **Decision:** YOLO26n, 480 px, AdamW lr 0.002, cosine schedule, Ultralytics `time=8.0` h budget (it fits the LR
+  schedule to the budget), patience 15, mosaic until the last 5 epochs. Training runs in the background while
+  phases 3–10 proceed.
+- **Consequences:** roughly 20–25 epochs. Small items (gloves, goggles) will be weaker than at 640 px. The GPU plan
+  (`hyp_gpu_full.yaml`, notebook) remains the recommended retraining path.
+
+## ADR-0008 — Exhaustive pHash deduplication
+- **Context:** the first dedup bucketed hashes by exact 16-bit chunks; the leakage test found near-duplicates across
+  splits because 6 differing bits can touch every chunk.
+- **Decision:** exhaustive vectorised pairwise Hamming distance (3.7k images → ~7M comparisons, seconds).
+- **Consequences:** 157 near-duplicates removed instead of 130; the leakage test passes; training was restarted on
+  the corrected split before any results were used.

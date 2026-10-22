@@ -17,15 +17,18 @@ import cv2
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from vs_data.classmap import load_class_map  # noqa: E402
-from vs_data.paths import MERGED, RAW  # noqa: E402
+from vs_data.classmap import load_class_map
+from vs_data.paths import MERGED, RAW
 
 MIN_BOX_PX = 4
+IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
 
 
-def yolo_source(root: Path, names: dict[int, str], glob: str = "images/**/*.jpg"):
+def yolo_source(root: Path, names: dict[int, str], glob: str = "images/**/*"):
     """Yield (image_path, [(source_class_name, cx, cy, w, h)]) for a YOLO-format folder."""
     for img in sorted(root.glob(glob)):
+        if img.suffix.lower() not in IMAGE_EXTS:
+            continue
         lbl = Path(str(img).replace("/images/", "/labels/")).with_suffix(".txt")
         rows = []
         if lbl.exists():
@@ -83,7 +86,7 @@ def main() -> None:
                 dropped_imgs += 1
                 continue
             stem = f"{source}__{img_path.stem}"
-            shutil.copy2(img_path, out / "images" / f"{stem}.jpg")
+            cv2.imwrite(str(out / "images" / f"{stem}.jpg"), img, [cv2.IMWRITE_JPEG_QUALITY, 95])
             (out / "labels" / f"{stem}.txt").write_text("\n".join(lines) + "\n")
             kept_imgs += 1
         stats[source] = {"images": kept_imgs, "dropped_images": dropped_imgs, "instances": dict(inst)}

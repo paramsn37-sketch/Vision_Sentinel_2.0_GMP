@@ -180,20 +180,20 @@ class Incident:       # id, camera_id, track_id, zone_id|None, rule, severity,
   inferred only when the relevant body region is visible enough (see §5.4), otherwise the state is `unknown`. This is
   what stops the false-alarm flood.
 
-### 4.2 Class taxonomy (v2.0, 10 classes)
-| id | class | meaning | mapped from (examples) |
+### 4.2 Class taxonomy (v2.0, 9 classes — revised in Phase 1, see ADR-0006)
+| id | class | meaning | mapped from |
 |---|---|---|---|
-| 0 | person | full or partial human | COCO/OIV7 Person, construction-ppe `Person`, SH17 `person`, Hard Hat Workers `person` |
-| 1 | head | bare head (no helmet) | Hard Hat Workers `head`, construction-ppe `no_helmet`, SH17 `head` (when no helmet overlaps) |
-| 2 | helmet | hard hat on a head | `helmet`, `hardhat`, `Hardhat`, OIV7 `Helmet` (filtered, see below) |
-| 3 | vest | high-visibility vest | `vest`, `Safety Vest`, SH17 `safety-vest` |
-| 4 | gloves | gloves on hands | `gloves`, SH17 `gloves`, OIV7 `Glove` |
-| 5 | hand | bare hand | SH17 `hands`, construction-ppe `no_gloves` |
-| 6 | boots | safety boots/shoes | `boots`, SH17 `shoes` |
-| 7 | goggles | eye protection | `goggles`, SH17 `glasses` |
-| 8 | mask | face mask / respirator | `Mask`, SH17 `face-mask-medical`, `face-guard` |
-| 9 | no_goggles | visible eyes without protection | construction-ppe `no_goggle` |
+| 0 | person | full or partial human | Construction-PPE `Person`, Open Images `Person` |
+| 1 | head | bare head (no hard hat) | Construction-PPE `no_helmet`, Open Images `Human head` |
+| 2 | helmet | hard hat on a head | Construction-PPE `helmet` |
+| 3 | vest | high-visibility vest | Construction-PPE `vest` |
+| 4 | gloves | gloves on hands | Construction-PPE `gloves`, Open Images `Glove` |
+| 5 | hand | bare hand | Construction-PPE `no_gloves`, Open Images `Human hand` |
+| 6 | boots | safety boots / footwear | Construction-PPE `boots`, Open Images `Boot` |
+| 7 | goggles | eye protection | Construction-PPE `goggles`, Open Images `Goggles` |
+| 8 | no_goggles | visible eyes without protection | Construction-PPE `no_goggle` |
 
+The original plan had a `mask` class; no reachable source had mask boxes, so it moved to the roadmap.
 `no_boots`, `NO-Safety Vest` and other negative labels from source sets are **dropped** (they are inconsistent
 across datasets); absence for those items is inferred by the associator. The mapping lives in
 `training/configs/class_map.yaml` and is unit-tested (every source class is either mapped or explicitly dropped).

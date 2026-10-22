@@ -35,3 +35,27 @@ An executive summary is added at the top when the build finishes (Phase 12).
   network policy (ADR-0004). Playwright MCP not configured (the CLI test runner covers the use).
 - **Known issues / follow-ups:** `openapi-typescript` peer-requires TypeScript 5; run it through `npx` (Makefile).
 - **Next phase:** 1 — Datasets
+
+## Phase 1 — Datasets: acquire, remap, dedup, split, dataset card
+- **Status:** done-with-fallbacks
+- **Dates:** 2026-10-22T13:58Z → 2026-10-22T14:12Z (UTC)
+- **What was built:**
+  - `training/configs/class_map.yaml` + `training/vs_data/classmap.py` (every source class mapped or dropped).
+  - `download_openimages.py` (capped, PPE-relevant Open Images V7 subset, 2,450 images, 0 failed downloads).
+  - `merge.py` (remap, clip, drop < 4 px boxes), `split.py` (exhaustive pHash dedup, stratified 70/15/15),
+    frozen manifests + test checksum in `data/manifests/`.
+  - `dataset_card.py` → `data/DATASET_CARD.md`, `data/figures/` (class distribution, box sizes, 9 QA grids).
+  - `backend/eval/make_clips.py` → three MOT17 sample clips in `data/samples/` with ground-truth counts in
+    `data/eval/clips.yaml`; 40 fixture images in `backend/tests/fixtures/images/`.
+- **Decisions:** ADR-0006 (taxonomy, Open Images selection), ADR-0008 (exhaustive dedup).
+- **Measurements:** 3,708 images after dedup → train 2,595 / val 554 / test 559 (the card's tables have
+  per-class counts). 157 near-duplicates removed. Sample clips: 22 / 53 / 69 unique pedestrians (MOT GT).
+- **Gate results:** `pytest tests/training` 8 passed (class map coverage, disjoint manifests, no cross-split
+  near-duplicates) · DATASET_CARD.md has real numbers, train ≥ 2,000 · data.yaml accepted by Ultralytics
+  (training scan: 2,595 images, 0 corrupt).
+- **Fallbacks used / deviations from blueprint:** Kaggle SH17 and Roboflow sets unreachable (network policy, no
+  credentials) → public sources only; no `mask` class; no hard negatives; sample clips are street scenes (MOT17),
+  not industrial footage, because no permissively licensed worker video was reachable.
+- **Known issues / follow-ups:** QA grid for `head` shows at least one Construction-PPE `no_helmet` box on a person
+  wearing a hard hat (source label noise; kept, noted in the training report).
+- **Next phase:** 2 — Detector training (running in the background), then 3 — Vision core

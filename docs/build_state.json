@@ -42,22 +42,25 @@
     {
       "id": 1,
       "title": "Datasets: acquire, remap, dedup, split, dataset card",
-      "status": "pending",
-      "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
-      "notes": ""
+      "status": "done-with-fallbacks",
+      "started_at": "2026-10-22T13:57:53Z",
+      "finished_at": "2026-10-22T14:09:36Z",
+      "commit": "5f50cc5",
+      "gate_results": {
+        "pytest tests/training": "8 passed",
+        "train images": "2595"
+      },
+      "notes": "public sources only (ADR-0004/0006)"
     },
     {
       "id": 2,
       "title": "Detector training, evaluation and records",
-      "status": "pending",
-      "started_at": null,
+      "status": "in_progress",
+      "started_at": "2026-10-22T14:09:36Z",
       "finished_at": null,
       "commit": null,
       "gate_results": {},
-      "notes": ""
+      "notes": "training running: vs2-y26n-cpu480 (8 h budget)"
     },
     {
       "id": 3,

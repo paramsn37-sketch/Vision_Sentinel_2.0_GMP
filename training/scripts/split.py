@@ -19,8 +19,8 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from vs_data.classmap import load_class_map  # noqa: E402
-from vs_data.paths import MANIFESTS, MERGED  # noqa: E402
+from vs_data.classmap import load_class_map
+from vs_data.paths import MANIFESTS, MERGED
 
 HAMMING_MAX = 6
 RATIOS = {"train": 0.70, "val": 0.15, "test": 0.15}
@@ -32,20 +32,19 @@ def phash_all(images: list[Path]) -> dict[Path, imagehash.ImageHash]:
 
 
 def dedup(hashes: dict[Path, imagehash.ImageHash]) -> tuple[list[Path], int]:
-    """Greedy clustering on a 16-bit prefix bucket, then exact Hamming check. Returns kept images."""
-    buckets: dict[int, list[tuple[Path, imagehash.ImageHash]]] = defaultdict(list)
+    """Exhaustive pairwise Hamming distances (vectorised); keep the first image of every near-duplicate group."""
+    paths = sorted(hashes)
+    bits = np.array([int(str(hashes[p]), 16) for p in paths], dtype=np.uint64)
     kept: list[Path] = []
-    removed = 0
-    for path, h in sorted(hashes.items()):
-        bits = int(str(h), 16)
-        keys = {(bits >> s) & 0xFFFF for s in (0, 16, 32, 48)}
-        if any(h - other <= HAMMING_MAX for k in keys for _, other in buckets[k]):
-            removed += 1
+    dropped = np.zeros(len(paths), dtype=bool)
+    for i in range(len(paths)):
+        if dropped[i]:
             continue
-        for k in keys:
-            buckets[k].append((path, h))
-        kept.append(path)
-    return kept, removed
+        kept.append(paths[i])
+        xor = np.bitwise_xor(bits[i + 1 :], bits[i])
+        dist = np.unpackbits(xor.view(np.uint8).reshape(-1, 8), axis=1).sum(axis=1)
+        dropped[i + 1 :] |= dist <= HAMMING_MAX
+    return kept, int(dropped.sum())
 
 
 def main() -> None:
@@ -58,7 +57,11 @@ def main() -> None:
     strata: dict[tuple[str, bool], list[Path]] = defaultdict(list)
     for img in kept:
         source = img.stem.split("__")[0]
-        cls_ids = {int(line.split()[0]) for line in (all_dir / "labels" / f"{img.stem}.txt").read_text().split("\n") if line}
+        cls_ids = {
+            int(line.split()[0])
+            for line in (all_dir / "labels" / f"{img.stem}.txt").read_text().split("\n")
+            if line
+        }
         strata[(source, bool(cls_ids & rare_ids))].append(img)
 
     rng = np.random.default_rng(42)

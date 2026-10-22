@@ -1,7 +1,7 @@
 """Update docs/build_state.json from the command line (used at the start and end of every build phase).
 
-    python scripts/phase_state.py start 3
-    python scripts/phase_state.py done 3 --status done --note "..." --gate "pytest=pass"
+python scripts/phase_state.py start 3
+python scripts/phase_state.py done 3 --status done --note "..." --gate "pytest=pass"
 """
 
 import argparse

@@ -25,8 +25,8 @@ import pandas as pd
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from vs_data.classmap import load_class_map  # noqa: E402
-from vs_data.paths import RAW  # noqa: E402
+from vs_data.classmap import load_class_map
+from vs_data.paths import RAW
 
 META = RAW / "oiv7" / "meta"
 OUT = RAW / "oiv7" / "yolo"
