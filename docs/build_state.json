@@ -23,7 +23,9 @@
       "download.pytorch.org"
     ]
   },
-  "followups": [],
+  "followups": [
+    "run eval.xai_eval with trained model"
+  ],
   "phases": [
     {
       "id": 0,
@@ -89,12 +91,12 @@
     {
       "id": 5,
       "title": "Explainability: Grad-CAM, EigenCAM, sanity evals",
-      "status": "pending",
+      "status": "partial",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
+      "finished_at": "2026-10-22T15:52:49Z",
+      "commit": "48265b5",
       "gate_results": {},
-      "notes": ""
+      "notes": "xai_eval pending trained detector"
     },
     {
       "id": 6,

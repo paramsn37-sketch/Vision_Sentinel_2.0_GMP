@@ -45,10 +45,10 @@ eval:
 	$(UV) python -m eval.xai_eval
 
 train:
-	$(UV) python ../training/scripts/train.py --hyp ../training/configs/hyp_main.yaml
+	$(UV) python ../training/scripts/train.py --hyp ../training/configs/hyp_cpu_budget.yaml --name vs2-y26n-cpu
 
 api-types:
-	$(UV) python -c "import json; from app.main import app; print(json.dumps(app.openapi()))" > $(FRONTEND)/openapi.json
+	$(UV) python -c "import json; from app.main import create_app; print(json.dumps(create_app(start_cameras=False).openapi()))" > $(CURDIR)/$(FRONTEND)/openapi.json
 	cd $(FRONTEND) && npx --yes openapi-typescript@7 openapi.json -o src/lib/api/schema.ts && rm openapi.json
 
 docker:

@@ -8,7 +8,7 @@ logs/
 data/raw/
 data/merged/
 data/xai/
-training/runs/*/weights/last.pt
+training/runs/*/weights/
 *.mp4.tmp
 .DS_Store
 .pytest_cache/
@@ -23,7 +23,8 @@ data/raw
 data/merged
 data/feedback/
 data/runtime/
-training/runs/*/weights/epoch*.pt
 *.db
 *.db-wal
 *.db-shm
+data/eval/cache/
+data/runtime/
