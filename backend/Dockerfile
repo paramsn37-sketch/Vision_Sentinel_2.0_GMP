@@ -9,7 +9,7 @@ WORKDIR /src
 COPY backend/pyproject.toml backend/uv.lock ./
 RUN uv venv /venv \
  && uv export --frozen --no-dev --no-hashes --no-emit-project -o req.txt \
- && grep -vE '^(torch|torchvision)==' req.txt > req-notorch.txt \
+ && grep -vE '^(torch|torchvision|triton)==|^cuda-|^nvidia-' req.txt > req-notorch.txt \
  && VIRTUAL_ENV=/venv uv pip install --no-cache --index-url https://download.pytorch.org/whl/cpu torch torchvision \
  && VIRTUAL_ENV=/venv uv pip install --no-cache -r req-notorch.txt
 # Fetch the COCO person model (people detector, and fallback without a trained model) so the container starts offline.

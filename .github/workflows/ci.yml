@@ -67,7 +67,11 @@ jobs:
       - uses: actions/checkout@v4
       - run: docker compose build
       - name: Image sizes
-        run: docker images --format '{{.Repository}} {{.Size}}' | grep -i sentinel || docker images
+        run: |
+          docker images --format '{{.Repository}} {{.Size}}' | grep -i sentinel
+          size=$(docker image inspect vision_sentinel_20_gmp-backend --format '{{.Size}}')
+          echo "backend image: $((size / 1000000)) MB (budget 2500 MB)"
+          test "$size" -lt 2500000000
       - name: Smoke-run the stack
         run: |
           VS_ADMIN_PASSWORD=sentinel-ci-pass docker compose up -d

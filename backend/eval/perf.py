@@ -98,11 +98,15 @@ def main() -> None:
     ap.add_argument("--imgsz", type=int, default=None)
     ap.add_argument("--cams", default="1,4")
     ap.add_argument("--label", default="default")
+    ap.add_argument(
+        "--person-model", default=None, help='override detection.person_model ("" = trained model only)'
+    )
     args = ap.parse_args()
 
     det = DetectionCfg()
+    person_model = det.person_model if args.person_model is None else args.person_model
     detector = Detector(
-        imgsz=args.imgsz, person_model=det.person_model or None, person_imgsz=det.person_imgsz
+        imgsz=args.imgsz, person_model=person_model or None, person_imgsz=det.person_imgsz
     )
     runs = [run(int(n), args.seconds, detector) for n in args.cams.split(",")]
     machine = {

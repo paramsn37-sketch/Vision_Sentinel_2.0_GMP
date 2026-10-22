@@ -181,3 +181,36 @@ An executive summary is added at the top when the build finishes (Phase 12).
   was interrupted after 26 of ~55 planned epochs by a machine restart and shipped as is (ADR-0012). Person and head
   miss their SHOULD targets (0.80 / 0.70).
 - **Next phase:** re-run counting and XAI evaluations with this model (Phase 5 completion), then 11–12.
+
+## Phase 5 (completion) — Explainability and counting with the trained model
+- **Status:** done-with-fallbacks
+- **What changed:** `eval.xai_eval` and `eval.counting_eval` re-run with `vs2-y26n`. The trained model's own person
+  class made counting much worse (41.3 % at 480 px, 32.9 % at 640 px), so people now come from the COCO model and
+  PPE from the trained model (ADR-0013); counting is back to 20.0 %. The Model screen crashed once real results
+  existed; the API now normalises every results file and a test pins the shapes. mypy on `app/core` is clean.
+- **Gate results:** pointing game 100 % (214 detections, 8 classes) · deletion check: hottest 20 % beats a random
+  20 % in 95 % of cases (score drop 0.509 vs 0.109) · randomisation check **fails** (SSIM 0.669, needs < 0.5),
+  explained in `docs/eval/xai_report.md` · explanation latency 142 ms p50 on CPU · counting 20.0 % mean error
+  (target 10 %, not met, ADR-0009).
+- **Fallbacks used / deviations from blueprint:** two networks per frame instead of one (ADR-0013).
+- **Next phase:** 11
+
+## Phase 11 — Integration, performance, hardening, Docker, CI
+- **Status:** done-with-fallbacks
+- **What was built:** disk-full guard with a UI notification; hourly retention job (it was never scheduled before);
+  security tests (every API route and both WebSockets reject anonymous callers, path traversal, headers); failure
+  tests (corrupt upload, low disk, retention); Docker images and compose (named volume, non-root, health check,
+  nginx proxy for API and WebSockets); CI jobs for Playwright e2e and the Docker build with a smoke run and an image
+  size budget; `eval/perf.py`, `scripts/soak.py`; docs: architecture, API (generated), operations, user guide,
+  training.
+- **Measurements:** one camera 9.6 FPS (default, two networks) or 21.3 FPS (trained model only) on 4 vCPU; detection
+  is 97 % of frame time ([performance.md](eval/performance.md)). 60-minute soak with three cameras: memory +3.0 %
+  after warm-up, open files and threads flat ([soak.md](eval/soak.md)).
+- **Fixes found here:** the backend image was 6.14 GB because CUDA wheels from the lock file were installed into the
+  CPU image; excluded, and CI now enforces the 2.5 GB budget. The benchmark script overwrote the promoted ONNX file
+  (and so its checksum); it now exports from a temporary copy. Docker: bind-mounted data was not writable by the
+  non-root user (named volume); OpenCV needed `libxcb1`/`libgl1`.
+- **Fallbacks used / deviations from blueprint:** Docker is not available inside the build container, so images are
+  built and smoke-tested in CI only. GPU throughput is not measured (no GPU). End-to-end UI latency is not
+  instrumented separately from the pipeline.
+- **Next phase:** 12
