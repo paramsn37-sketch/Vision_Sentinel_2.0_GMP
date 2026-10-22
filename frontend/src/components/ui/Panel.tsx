@@ -14,15 +14,27 @@ export function Panel({
   actions?: ReactNode
   bodyClassName?: string
 } & HTMLAttributes<HTMLElement>) {
+  // A body that can scroll must be reachable by keyboard (WCAG 2.1.1, axe scrollable-region-focusable).
+  const scrolls = /\boverflow-(x-|y-)?(auto|scroll)\b/.test(bodyClassName ?? '')
   return (
-    <section className={cn('flex min-h-0 flex-col rounded-md border border-line bg-sunken', className)} {...rest}>
+    <section
+      className={cn('flex min-h-0 flex-col rounded-md border border-line bg-sunken', className)}
+      {...rest}
+    >
       {(title || actions) && (
         <header className="flex h-11 shrink-0 items-center justify-between gap-3 border-b border-line px-4">
           {typeof title === 'string' ? <h2 className="text-sm font-semibold">{title}</h2> : title}
           {actions && <div className="flex items-center gap-2">{actions}</div>}
         </header>
       )}
-      <div className={cn('min-h-0 flex-1', bodyClassName)}>{children}</div>
+      <div
+        className={cn('min-h-0 flex-1', bodyClassName)}
+        {...(scrolls
+          ? { tabIndex: 0, role: 'region', 'aria-label': typeof title === 'string' ? title : undefined }
+          : {})}
+      >
+        {children}
+      </div>
     </section>
   )
 }
