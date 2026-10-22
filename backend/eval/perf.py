@@ -105,9 +105,7 @@ def main() -> None:
 
     det = DetectionCfg()
     person_model = det.person_model if args.person_model is None else args.person_model
-    detector = Detector(
-        imgsz=args.imgsz, person_model=person_model or None, person_imgsz=det.person_imgsz
-    )
+    detector = Detector(imgsz=args.imgsz, person_model=person_model or None, person_imgsz=det.person_imgsz)
     runs = [run(int(n), args.seconds, detector) for n in args.cams.split(",")]
     machine = {
         "cpu": platform.processor() or platform.machine(),
