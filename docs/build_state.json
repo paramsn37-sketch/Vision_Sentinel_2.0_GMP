@@ -190,12 +190,17 @@
     {
       "id": 12,
       "title": "Docs, final audit, release v2.0.0",
-      "status": "pending",
+      "status": "done-with-fallbacks",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
-      "notes": ""
+      "finished_at": "2026-10-22T23:37:41Z",
+      "commit": "6a28aad",
+      "gate_results": {
+        "final_audit": "pass",
+        "make_test": "pass",
+        "make_e2e": "pass (20)",
+        "tag_v2.0.0": "pass"
+      },
+      "notes": "See docs/FINAL_AUDIT.md for partial and failed targets"
     }
   ]
 }
