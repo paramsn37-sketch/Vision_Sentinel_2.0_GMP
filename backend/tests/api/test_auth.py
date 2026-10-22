@@ -40,6 +40,16 @@ def test_login_rate_limit(client, services) -> None:
     assert PASSWORD
 
 
+def test_successful_logins_are_not_rate_limited(client, services) -> None:
+    services.login_limiter._hits.clear()
+    c = anonymous(client)
+    codes = [
+        c.post("/api/v1/auth/login", json={"username": "admin", "password": PASSWORD}).status_code
+        for _ in range(8)
+    ]
+    assert codes == [200] * 8
+
+
 def test_health_is_public(client) -> None:
     assert client.get("/api/v1/health").json()["status"] == "ok"
     assert "vs_uptime_seconds" in client.get("/api/v1/metrics").text

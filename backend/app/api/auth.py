@@ -25,6 +25,7 @@ def login(body: LoginIn, request: Request, response: Response, svc: Svc, s: DB) 
         raise ApiError(429, "rate_limited", "Too many sign-in attempts. Wait a minute and try again.")
     user = s.exec(select(UserRow).where(UserRow.username == body.username)).first()
     if user is None or not verify_password(user.password_hash, body.password):
+        svc.login_limiter.fail(ip)
         raise ApiError(401, "bad_credentials", "Wrong username or password.")
     csrf = _set_session(response, svc, user.username)
     audit(s, user.username, "login")

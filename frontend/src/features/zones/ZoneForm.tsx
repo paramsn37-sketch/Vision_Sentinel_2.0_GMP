@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 import { Button, Checkbox, Field, Input, Select, Switch } from '@/components/ui'
 import { api, type ZoneIn } from '@/lib/api/client'
 import { ppeLabel } from '@/lib/format'
@@ -31,7 +32,7 @@ export function ZoneForm({
 }) {
   const set = (patch: Partial<FormValues>) => onChange({ ...value, ...patch })
   const rule = (patch: Partial<FormValues['rules']>) => onChange({ ...value, rules: { ...value.rules, ...patch } })
-  const body = JSON.stringify({ ...value, polygon: points })
+  const body = useDebounced(JSON.stringify({ ...value, polygon: points }), 300)
   // Server-side validation is the source of truth (same rules as the pipeline).
   const check = useQuery({
     queryKey: ['zone-validate', body],
@@ -169,4 +170,14 @@ export function ZoneForm({
       </div>
     </form>
   )
+}
+
+/** The value after it has stopped changing for `ms` (keeps validation to one request per pause in typing). */
+function useDebounced<T>(value: T, ms: number): T {
+  const [v, setV] = useState(value)
+  useEffect(() => {
+    const t = setTimeout(() => setV(value), ms)
+    return () => clearTimeout(t)
+  }, [value, ms])
+  return v
 }

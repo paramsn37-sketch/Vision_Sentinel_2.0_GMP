@@ -132,3 +132,17 @@ An executive summary is added at the top when the build finishes (Phase 12).
 - **Known issues / follow-ups:** two tolerated `set-state-in-effect` lint warnings; uPlot dependency removed
   (charts are hand-written SVG).
 - **Next phase:** 9
+
+## Phase 9 — Flagship interactions: zone editor and explainability panel
+- **Status:** done
+- **What was built:** the zone editor and XAI panel from Phase 8 were verified end to end and hardened:
+  `e2e/zones-xai.spec.ts` (draw a no-entry zone on a live camera ⇒ intrusion incident ⇒ evidence ⇒ Grad-CAM
+  heatmap and reading ⇒ acknowledge ⇒ resolve; drag a vertex and undo it; keyboard-only zone creation and save).
+- **Fixes found by the tests:** the login throttle counted successful sign-ins, so repeated logins from one IP were
+  blocked; it now counts only failed attempts (new API test). Zone validation fired a request per keystroke; it is
+  now debounced (300 ms).
+- **Gate results:** Vitest 25 passed three runs in a row · `zones-xai.spec.ts` 3/3 passed three runs in a row (after
+  making the incident-row click retry when live rows re-render) · keyboard-only zone creation passes · smoke and
+  design specs pass · backend auth tests 6 passed.
+- **Known issues / follow-ups:** Grad-CAM was exercised with the COCO fallback detector; repeat with the trained model.
+- **Next phase:** 10

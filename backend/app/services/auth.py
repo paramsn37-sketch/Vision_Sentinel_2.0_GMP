@@ -68,20 +68,25 @@ def new_csrf_token() -> str:
 
 
 class RateLimiter:
-    """Sliding window: at most `limit` attempts per `window_s` per key (client IP)."""
+    """Sliding window: at most `limit` failed attempts per `window_s` per key (client IP).
+    Successful sign-ins are not counted, so a shared office IP is only blocked by wrong passwords."""
 
     def __init__(self, limit: int = 5, window_s: float = 60.0) -> None:
         self.limit, self.window_s = limit, window_s
         self._hits: dict[str, deque[float]] = defaultdict(deque)
         self._lock = threading.Lock()
 
+    def _trim(self, key: str, now: float) -> deque[float]:
+        q = self._hits[key]
+        while q and now - q[0] > self.window_s:
+            q.popleft()
+        return q
+
     def allow(self, key: str) -> bool:
-        now = time.monotonic()
         with self._lock:
-            q = self._hits[key]
-            while q and now - q[0] > self.window_s:
-                q.popleft()
-            if len(q) >= self.limit:
-                return False
-            q.append(now)
-            return True
+            return len(self._trim(key, time.monotonic())) < self.limit
+
+    def fail(self, key: str) -> None:
+        with self._lock:
+            now = time.monotonic()
+            self._trim(key, now).append(now)

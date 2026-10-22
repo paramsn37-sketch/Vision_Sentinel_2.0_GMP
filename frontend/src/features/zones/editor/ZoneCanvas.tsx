@@ -274,6 +274,7 @@ export function ZoneCanvas({
               {state.points.map(([x, y], i) => (
                 <circle
                   key={i}
+                  data-vertex={i}
                   cx={x * W}
                   cy={y * H}
                   r={i === state.selected ? r * 1.25 : r}
