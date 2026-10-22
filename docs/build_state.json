@@ -24,7 +24,6 @@
     ]
   },
   "followups": [
-    "run eval.xai_eval with trained model",
     "full GPU training run via train_colab.ipynb"
   ],
   "phases": [

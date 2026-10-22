@@ -1,7 +1,25 @@
 # Build Log
 
 Each phase appends an entry here using the template in `BUILD_PROMPTS.md` §A.5. Newest at the bottom.
-An executive summary is added at the top when the build finishes (Phase 12).
+
+## Executive summary (v2.0.0, 2026-10-22)
+
+**What was built.** Vision Sentinel 2.0, from scratch in one day of unattended phases: a FastAPI vision service
+(detection, tracking, PPE state, zones, incidents, explanations, analytics, reports, auth) and a React control-room
+UI (Live, Incidents, Zones editor, Analytics, Uploads, Model, Settings), a trained person + PPE detector with full
+records, evaluation scripts for detection, counting and explanations, Docker Compose, CI, and documentation.
+
+**Headline numbers (all measured).**
+- Detector (frozen test split, 559 images): helmet 0.867, vest 0.849, person 0.683, head 0.579 mAP50; mean 0.524.
+  Stock COCO models detect no PPE at all.
+- Unique-person counting (MOT17, 5 held-out sequences): 20.0 % mean error, against 107.9 % for v1's method.
+- Explanations: pointing game 100 %, deletion check 95 %; randomisation check fails (SSIM 0.669).
+- One camera on a 4-core CPU: 9.6 FPS (21.3 FPS with the trained model alone). 60-minute soak: memory +3.0 %.
+- Tests: 70 backend + 6 model, 25 frontend unit, 20 Playwright e2e; `app/core` coverage 86 %; axe 0 serious issues.
+
+**What remains** ([FINAL_AUDIT.md](FINAL_AUDIT.md)). Counting error is twice the 10 % target. The detector was
+trained on CPU and stopped after 26 epochs by a machine restart; a GPU run (Colab notebook provided) is the first
+improvement. One explanation sanity check fails. GPU speed was never measured.
 
 ---
 
@@ -214,3 +232,16 @@ An executive summary is added at the top when the build finishes (Phase 12).
   built and smoke-tested in CI only. GPU throughput is not measured (no GPU). End-to-end UI latency is not
   instrumented separately from the pipeline.
 - **Next phase:** 12
+
+## Phase 12 — Docs, final audit, release v2.0.0
+- **Status:** done-with-fallbacks
+- **What was built:** README rewrite (quick start, honest feature status, results), `docs/report-appendix.md`,
+  `docs/FINAL_AUDIT.md`, `MODEL_CARD.md`, `training/reports/training_report.md`, `docs/eval/performance.md`,
+  per-class mAP figure, AGPL-3.0 licence text (the file was missing), CHANGELOG 2.0.0, this summary, tag `v2.0.0`.
+- **Fixes found in the final pass:** the Model screen crashed with real results; a scrollable panel was not keyboard
+  reachable; `make lint` called a bare `ruff`; mypy on `app/core` had 13 errors (now 0); the Docker image carried
+  CUDA wheels.
+- **Gate results:** FINAL_AUDIT covers every §13 item and every MUST · `make lint` clean (2 oxlint warnings) ·
+  `make typecheck` clean · `make test` green (backend 70, Vitest 25) · `pytest -m model` 6 passed · `make e2e` 20
+  passed · coverage `app/core` 86 % · all phases `done` or `done-with-fallbacks`.
+- **Fallbacks used / deviations from blueprint:** see FINAL_AUDIT "Partial" and "Fail" rows.
