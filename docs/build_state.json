@@ -127,11 +127,15 @@
     {
       "id": 8,
       "title": "Frontend app: shell and screens",
-      "status": "pending",
+      "status": "done",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
+      "finished_at": "2026-10-22T15:52:50Z",
+      "commit": "6125f05",
+      "gate_results": {
+        "vitest": "25 passed",
+        "smoke e2e": "pass",
+        "initial JS gzip": "173.7KB"
+      },
       "notes": ""
     },
     {
