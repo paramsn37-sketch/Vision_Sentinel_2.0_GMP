@@ -63,3 +63,34 @@ Short ADRs. Format: context → decision → consequences. Newest at the bottom.
 - **Decision:** exhaustive vectorised pairwise Hamming distance (3.7k images → ~7M comparisons, seconds).
 - **Consequences:** 157 near-duplicates removed instead of 130; the leakage test passes; training was restarted on
   the corrected split before any results were used.
+
+## ADR-0009 — Counting thresholds tuned on MOT17
+- **Context:** blueprint §5 asks for thresholds tuned on MOT17-02/04 only and reported on held-out sequences.
+  The first grid (confirmation knobs only) left the detector-limited tuning sequences badly undercounted.
+- **Decision:** grid over 216 configurations including recall knobs (`track_high_thresh`, `new_track_thresh`).
+  Chosen: high 0.2, new 0.25, min_hits 2, min_age 0.2 s, buffer 1.5 s, lost-track merge **off** (it merged
+  different people on MOT17 and undercounted). `min_hit_ratio` is fixed at 0.5 as a product constraint (flicker
+  must never count), costing 0.3 points.
+- **Consequences:** mean unique-count error on MOT17-05/09/10/11/13 is 19.7–20.0 % with the stock YOLO26n person
+  detector, against 107.9 % for v1's per-frame counting and 25.2 % for ByteTrack defaults. The 10 % target is not
+  met; remaining error is mostly missed small/occluded people (detector recall at 640 px) and one crowded sequence
+  (MOT17-09, +41 %). Follow-up: rerun with the trained weights and with 960 px input on a GPU.
+
+## ADR-0010 — Grad-CAM target branch and variant
+- **Context:** in eval mode the Ultralytics head returns `(y, preds)`. YOLO26 predicts with the one-to-one branch
+  when `head.end2end` is true, otherwise with the one-to-many branch. Classic Grad-CAM (channel-mean weights)
+  spread heat over the whole frame on these small models.
+- **Decision:** backprop the matched anchor's class logit from the branch the predictor actually used
+  (`one2one` if `end2end`, else `one2many`) into that branch's neck features. Default variant is HiResCAM
+  (element-wise gradient × activation, ReLU, summed over channels and scales); classic Grad-CAM stays selectable;
+  EigenCAM (first principal component, no gradients) is the fallback when no anchor matches.
+- **Consequences:** on the fixture image ~0.79 of the heat energy lies inside the explained box and the peak is in
+  the box. Sanity checks are in `docs/eval/xai_report.md`.
+
+## ADR-0011 — Persistence and PDF without heavy native dependencies
+- **Context:** the blueprint names Alembic and WeasyPrint. WeasyPrint needs Pango/Cairo system libraries; the schema
+  is one version old.
+- **Decision:** `SQLModel.metadata.create_all` with SQLite `PRAGMA user_version` (currently 1) as the schema version;
+  a migration step is added when version 2 exists. PDF reports use `fpdf2` (pure Python).
+- **Consequences:** no system packages beyond ffmpeg in the Docker image. Alembic is a follow-up if the schema starts
+  changing between releases.

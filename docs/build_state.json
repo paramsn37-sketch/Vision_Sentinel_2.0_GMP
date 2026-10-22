@@ -114,11 +114,14 @@
     {
       "id": 7,
       "title": "Design direction and design system",
-      "status": "pending",
+      "status": "done",
       "started_at": null,
-      "finished_at": null,
-      "commit": null,
-      "gate_results": {},
+      "finished_at": "2026-10-22T15:52:49Z",
+      "commit": "1b8115b",
+      "gate_results": {
+        "check-tokens": "pass",
+        "design e2e": "pass"
+      },
       "notes": ""
     },
     {
