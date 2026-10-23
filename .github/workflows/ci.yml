@@ -6,13 +6,15 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults: { run: { working-directory: backend } }
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
       - run: uv sync --group dev
       - run: uv run ruff check . && uv run ruff format --check .
-      - run: uv run pytest -m "not slow and not model" --cov=app --cov-report=term
+      # faulthandler prints every thread's stack if one test runs for over 5 minutes, so a hang shows where it is.
+      - run: uv run pytest -m "not slow and not model" --cov=app --cov-report=term -o faulthandler_timeout=300
 
   frontend:
     runs-on: ubuntu-latest
