@@ -1,0 +1,25 @@
+# Second CPU stage (ADR-0014): continue from the promoted vs2-y26n weights with a fresh, short schedule so the
+# learning rate actually decays and the mosaic-off epochs run. Fixed epochs, no `time`, so an interrupted run can be
+# resumed with `train.py --resume` without restarting a clock.
+model: models/vs2-y26n.pt
+imgsz: 480
+epochs: 24
+batch: 16
+patience: 24
+optimizer: AdamW
+lr0: 0.0008
+lrf: 0.05
+warmup_epochs: 1
+cos_lr: true
+close_mosaic: 8
+mosaic: 1.0
+mixup: 0.0
+degrees: 0.0
+fliplr: 0.5
+hsv_h: 0.015
+hsv_s: 0.6
+hsv_v: 0.4
+seed: 0
+deterministic: false
+workers: 3
+amp: false

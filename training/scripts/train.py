@@ -45,6 +45,9 @@ def main() -> None:
     ap.add_argument("--name", required=True)
     ap.add_argument("--device", default=None)
     ap.add_argument("--threads", type=int, default=None)
+    ap.add_argument(
+        "--resume", action="store_true", help="continue runs/<name>/weights/last.pt after an interruption"
+    )
     args = ap.parse_args()
 
     import torch
@@ -54,25 +57,33 @@ def main() -> None:
         torch.set_num_threads(args.threads)
     hyp = yaml.safe_load(args.hyp.read_text())
     model_name = hyp.pop("model")
+    # A repo-relative path (e.g. models/vs2-y26n.pt) continues from our own weights; a bare name is a stock model.
+    in_repo = REPO / model_name
     local = WEIGHTS_CACHE / model_name
-    model = YOLO(str(local) if local.exists() else model_name)
+    start = in_repo if in_repo.is_file() else local if local.exists() else model_name
     device = args.device or ("0" if torch.cuda.is_available() else "cpu")
+    last = RUNS / args.name / "weights" / "last.pt"
 
-    registry.upsert(
-        args.name, status="running", model=model_name, hyp=hyp, hyp_file=args.hyp.name, device=device
-    )
     t0 = time.time()
-    try:
-        model.train(
-            data=str(resolved_data_yaml()),
-            project=str(RUNS),
-            name=args.name,
-            exist_ok=True,
-            device=device,
-            plots=True,
-            verbose=True,
-            **hyp,
+    if args.resume:
+        if not last.exists():
+            raise SystemExit(f"nothing to resume: {last} does not exist")
+        registry.upsert(
+            args.name, status="running", resumed_at=datetime.now(UTC).isoformat(timespec="seconds")
         )
+        model = YOLO(str(last))
+        train_kwargs: dict = {"resume": True}
+    else:
+        registry.upsert(
+            args.name, status="running", model=model_name, hyp=hyp, hyp_file=args.hyp.name, device=device
+        )
+        model = YOLO(str(start))
+        train_kwargs = dict(
+            data=str(resolved_data_yaml()), project=str(RUNS), name=args.name, exist_ok=True, device=device,
+            plots=True, verbose=True, **hyp,
+        )  # fmt: skip
+    try:
+        model.train(**train_kwargs)
     except Exception as exc:
         registry.upsert(
             args.name, status="failed", error=repr(exc), wall_time_h=round((time.time() - t0) / 3600, 2)
