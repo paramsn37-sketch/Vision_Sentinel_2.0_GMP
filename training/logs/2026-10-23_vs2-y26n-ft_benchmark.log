@@ -1,0 +1,28 @@
+Ultralytics 8.4.183 🚀 Python-3.12.13 torch-2.14.1+cu130 CPU (Intel Xeon Processor @ 2.10GHz)
+YOLO26n summary (fused): 121 layers, 2,391,679 parameters, 0 gradients, 5.4 GFLOPs
+PyTorch: starting from '/tmp/tmp5l4dexvb/vs2-y26n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 13, 8400) (5.2 MB)
+ONNX: starting export with onnx 1.23.2 opset 18...
+ONNX: slimming with onnxslim 0.1.98...
+ONNX: export success ✅ 1.1s, saved as '/tmp/tmp5l4dexvb/vs2-y26n.onnx' (9.4 MB)
+Export complete (1.5s)
+Results saved to /tmp/tmp5l4dexvb/vs2-y26n.onnx
+Predict:         yolo predict task=detect model=/tmp/tmp5l4dexvb/vs2-y26n.onnx imgsz=640
+Validate:        yolo val task=detect model=/tmp/tmp5l4dexvb/vs2-y26n.onnx imgsz=640 data=/home/claude/vision_sentinel_2.0_gmp/data/merged/data.resolved.yaml
+Visualize:       https://netron.app
+Loading /tmp/tmp5l4dexvb/vs2-y26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.0 with CPUExecutionProvider
+[{'runtime': 'pytorch', 'imgsz': 640, 'device': 'cpu', 'frames': 60, 'p50_ms': 52.1, 'p95_ms': 79.6, 'fps_at_p50': 19.2}, {'runtime': 'onnxruntime', 'imgsz': 640, 'device': 'cpu', 'frames': 60, 'p50_ms': 36.6, 'p95_ms': 84.1, 'fps_at_p50': 27.4}]
+Ultralytics 8.4.183 🚀 Python-3.12.13 torch-2.14.1+cu130 CPU (Intel Xeon Processor @ 2.10GHz)
+YOLO26n summary (fused): 121 layers, 2,391,679 parameters, 0 gradients, 3.0 GFLOPs
+PyTorch: starting from '/tmp/tmp2embhfg5/vs2-y26n.pt' with input shape (1, 3, 480, 480) BCHW and output shape(s) (1, 13, 4725) (5.2 MB)
+ONNX: starting export with onnx 1.23.2 opset 18...
+ONNX: slimming with onnxslim 0.1.98...
+ONNX: export success ✅ 1.2s, saved as '/tmp/tmp2embhfg5/vs2-y26n.onnx' (9.3 MB)
+Export complete (1.4s)
+Results saved to /tmp/tmp2embhfg5/vs2-y26n.onnx
+Predict:         yolo predict task=detect model=/tmp/tmp2embhfg5/vs2-y26n.onnx imgsz=480
+Validate:        yolo val task=detect model=/tmp/tmp2embhfg5/vs2-y26n.onnx imgsz=480 data=/home/claude/vision_sentinel_2.0_gmp/data/merged/data.resolved.yaml
+Visualize:       https://netron.app
+Loading /tmp/tmp2embhfg5/vs2-y26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.0 with CPUExecutionProvider
+[{'runtime': 'pytorch', 'imgsz': 480, 'device': 'cpu', 'frames': 60, 'p50_ms': 32.0, 'p95_ms': 60.7, 'fps_at_p50': 31.2}, {'runtime': 'onnxruntime', 'imgsz': 480, 'device': 'cpu', 'frames': 60, 'p50_ms': 23.1, 'p95_ms': 44.1, 'fps_at_p50': 43.4}]

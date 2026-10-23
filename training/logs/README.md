@@ -19,7 +19,16 @@ model in `models/`.
 | `2026-10-22_xai_eval.log` | `backend/eval/xai_eval.py`: pointing game, deletion, randomisation, latency | `docs/eval/xai_report.md` |
 | `2026-10-22_perf_dual.log`, `_perf_single.log` | `backend/eval/perf.py`, both detector modes, 1 and 4 cameras | `docs/eval/performance.md` |
 | `2026-10-22_soak.log` | `scripts/soak.py`, 60 minutes, three cameras | `docs/eval/soak.md` |
-| `2026-10-23_vs2-y26n-cpu480-ft_train.log` | `training/scripts/train.py` second CPU stage (ADR-0014); added when the run finishes | `training/runs/vs2-y26n-cpu480-ft/` |
+| `2026-10-23_vs2-y26n-cpu480-ft_train.log` | `training/scripts/train.py`, second CPU stage (ADR-0014), both parts: epochs 1–21, then `--resume` for 22–24 | `training/runs/vs2-y26n-cpu480-ft/` |
+| `2026-10-23_vs2-y26n-cpu480-ft_eval.log` | `evaluate.py --thresholds` on the second stage, test + validation | `training/reports/eval/vs2-y26n-cpu480-ft{,-val}/`, `docs/eval/detector_results.json` |
+| `2026-10-23_vs2-y26n-ft_export.log` | `export.py`: promotes the second stage as `vs2-y26n` | `models/` |
+| `2026-10-23_vs2-y26n-ft_benchmark.log` | `benchmark.py` on the promoted model | `training/benchmarks/latency.json` |
+| `2026-10-23_vs2-y26n-ft_error_analysis.log` | `error_analysis.py` on the promoted model | `training/reports/error_analysis/` |
+| `2026-10-23_xai_eval_ft.log` | `xai_eval.py` on the promoted model | `docs/eval/xai_report.md` |
+| `2026-10-23_perf_dual_ft.log`, `_perf_single_ft.log` | `perf.py` on the promoted model (re-provisioned machine) | `docs/eval/performance.md` |
+
+Files dated 2026-10-22 describe stage 1 (`vs2-y26n-cpu480`); the reports they fed now show stage 2, and the
+training report keeps both.
 
 **Missing:** the console log of the first training run (`vs2-y26n-cpu480`, 26 epochs) was lost when the build
 machine restarted mid-run. Its complete per-epoch record survives in `training/runs/vs2-y26n-cpu480/results.csv`

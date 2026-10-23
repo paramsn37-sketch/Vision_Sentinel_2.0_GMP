@@ -234,5 +234,91 @@
       "goggles": 0.271,
       "no_goggles": 0.038
     }
+  },
+  "vs2-y26n-cpu480-ft": {
+    "name": "vs2-y26n-cpu480-ft",
+    "weights": "../training/runs/vs2-y26n-cpu480-ft/weights/best.pt",
+    "split": "test",
+    "imgsz": 480,
+    "kind": "trained",
+    "evaluated_at": "2026-10-23T07:07:53+00:00",
+    "per_class": {
+      "person": {
+        "precision": 0.752,
+        "recall": 0.6844,
+        "mAP50": 0.7261,
+        "mAP50-95": 0.4035
+      },
+      "head": {
+        "precision": 0.7646,
+        "recall": 0.5962,
+        "mAP50": 0.6441,
+        "mAP50-95": 0.3657
+      },
+      "helmet": {
+        "precision": 0.8854,
+        "recall": 0.8488,
+        "mAP50": 0.9007,
+        "mAP50-95": 0.4997
+      },
+      "vest": {
+        "precision": 0.8577,
+        "recall": 0.8324,
+        "mAP50": 0.8883,
+        "mAP50-95": 0.5476
+      },
+      "gloves": {
+        "precision": 0.7515,
+        "recall": 0.4952,
+        "mAP50": 0.5546,
+        "mAP50-95": 0.2608
+      },
+      "hand": {
+        "precision": 0.5253,
+        "recall": 0.176,
+        "mAP50": 0.222,
+        "mAP50-95": 0.0922
+      },
+      "boots": {
+        "precision": 0.7337,
+        "recall": 0.6174,
+        "mAP50": 0.6958,
+        "mAP50-95": 0.3693
+      },
+      "goggles": {
+        "precision": 0.7472,
+        "recall": 0.3918,
+        "mAP50": 0.4501,
+        "mAP50-95": 0.1727
+      },
+      "no_goggles": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "mAP50": 0.0338,
+        "mAP50-95": 0.0079
+      }
+    },
+    "mean": {
+      "mAP50": 0.5684,
+      "mAP50-95": 0.3022
+    },
+    "speed_ms": {
+      "preprocess": 0.95,
+      "inference": 20.83,
+      "loss": 0.0,
+      "postprocess": 0.72
+    },
+    "plots": "training/reports/eval/vs2-y26n-cpu480-ft",
+    "thresholds_from_val": {
+      "person": 0.287,
+      "head": 0.186,
+      "helmet": 0.317,
+      "vest": 0.409,
+      "gloves": 0.338,
+      "hand": 0.098,
+      "boots": 0.262,
+      "goggles": 0.393,
+      "no_goggles": 0.059
+    }
   }
 }

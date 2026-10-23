@@ -12,7 +12,7 @@
         "device": "cpu",
         "cpu": "x86_64"
       },
-      "status": "promoted",
+      "status": "superseded",
       "model": "yolo26n.pt",
       "hyp": {
         "imgsz": 480,
@@ -112,7 +112,8 @@
           "mAP50-95": 0.2718
         }
       },
-      "promoted_as": "vs2-y26n"
+      "promoted_as": "vs2-y26n",
+      "superseded_by": "vs2-y26n-cpu480-ft"
     },
     {
       "id": "baseline-yolo26n-coco",
@@ -280,7 +281,7 @@
         "device": "cpu",
         "cpu": "x86_64"
       },
-      "status": "running",
+      "status": "promoted",
       "model": "models/vs2-y26n.pt",
       "hyp": {
         "imgsz": 480,
@@ -306,7 +307,84 @@
         "amp": false
       },
       "hyp_file": "hyp_cpu_finetune.yaml",
-      "device": "cpu"
+      "device": "cpu",
+      "resumed_at": "2026-10-23T06:50:09+00:00",
+      "finished_at": "2026-10-23T07:06:55+00:00",
+      "wall_time_h": 2.14,
+      "run_dir": "training/runs/vs2-y26n-cpu480-ft",
+      "epochs_completed": 24,
+      "best_epoch": 24,
+      "val": {
+        "mAP50": 0.573,
+        "mAP50-95": 0.29713,
+        "precision": 0.76695,
+        "recall": 0.52322
+      },
+      "test_metrics": {
+        "per_class": {
+          "person": {
+            "precision": 0.752,
+            "recall": 0.6844,
+            "mAP50": 0.7261,
+            "mAP50-95": 0.4035
+          },
+          "head": {
+            "precision": 0.7646,
+            "recall": 0.5962,
+            "mAP50": 0.6441,
+            "mAP50-95": 0.3657
+          },
+          "helmet": {
+            "precision": 0.8854,
+            "recall": 0.8488,
+            "mAP50": 0.9007,
+            "mAP50-95": 0.4997
+          },
+          "vest": {
+            "precision": 0.8577,
+            "recall": 0.8324,
+            "mAP50": 0.8883,
+            "mAP50-95": 0.5476
+          },
+          "gloves": {
+            "precision": 0.7515,
+            "recall": 0.4952,
+            "mAP50": 0.5546,
+            "mAP50-95": 0.2608
+          },
+          "hand": {
+            "precision": 0.5253,
+            "recall": 0.176,
+            "mAP50": 0.222,
+            "mAP50-95": 0.0922
+          },
+          "boots": {
+            "precision": 0.7337,
+            "recall": 0.6174,
+            "mAP50": 0.6958,
+            "mAP50-95": 0.3693
+          },
+          "goggles": {
+            "precision": 0.7472,
+            "recall": 0.3918,
+            "mAP50": 0.4501,
+            "mAP50-95": 0.1727
+          },
+          "no_goggles": {
+            "precision": 1.0,
+            "recall": 0.0,
+            "mAP50": 0.0338,
+            "mAP50-95": 0.0079
+          }
+        },
+        "mean": {
+          "mAP50": 0.5684,
+          "mAP50-95": 0.3022
+        }
+      },
+      "promoted_as": "vs2-y26n",
+      "wall_time_note": "sum of both parts from results.csv (epochs 1-21: 6,702 s; resumed epochs 22-24: 987 s)",
+      "start_weights": "models/vs2-y26n.pt at commit c99ca8f (stage 1, run vs2-y26n-cpu480)"
     }
   ]
 }

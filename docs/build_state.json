@@ -63,11 +63,13 @@
       "finished_at": "2026-10-22T22:25:30Z",
       "commit": "c99ca8f",
       "gate_results": {
-        "person_within_5pts_of_stock": "pass (3.7)",
+        "person_within_5pts_of_stock": "pass (+0.6 above stock after stage 2)",
         "pytest_model": "pass",
-        "person_mAP50_0.80": "fail (0.683)"
+        "person_mAP50_0.80": "fail (0.726)",
+        "stage2_better_than_stage1": "pass (test mAP50 0.524 -> 0.568, every class up)"
       },
-      "notes": "Interrupted after 26 epochs, shipped as is (ADR-0012)"
+      "notes": "Stage 1 interrupted after 26 epochs (ADR-0012); stage 2 vs2-y26n-cpu480-ft, 24 epochs, promoted 2026-10-23 (ADR-0014)",
+      "updated_at": "2026-10-23T07:30:00Z"
     },
     {
       "id": 3,

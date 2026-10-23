@@ -1,7 +1,7 @@
 {
   "model": "vs2-y26n.pt",
   "variant": "hirescam",
-  "samples": 214,
+  "samples": 256,
   "pointing_game": 1.0,
   "pointing_by_class": {
     "person": 1.0,
@@ -14,14 +14,14 @@
     "gloves": 1.0
   },
   "energy_in_box_by_class": {
-    "person": 0.9549274862091008,
-    "head": 0.9427437679010999,
-    "helmet": 0.9399433789550201,
-    "vest": 0.9631649227137213,
-    "boots": 0.929781205058853,
-    "goggles": 0.9855623892911128,
-    "hand": 0.9694843031706349,
-    "gloves": 0.9469917568182424
+    "person": 0.8997860441193127,
+    "head": 0.9204925338699077,
+    "helmet": 0.94208275145117,
+    "vest": 0.9569984837276483,
+    "boots": 0.9247623855935825,
+    "goggles": 0.9535477294320216,
+    "hand": 0.9376172831216479,
+    "gloves": 0.9430799865062137
   },
   "n_by_class": {
     "person": 33,
@@ -29,24 +29,24 @@
     "helmet": 33,
     "vest": 33,
     "boots": 33,
-    "goggles": 21,
-    "hand": 7,
-    "gloves": 21
+    "goggles": 32,
+    "hand": 33,
+    "gloves": 26
   },
-  "pointing_eigencam_first60": 0.16666666666666666,
-  "pointing_classic_gradcam_first60": 0.6333333333333333,
+  "pointing_eigencam_first60": 0.23333333333333334,
+  "pointing_classic_gradcam_first60": 0.65,
   "deletion": {
     "n": 100,
-    "mean_drop_top20": 0.5089944211542988,
-    "mean_drop_random20": 0.10892888491849134,
-    "share_top_beats_random": 0.95
+    "mean_drop_top20": 0.6452368730493941,
+    "mean_drop_random20": 0.14552503906907532,
+    "share_top_beats_random": 0.98
   },
   "randomisation": {
     "n": 30,
-    "mean_ssim": 0.6685390729466969
+    "mean_ssim": 0.7957725536619453
   },
   "latency_ms": {
-    "p50": 141.7507610000257,
-    "p95": 223.8834688500333
+    "p50": 160.75482349970116,
+    "p95": 248.44673999996303
   }
 }

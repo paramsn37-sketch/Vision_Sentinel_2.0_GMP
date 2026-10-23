@@ -1,12 +1,12 @@
 {
   "vs2-y26n": {
-    "measured_at": "2026-10-22T22:21:31+00:00",
+    "measured_at": "2026-10-23T07:09:03+00:00",
     "weights": "../models/vs2-y26n.pt",
     "machine": {
       "cpu": "x86_64",
       "cpu_count": 4,
       "torch_threads": 3,
-      "load_avg_1m": 1.96,
+      "load_avg_1m": 1.78,
       "gpu": null
     },
     "note": "single image per call, includes pre- and post-processing",
@@ -16,36 +16,36 @@
         "imgsz": 640,
         "device": "cpu",
         "frames": 60,
-        "p50_ms": 44.1,
-        "p95_ms": 70.6,
-        "fps_at_p50": 22.7
+        "p50_ms": 52.1,
+        "p95_ms": 79.6,
+        "fps_at_p50": 19.2
       },
       {
         "runtime": "onnxruntime",
         "imgsz": 640,
         "device": "cpu",
         "frames": 60,
-        "p50_ms": 35.6,
-        "p95_ms": 52.4,
-        "fps_at_p50": 28.1
+        "p50_ms": 36.6,
+        "p95_ms": 84.1,
+        "fps_at_p50": 27.4
       },
       {
         "runtime": "pytorch",
         "imgsz": 480,
         "device": "cpu",
         "frames": 60,
-        "p50_ms": 29.9,
-        "p95_ms": 60.0,
-        "fps_at_p50": 33.5
+        "p50_ms": 32.0,
+        "p95_ms": 60.7,
+        "fps_at_p50": 31.2
       },
       {
         "runtime": "onnxruntime",
         "imgsz": 480,
         "device": "cpu",
         "frames": 60,
-        "p50_ms": 27.6,
-        "p95_ms": 59.0,
-        "fps_at_p50": 36.2
+        "p50_ms": 23.1,
+        "p95_ms": 44.1,
+        "fps_at_p50": 43.4
       }
     ]
   }

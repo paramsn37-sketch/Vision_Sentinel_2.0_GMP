@@ -2,40 +2,40 @@
   "images": 559,
   "per_class": {
     "boots": {
-      "false_positives": 73,
-      "false_negatives": 86
+      "false_positives": 75,
+      "false_negatives": 83
     },
     "gloves": {
-      "false_positives": 39,
-      "false_negatives": 107
+      "false_positives": 25,
+      "false_negatives": 105
     },
     "goggles": {
-      "false_positives": 25,
-      "false_negatives": 114
+      "false_positives": 9,
+      "false_negatives": 113
     },
     "hand": {
-      "false_positives": 136,
-      "false_negatives": 212
+      "false_positives": 196,
+      "false_negatives": 187
     },
     "head": {
-      "false_positives": 177,
-      "false_negatives": 302
+      "false_positives": 184,
+      "false_negatives": 259
     },
     "helmet": {
-      "false_positives": 40,
-      "false_negatives": 36
+      "false_positives": 24,
+      "false_negatives": 33
     },
     "no_goggles": {
-      "false_positives": 88,
-      "false_negatives": 46
+      "false_positives": 46,
+      "false_negatives": 44
     },
     "person": {
-      "false_positives": 209,
-      "false_negatives": 352
+      "false_positives": 233,
+      "false_negatives": 299
     },
     "vest": {
-      "false_positives": 24,
-      "false_negatives": 46
+      "false_positives": 21,
+      "false_negatives": 44
     }
   }
 }

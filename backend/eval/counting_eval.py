@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import configparser
+import hashlib
 import itertools
 import json
 from dataclasses import asdict, replace
@@ -65,6 +66,10 @@ def load_gt(seq: Path) -> tuple[dict[int, list], dict[int, list], int]:
         elif cls in DISTRACTORS:
             distract.setdefault(fr, []).append(box)
     return targets, distract, len(ids)
+
+
+def _short_hash(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:8] if path.exists() else "nohash"
 
 
 def detections(seq: Path, detector: Detector, tag: str) -> dict[int, list[Detection]]:
@@ -199,11 +204,12 @@ def main() -> None:
     cfg_det = DetectionCfg()
     detector = Detector(info, imgsz=args.imgsz, person_model=cfg_det.person_model or None,
                         person_imgsz=cfg_det.person_imgsz)  # fmt: skip
-    # Only person boxes matter here, so the cache key is whichever network produced them.
+    # Only person boxes matter here, so the cache key is whichever network produced them. A retrained model keeps
+    # its name, so the trained-model key includes a hash of the weights file.
     tag = (
         f"{detector.person_model_name}_{detector.person_imgsz}"
         if detector.person_model
-        else f"{Path(str(info.weights)).stem}_{detector.imgsz}"
+        else f"{Path(str(info.weights)).stem}_{_short_hash(Path(str(info.weights)))}_{detector.imgsz}"
     )
 
     cache = {}

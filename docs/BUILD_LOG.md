@@ -2,7 +2,7 @@
 
 Each phase appends an entry here using the template in `BUILD_PROMPTS.md` §A.5. Newest at the bottom.
 
-## Executive summary (v2.0.0, 2026-10-22)
+## Executive summary (v2.0.0, 2026-10-22, updated 2026-10-23)
 
 **What was built.** Vision Sentinel 2.0, from scratch in one day of unattended phases: a FastAPI vision service
 (detection, tracking, PPE state, zones, incidents, explanations, analytics, reports, auth) and a React control-room
@@ -10,16 +10,17 @@ UI (Live, Incidents, Zones editor, Analytics, Uploads, Model, Settings), a train
 records, evaluation scripts for detection, counting and explanations, Docker Compose, CI, and documentation.
 
 **Headline numbers (all measured).**
-- Detector (frozen test split, 559 images): helmet 0.867, vest 0.849, person 0.683, head 0.579 mAP50; mean 0.524.
-  Stock COCO models detect no PPE at all.
+- Detector (frozen test split, 559 images), after a second CPU training stage on 2026-10-23: helmet 0.901,
+  vest 0.888, person 0.726, head 0.644 mAP50; mean 0.568 (0.524 after stage 1). Stock COCO models detect no PPE.
 - Unique-person counting (MOT17, 5 held-out sequences): 20.0 % mean error, against 107.9 % for v1's method.
-- Explanations: pointing game 100 %, deletion check 95 %; randomisation check fails (SSIM 0.669).
-- One camera on a 4-core CPU: 9.6 FPS (21.3 FPS with the trained model alone). 60-minute soak: memory +3.0 %.
+- Explanations: pointing game 100 %, deletion check 98 %; randomisation check fails (SSIM 0.796).
+- One camera on a 4-core CPU: 9.6 FPS (21.3 FPS with the trained model alone); 7.8 / 18.0 FPS on a slower
+  re-provisioned machine the next day. 60-minute soak: memory +3.0 %.
 - Tests: 70 backend + 6 model, 25 frontend unit, 20 Playwright e2e; `app/core` coverage 86 %; axe 0 serious issues.
 
 **What remains** ([FINAL_AUDIT.md](FINAL_AUDIT.md)). Counting error is twice the 10 % target. The detector was
-trained on CPU and stopped after 26 epochs by a machine restart; a GPU run (Colab notebook provided) is the first
-improvement. One explanation sanity check fails. GPU speed was never measured.
+trained on CPU in two stages and has converged for a nano model; person and head miss their targets, and a GPU run
+(Colab notebook provided) is the next improvement. One explanation sanity check fails. GPU speed was never measured.
 
 ---
 
@@ -247,3 +248,21 @@ improvement. One explanation sanity check fails. GPU speed was never measured.
 - **Fallbacks used / deviations from blueprint:** the `v2.0.0` tag could not be pushed (the session may push only its
   branch; HTTP 403), so the owner creates it (command in FINAL_AUDIT). Other deviations: FINAL_AUDIT "Partial" and
   "Fail" rows.
+
+## Post-release — Second training stage and training records
+- **Status:** done
+- **Dates:** 2026-10-23 (UTC)
+- **What was built:** run `vs2-y26n-cpu480-ft` from the shipped stage-1 weights with
+  `training/configs/hyp_cpu_finetune.yaml` (24 epochs, AdamW lr 0.0008 cosine to 5 %, mosaic off for the last 8),
+  in two parts with `train.py --resume` (ADR-0014). Promoted as `vs2-y26n`; stage 1 marked `superseded` in the
+  registry. Re-ran export, benchmark, error analysis, per-class figure, `pytest -m model`, `xai_eval`, `perf`.
+  Archived the console log of every training, evaluation and measurement run in `training/logs/` with an index.
+- **Measurements:** test mAP50 0.524 → 0.568, every class up (person 0.683 → 0.726, head 0.579 → 0.644, helmet
+  0.867 → 0.901, vest 0.849 → 0.888). Validation mAP50 flat around 0.57 over the last 8 epochs (converged).
+  Explanations: pointing game 100 % (256 detections), deletion 98 %, randomisation SSIM 0.796 (still fails),
+  161 ms p50. Speed re-measured on a re-provisioned, slower machine: 7.8 FPS default, 18.0 FPS trained model only.
+- **Fixes found here:** `counting_eval.py` cached detections under the model's name, so a retrained model with the
+  same name would have reused stale detections; the cache key now includes a hash of the weights file.
+- **Fallbacks used / deviations from blueprint:** counting was not re-measured, because the app's people come from
+  the unchanged COCO model (ADR-0013). The first run's console log was lost in the machine restart; its
+  `results.csv`, `args.yaml` and `results.png` are its record.

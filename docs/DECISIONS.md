@@ -127,5 +127,7 @@ Short ADRs. Format: context → decision → consequences. Newest at the bottom.
   mosaic off for the last 8 epochs), same data and image size. It runs in chunks of under two hours with
   `train.py --resume`. The result is promoted only if it beats `vs2-y26n` on the frozen test split; otherwise it is
   recorded and `vs2-y26n` stays.
-- **Consequences:** about 3.5 hours of CPU. Comparable to the first run (same data, split, image size, evaluation
-  script). A full GPU run (`train_colab.ipynb`) remains the real fix for the under-trained classes.
+- **Consequences:** about 3.5 hours of CPU planned, 2.1 hours used. Comparable to the first run (same data, split,
+  image size, evaluation script). **Result (2026-10-23):** test mAP50 0.524 → 0.568 with every class improved, so it
+  was promoted; validation mAP50 flattened at about 0.57, so more CPU epochs of this kind would add little. A full
+  GPU run (`train_colab.ipynb`) remains the fix for person, head and the rare classes.

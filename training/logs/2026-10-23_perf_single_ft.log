@@ -1,0 +1,99 @@
+{
+ "measured_at": "2026-10-23T07:17:18+00:00",
+ "model": "vs2-y26n",
+ "imgsz": 480,
+ "device": "cpu",
+ "machine": {
+  "cpu": "x86_64",
+  "cpu_count": 4,
+  "torch_threads": 4,
+  "gpu": null,
+  "load_avg_1m_end": 1.47
+ },
+ "runs": [
+  {
+   "cameras": 1,
+   "seconds": 60.0,
+   "frames": 1081,
+   "fps_total": 18.01,
+   "fps_per_camera": 18.01,
+   "resolutions": [
+    "960x540"
+   ],
+   "stage_ms": {
+    "detect": {
+     "p50": 47.5,
+     "p95": 63.9,
+     "mean": 50.4
+    },
+    "track": {
+     "p50": 1.9,
+     "p95": 3.0,
+     "mean": 2.0
+    },
+    "ppe": {
+     "p50": 0.3,
+     "p95": 0.6,
+     "mean": 0.4
+    },
+    "zones_incidents": {
+     "p50": 0.2,
+     "p95": 0.6,
+     "mean": 0.3
+    },
+    "total": {
+     "p50": 50.1,
+     "p95": 66.9,
+     "mean": 53.1
+    },
+    "jpeg": {
+     "p50": 1.5,
+     "p95": 2.1,
+     "mean": 1.6
+    }
+   }
+  },
+  {
+   "cameras": 4,
+   "seconds": 60.2,
+   "frames": 1130,
+   "fps_total": 18.78,
+   "fps_per_camera": 4.69,
+   "resolutions": [
+    "960x540"
+   ],
+   "stage_ms": {
+    "detect": {
+     "p50": 203.8,
+     "p95": 246.5,
+     "mean": 206.2
+    },
+    "track": {
+     "p50": 2.9,
+     "p95": 4.4,
+     "mean": 3.1
+    },
+    "ppe": {
+     "p50": 0.3,
+     "p95": 0.5,
+     "mean": 0.3
+    },
+    "zones_incidents": {
+     "p50": 0.3,
+     "p95": 0.7,
+     "mean": 0.3
+    },
+    "total": {
+     "p50": 207.4,
+     "p95": 251.3,
+     "mean": 209.9
+    },
+    "jpeg": {
+     "p50": 1.6,
+     "p95": 2.2,
+     "mean": 1.7
+    }
+   }
+  }
+ ]
+}

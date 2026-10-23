@@ -59,10 +59,12 @@ frozen test split of 559 images; counting on MOT17 sequences not used for tuning
 |---|---|---|---|---|---|---|
 | v1 setup: YOLO11m, COCO weights | 0.745 | — | — | — | — | person only |
 | Stock YOLO26n, COCO weights | 0.720 | — | — | — | — | person only |
-| **Ours: YOLO26n fine-tuned on person + PPE (480 px)** | 0.683 | **0.867** | **0.849** | 0.579 | 0.683 | 0.524 |
+| **Ours: YOLO26n fine-tuned on person + PPE (480 px)** | 0.726 | **0.901** | **0.888** | 0.644 | 0.696 | 0.568 |
 
-Trained on CPU only and stopped after 26 epochs by a machine restart, so it is under-trained
-([model card](MODEL_CARD.md)). Gloves, goggles and bare hands are not reliable yet. In the app, people come from the
+Trained on CPU only, in two stages: 26 epochs from COCO weights (cut short by a machine restart), then 24 more
+epochs with a decaying schedule, which improved every class ([model card](MODEL_CARD.md),
+[training report](training/reports/training_report.md), [all logs](training/logs/README.md)). Gloves, goggles and
+bare hands are not reliable yet. In the app, people come from the
 stock COCO model (better on small, distant people, which counting depends on) and PPE from ours (ADR-0013).
 
 **Unique-person counting, MOT17 (mean absolute count error, lower is better)**
@@ -79,11 +81,11 @@ The blueprint's 10 % target is not met yet.
 
 | What | Result |
 |---|---|
-| Speed, one camera, 4-core CPU, no GPU | 9.6 FPS (both networks), 21.3 FPS (trained model only) |
-| Explanations: hottest pixel inside the box (pointing game) | 100 % of 214 test detections |
-| Explanations: hiding the hot region lowers the score more than hiding a random region | 95 % of cases |
-| Explanations: model-randomisation sanity check | **fails** (SSIM 0.67, needs < 0.5); see the report |
-| Explanation time on CPU | 142 ms p50 |
+| Speed, one camera, 4-core CPU, no GPU | 7.8–9.6 FPS (both networks), 18.0–21.3 FPS (trained model only); two measurement days |
+| Explanations: hottest pixel inside the box (pointing game) | 100 % of 256 test detections |
+| Explanations: hiding the hot region lowers the score more than hiding a random region | 98 % of cases |
+| Explanations: model-randomisation sanity check | **fails** (SSIM 0.80, needs < 0.5); see the report |
+| Explanation time on CPU | 161 ms p50 |
 | 60-minute soak, three cameras | memory +3.0 % after warm-up, no leaks in files or threads |
 
 Details: [counting report](docs/eval/counting_report.md), [explanation report](docs/eval/xai_report.md),

@@ -40,7 +40,9 @@ incidents, zones, analytics and model information over REST and WebSockets; SQLi
 **Detector training.** 3,708 images from Ultralytics Construction-PPE and an Open Images V7 subset, remapped to 9
 classes, near-duplicates removed by perceptual hash, split 70/15/15 with a frozen test split
 ([dataset card](../data/DATASET_CARD.md)). YOLO26n fine-tuned from COCO weights on CPU, 480 px, AdamW, mosaic
-augmentation, 26 epochs (3.8 h) before the machine restarted ([training report](../training/reports/training_report.md)).
+augmentation, in two stages: 26 epochs (3.8 h) until the machine restarted, then 24 more epochs (2.1 h) from those
+weights with a lower, cosine-decayed learning rate and mosaic switched off for the last 8 epochs
+([training report](../training/reports/training_report.md), [logs](../training/logs/README.md)).
 Per-class operating thresholds chosen on validation, never on test.
 
 ## C. Results
@@ -49,20 +51,23 @@ Per-class operating thresholds chosen on validation, never on test.
 
 | class | precision | recall | mAP50 | mAP50-95 |
 |---|---|---|---|---|
-| person | 0.690 | 0.702 | 0.683 | 0.368 |
-| head (bare) | 0.654 | 0.602 | 0.579 | 0.315 |
-| helmet | 0.785 | 0.839 | 0.867 | 0.454 |
-| vest | 0.807 | 0.814 | 0.849 | 0.503 |
-| gloves | 0.764 | 0.468 | 0.514 | 0.232 |
-| hand (bare) | 0.444 | 0.060 | 0.150 | 0.058 |
-| boots | 0.737 | 0.591 | 0.683 | 0.375 |
-| goggles | 0.633 | 0.319 | 0.380 | 0.138 |
-| no_goggles | — | 0.000 | 0.016 | 0.004 |
-| **mean** | 0.724 | 0.488 | **0.524** | 0.272 |
+| person | 0.752 | 0.684 | 0.726 | 0.404 |
+| head (bare) | 0.765 | 0.596 | 0.644 | 0.366 |
+| helmet | 0.885 | 0.849 | 0.901 | 0.500 |
+| vest | 0.858 | 0.832 | 0.888 | 0.548 |
+| gloves | 0.752 | 0.495 | 0.555 | 0.261 |
+| hand (bare) | 0.525 | 0.176 | 0.222 | 0.092 |
+| boots | 0.734 | 0.617 | 0.696 | 0.369 |
+| goggles | 0.747 | 0.392 | 0.450 | 0.173 |
+| no_goggles | — | 0.000 | 0.034 | 0.008 |
+| **mean** | 0.780 | 0.516 | **0.568** | 0.302 |
 
-Comparison on the same split, person class: v1's YOLO11m 0.745, stock YOLO26n 0.720, ours 0.683. Neither COCO model
-detects any PPE class. Figures: `training/reports/eval/vs2-y26n-cpu480/` (PR and F1 curves, confusion matrix),
-`training/runs/vs2-y26n-cpu480/results.png` (learning curves), `training/reports/error_analysis/` (worst errors).
+After the first stage alone the mean was 0.524 (person 0.683, helmet 0.867, vest 0.849); the second stage improved
+every class.
+
+Comparison on the same split, person class: v1's YOLO11m 0.745, stock YOLO26n 0.720, ours 0.726. Neither COCO model
+detects any PPE class. Figures: `training/reports/eval/vs2-y26n-cpu480-ft/` (PR and F1 curves, confusion matrix),
+`training/runs/vs2-y26n-cpu480{,-ft}/results.png` (learning curves of both stages), `training/reports/error_analysis/` (worst errors).
 
 ### C.2 Unique-person counting (MOT17, 5 sequences not used for tuning; `backend/eval/counting_eval.py`)
 
@@ -79,21 +84,21 @@ detects any PPE class. Figures: `training/reports/eval/vs2-y26n-cpu480/` (PR and
 switches) is in [counting_report.md](eval/counting_report.md). With our trained model's own person class instead of
 the COCO person model, the error was 41.3 % (480 px) and 32.9 % (640 px).
 
-### C.3 Explanations (214 test detections; `backend/eval/xai_eval.py`)
+### C.3 Explanations (256 test detections; `backend/eval/xai_eval.py`)
 
 | check | result |
 |---|---|
-| Pointing game (hottest pixel inside the box) | 100 % (classic Grad-CAM: 63 %, EigenCAM: 17 %, on 60 detections) |
-| Heat inside the box | 93–99 % by class |
-| Deletion: hiding the hottest 20 % lowers the score more than hiding a random 20 % | 95 % of cases; mean drop 0.509 vs 0.109 |
-| Model randomisation: maps from a randomly re-initialised network should differ (SSIM < 0.5) | **0.669, fails** |
-| Time per explanation (CPU) | 142 ms p50, 224 ms p95 |
+| Pointing game (hottest pixel inside the box) | 100 % (classic Grad-CAM: 65 %, EigenCAM: 23 %, on 60 detections) |
+| Heat inside the box | 90–96 % by class |
+| Deletion: hiding the hottest 20 % lowers the score more than hiding a random 20 % | 98 % of cases; mean drop 0.645 vs 0.146 |
+| Model randomisation: maps from a randomly re-initialised network should differ (SSIM < 0.5) | **0.796, fails** |
+| Time per explanation (CPU) | 161 ms p50, 248 ms p95 |
 
 ### C.4 System (`backend/eval/perf.py`, `scripts/soak.py`)
 
 | measurement | result |
 |---|---|
-| One camera, 4 vCPU, no GPU | 9.6 FPS (both networks); 21.3 FPS (trained model only) |
+| One camera, 4 vCPU, no GPU | 9.6 FPS (both networks); 21.3 FPS (trained model only). Re-run a day later on a slower re-provisioned machine: 7.8 and 18.0 FPS |
 | Four cameras | 9.7 FPS in total (2.4 each) |
 | Share of frame time spent in detection | 97 % |
 | 60-minute soak, three cameras | memory +3.0 % after warm-up; open files and threads constant |
@@ -116,8 +121,8 @@ the COCO person model, the error was 41.3 % (480 px) and 32.9 % (640 px).
 
 1. **Counting error is 20 %, twice the 10 % target.** The worst sequences (MOT17-09, MOT17-13) are crowded or filmed
    from a moving camera; occlusions split and merge tracks.
-2. **The detector is under-trained.** CPU only, 26 epochs, nano model. Person mAP50 (0.683) and head (0.579) miss
-   their targets (0.80 and 0.70). Bare hands and "no goggles" are effectively not detected, so glove and goggle
+2. **The detector is small and CPU-trained.** Nano model, 480 px, 50 epochs over two stages, now converged. Person
+   mAP50 (0.726) and head (0.644) miss their targets (0.80 and 0.70). Bare hands and "no goggles" are effectively not detected, so glove and goggle
    violations are reported as "unknown" rather than raised.
 3. **Domain gap.** PPE images are daylight construction sites, mostly frontal. Night, rain, top-down CCTV and other
    industries are under-represented.

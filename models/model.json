@@ -15,84 +15,84 @@
   ],
   "imgsz": 480,
   "thresholds": {
-    "person": 0.361,
-    "head": 0.303,
-    "helmet": 0.287,
-    "vest": 0.317,
-    "gloves": 0.253,
-    "hand": 0.09,
-    "boots": 0.213,
-    "goggles": 0.271,
-    "no_goggles": 0.038
+    "person": 0.287,
+    "head": 0.186,
+    "helmet": 0.317,
+    "vest": 0.409,
+    "gloves": 0.338,
+    "hand": 0.098,
+    "boots": 0.262,
+    "goggles": 0.393,
+    "no_goggles": 0.059
   },
   "metrics_test": {
     "person": {
-      "precision": 0.6897,
-      "recall": 0.7018,
-      "mAP50": 0.6829,
-      "mAP50-95": 0.3677
+      "precision": 0.752,
+      "recall": 0.6844,
+      "mAP50": 0.7261,
+      "mAP50-95": 0.4035
     },
     "head": {
-      "precision": 0.6536,
-      "recall": 0.6021,
-      "mAP50": 0.5792,
-      "mAP50-95": 0.3152
+      "precision": 0.7646,
+      "recall": 0.5962,
+      "mAP50": 0.6441,
+      "mAP50-95": 0.3657
     },
     "helmet": {
-      "precision": 0.7848,
-      "recall": 0.839,
-      "mAP50": 0.8668,
-      "mAP50-95": 0.4535
+      "precision": 0.8854,
+      "recall": 0.8488,
+      "mAP50": 0.9007,
+      "mAP50-95": 0.4997
     },
     "vest": {
-      "precision": 0.8065,
-      "recall": 0.8143,
-      "mAP50": 0.8491,
-      "mAP50-95": 0.503
+      "precision": 0.8577,
+      "recall": 0.8324,
+      "mAP50": 0.8883,
+      "mAP50-95": 0.5476
     },
     "gloves": {
-      "precision": 0.7643,
-      "recall": 0.4676,
-      "mAP50": 0.5138,
-      "mAP50-95": 0.2322
+      "precision": 0.7515,
+      "recall": 0.4952,
+      "mAP50": 0.5546,
+      "mAP50-95": 0.2608
     },
     "hand": {
-      "precision": 0.4437,
-      "recall": 0.0599,
-      "mAP50": 0.15,
-      "mAP50-95": 0.0583
+      "precision": 0.5253,
+      "recall": 0.176,
+      "mAP50": 0.222,
+      "mAP50-95": 0.0922
     },
     "boots": {
-      "precision": 0.7371,
-      "recall": 0.5913,
-      "mAP50": 0.6826,
-      "mAP50-95": 0.3749
+      "precision": 0.7337,
+      "recall": 0.6174,
+      "mAP50": 0.6958,
+      "mAP50-95": 0.3693
     },
     "goggles": {
-      "precision": 0.6329,
-      "recall": 0.3193,
-      "mAP50": 0.3797,
-      "mAP50-95": 0.1381
+      "precision": 0.7472,
+      "recall": 0.3918,
+      "mAP50": 0.4501,
+      "mAP50-95": 0.1727
     },
     "no_goggles": {
       "precision": 1.0,
       "recall": 0.0,
-      "mAP50": 0.0158,
-      "mAP50-95": 0.0035
+      "mAP50": 0.0338,
+      "mAP50-95": 0.0079
     }
   },
   "metrics_test_mean": {
-    "mAP50": 0.5244,
-    "mAP50-95": 0.2718
+    "mAP50": 0.5684,
+    "mAP50-95": 0.3022
   },
-  "trained_from": "yolo26n.pt",
-  "run": "vs2-y26n-cpu480",
+  "trained_from": "models/vs2-y26n.pt",
+  "run": "vs2-y26n-cpu480-ft",
   "training_mode": "cpu-budget",
-  "epochs_completed": 26,
+  "epochs_completed": 24,
   "data_manifest": "959596097b843262",
   "sha256": {
-    "vs2-y26n.pt": "f7d1d75f701972f60e6176b143bb5b65c18143caaaa1e99757c2ad73f79394d9",
-    "vs2-y26n.onnx": "29edcdae02b2386632e23f4deaa39379a1356b6b578e5f3f215c0da2be88534f"
+    "vs2-y26n.pt": "4b7d265bd661177fa763514801a31b9d60f478944a9941f5451eaa9ca2ae9692",
+    "vs2-y26n.onnx": "7f653d07ee311da7bafb5a81383ca1a28ace245a892658e228b77e245ec1b5b6"
   },
   "licence_note": "AGPL-3.0. Trained on Ultralytics Construction-PPE (AGPL-3.0) and Open Images V7 (annotations CC BY 4.0, images CC BY 2.0); see data/DATASET_CARD.md."
 }

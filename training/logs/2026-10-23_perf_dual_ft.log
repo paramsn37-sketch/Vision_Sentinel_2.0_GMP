@@ -1,0 +1,99 @@
+{
+ "measured_at": "2026-10-23T07:15:15+00:00",
+ "model": "vs2-y26n + yolo26n (people)",
+ "imgsz": 480,
+ "device": "cpu",
+ "machine": {
+  "cpu": "x86_64",
+  "cpu_count": 4,
+  "torch_threads": 4,
+  "gpu": null,
+  "load_avg_1m_end": 1.65
+ },
+ "runs": [
+  {
+   "cameras": 1,
+   "seconds": 60.1,
+   "frames": 469,
+   "fps_total": 7.81,
+   "fps_per_camera": 7.81,
+   "resolutions": [
+    "960x540"
+   ],
+   "stage_ms": {
+    "detect": {
+     "p50": 114.9,
+     "p95": 140.5,
+     "mean": 119.0
+    },
+    "track": {
+     "p50": 1.8,
+     "p95": 2.6,
+     "mean": 1.9
+    },
+    "ppe": {
+     "p50": 0.4,
+     "p95": 0.6,
+     "mean": 0.4
+    },
+    "zones_incidents": {
+     "p50": 0.2,
+     "p95": 0.5,
+     "mean": 0.3
+    },
+    "total": {
+     "p50": 117.5,
+     "p95": 143.7,
+     "mean": 121.6
+    },
+    "jpeg": {
+     "p50": 1.6,
+     "p95": 2.2,
+     "mean": 1.7
+    }
+   }
+  },
+  {
+   "cameras": 4,
+   "seconds": 60.4,
+   "frames": 512,
+   "fps_total": 8.48,
+   "fps_per_camera": 2.12,
+   "resolutions": [
+    "960x540"
+   ],
+   "stage_ms": {
+    "detect": {
+     "p50": 462.5,
+     "p95": 541.6,
+     "mean": 462.3
+    },
+    "track": {
+     "p50": 2.7,
+     "p95": 4.1,
+     "mean": 2.8
+    },
+    "ppe": {
+     "p50": 0.3,
+     "p95": 0.6,
+     "mean": 0.3
+    },
+    "zones_incidents": {
+     "p50": 0.3,
+     "p95": 0.8,
+     "mean": 0.4
+    },
+    "total": {
+     "p50": 465.9,
+     "p95": 545.5,
+     "mean": 465.8
+    },
+    "jpeg": {
+     "p50": 1.6,
+     "p95": 2.3,
+     "mean": 1.7
+    }
+   }
+  }
+ ]
+}

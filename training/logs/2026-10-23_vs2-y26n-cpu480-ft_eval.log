@@ -1,0 +1,24 @@
+Ultralytics 8.4.183 🚀 Python-3.12.13 torch-2.14.1+cu130 CPU (Intel Xeon Processor @ 2.10GHz)
+YOLO26n summary (fused): 121 layers, 2,391,679 parameters, 0 gradients, 5.4 GFLOPs
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 867.0±433.3 MB/s, size: 130.7 KB)
+                   all        559       2992       0.78      0.516      0.568      0.302
+Speed: 1.0ms preprocess, 20.8ms inference, 0.0ms loss, 0.7ms postprocess per image
+Results saved to /home/claude/vision_sentinel_2.0_gmp/training/reports/eval/vs2-y26n-cpu480-ft
+Ultralytics 8.4.183 🚀 Python-3.12.13 torch-2.14.1+cu130 CPU (Intel Xeon Processor @ 2.10GHz)
+YOLO26n summary (fused): 121 layers, 2,391,679 parameters, 0 gradients, 5.4 GFLOPs
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 2636.0±922.5 MB/s, size: 176.9 KB)
+                   all        554       3233      0.766      0.525      0.573      0.297
+Speed: 0.7ms preprocess, 19.5ms inference, 0.0ms loss, 0.6ms postprocess per image
+Results saved to /home/claude/vision_sentinel_2.0_gmp/training/reports/eval/vs2-y26n-cpu480-ft-val
+{
+ "person": 0.7261,
+ "head": 0.6441,
+ "helmet": 0.9007,
+ "vest": 0.8883,
+ "gloves": 0.5546,
+ "hand": 0.222,
+ "boots": 0.6958,
+ "goggles": 0.4501,
+ "no_goggles": 0.0338,
+ "mean_mAP50": 0.5684
+}
