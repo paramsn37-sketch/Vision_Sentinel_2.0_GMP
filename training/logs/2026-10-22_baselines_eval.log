@@ -1,0 +1,112 @@
+Ultralytics 8.4.183 🚀 Python-3.12.13 torch-2.14.1+cu130 CPU (Intel Xeon Processor @ 2.10GHz)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 3101.9±932.7 MB/s, size: 172.1 KB)
+
+val: Scanning /home/claude/vsdata/merged/test/labels.cache... 559 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 559/559 111.6Mit/s 0.0s
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 2% ──────────── 1/35 10.0s/it 3.0s<5:41
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 5% ╸─────────── 2/35 5.5s/it 5.7s<3:02
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 8% ━─────────── 3/35 4.3s/it 8.6s<2:19
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 11% ━─────────── 4/35 4.1s/it 12.1s<2:06
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 14% ━╸────────── 5/35 3.6s/it 15.1s<1:49
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 17% ━━────────── 6/35 3.1s/it 17.4s<1:30
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 20% ━━────────── 7/35 3.3s/it 21.2s<1:32
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 22% ━━╸───────── 8/35 3.4s/it 24.9s<1:32
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 25% ━━━───────── 9/35 3.4s/it 28.1s<1:27
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 28% ━━━───────── 10/35 3.3s/it 31.2s<1:22
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 31% ━━━╸──────── 11/35 3.2s/it 34.3s<1:17
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 34% ━━━━──────── 12/35 3.3s/it 37.7s<1:15
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 37% ━━━━──────── 13/35 3.5s/it 41.8s<1:17
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 40% ━━━━╸─────── 14/35 3.4s/it 45.0s<1:11
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 42% ━━━━━─────── 15/35 3.1s/it 47.6s<1:02
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 45% ━━━━━─────── 16/35 3.2s/it 51.2s<1:02
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 48% ━━━━━╸────── 17/35 3.1s/it 54.0s<55.8s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 51% ━━━━━━────── 18/35 3.1s/it 57.1s<52.7s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 54% ━━━━━━╸───── 19/35 3.2s/it 1:00<50.7s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 57% ━━━━━━╸───── 20/35 3.4s/it 1:04<50.4s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 60% ━━━━━━━───── 21/35 3.5s/it 1:08<49.4s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 62% ━━━━━━━╸──── 22/35 3.5s/it 1:12<45.3s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 65% ━━━━━━━╸──── 23/35 3.7s/it 1:16<44.6s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 68% ━━━━━━━━──── 24/35 3.6s/it 1:20<39.9s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 71% ━━━━━━━━╸─── 25/35 3.8s/it 1:24<38.0s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 74% ━━━━━━━━╸─── 26/35 3.9s/it 1:28<34.9s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 77% ━━━━━━━━━─── 27/35 3.9s/it 1:32<31.3s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 80% ━━━━━━━━━╸── 28/35 3.9s/it 1:36<27.5s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 82% ━━━━━━━━━╸── 29/35 3.8s/it 1:40<23.0s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 85% ━━━━━━━━━━── 30/35 3.4s/it 1:42<17.1s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 88% ━━━━━━━━━━╸─ 31/35 3.5s/it 1:46<13.9s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 91% ━━━━━━━━━━╸─ 32/35 3.4s/it 1:49<10.3s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 94% ━━━━━━━━━━━─ 33/35 3.3s/it 1:52<6.7s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 97% ━━━━━━━━━━━╸ 34/35 3.2s/it 1:55<3.2s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 35/35 3.4s/it 1:58
+                   all        559        976      0.741      0.743       0.72      0.387
+Speed: 4.6ms preprocess, 182.8ms inference, 0.0ms loss, 12.4ms postprocess per image
+Results saved to /home/claude/vision_sentinel_2.0_gmp/training/reports/eval/baseline-yolo26n-coco
+{
+ "person": 0.72,
+ "head": 0.0,
+ "helmet": 0.0,
+ "vest": 0.0,
+ "gloves": 0.0,
+ "hand": 0.0,
+ "boots": 0.0,
+ "goggles": 0.0,
+ "no_goggles": 0.0,
+ "mean_mAP50": 0.08
+}
+Ultralytics 8.4.183 🚀 Python-3.12.13 torch-2.14.1+cu130 CPU (Intel Xeon Processor @ 2.10GHz)
+YOLO11m summary (fused): 125 layers, 20,091,712 parameters, 0 gradients, 68.1 GFLOPs
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 2753.3±657.0 MB/s, size: 220.1 KB)
+
+val: Scanning /home/claude/vsdata/merged/test/labels.cache... 559 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 559/559 111.6Mit/s 0.0s
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 2% ──────────── 1/35 32.2s/it 9.7s<18:15
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 5% ╸─────────── 2/35 19.6s/it 19.9s<10:46
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 8% ━─────────── 3/35 15.7s/it 30.6s<8:23
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 11% ━─────────── 4/35 13.5s/it 40.7s<6:57
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 14% ━╸────────── 5/35 12.1s/it 50.6s<6:04
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 17% ━━────────── 6/35 11.4s/it 1:00<5:29
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 20% ━━────────── 7/35 11.1s/it 1:11<5:11
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 22% ━━╸───────── 8/35 10.7s/it 1:21<4:50
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 25% ━━━───────── 9/35 10.6s/it 1:31<4:34
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 28% ━━━───────── 10/35 11.2s/it 1:44<4:40
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 31% ━━━╸──────── 11/35 12.0s/it 1:59<4:49
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 34% ━━━━──────── 12/35 12.5s/it 2:13<4:48
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 37% ━━━━──────── 13/35 12.2s/it 2:24<4:28
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 40% ━━━━╸─────── 14/35 12.0s/it 2:36<4:11
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 42% ━━━━━─────── 15/35 11.8s/it 2:47<3:55
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 45% ━━━━━─────── 16/35 11.8s/it 2:59<3:44
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 48% ━━━━━╸────── 17/35 11.5s/it 3:10<3:27
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 51% ━━━━━━────── 18/35 12.4s/it 3:25<3:30
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 54% ━━━━━━╸───── 19/35 12.9s/it 3:39<3:27
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 57% ━━━━━━╸───── 20/35 13.4s/it 3:53<3:20
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 60% ━━━━━━━───── 21/35 13.6s/it 4:08<3:11
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 62% ━━━━━━━╸──── 22/35 13.8s/it 4:22<3:00
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 65% ━━━━━━━╸──── 23/35 13.9s/it 4:36<2:47
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 68% ━━━━━━━━──── 24/35 14.6s/it 4:53<2:40
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 71% ━━━━━━━━╸─── 25/35 14.6s/it 5:07<2:26
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 74% ━━━━━━━━╸─── 26/35 14.5s/it 5:22<2:10
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 77% ━━━━━━━━━─── 27/35 14.3s/it 5:35<1:54
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 80% ━━━━━━━━━╸── 28/35 14.2s/it 5:49<1:39
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 82% ━━━━━━━━━╸── 29/35 13.9s/it 6:03<1:24
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 85% ━━━━━━━━━━── 30/35 13.7s/it 6:16<1:08
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 88% ━━━━━━━━━━╸─ 31/35 12.6s/it 6:26<50.3s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 91% ━━━━━━━━━━╸─ 32/35 11.8s/it 6:37<35.4s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 94% ━━━━━━━━━━━─ 33/35 11.2s/it 6:47<22.4s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 97% ━━━━━━━━━━━╸ 34/35 10.8s/it 6:57<10.8s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 35/35 12.2s/it 7:06
+                   all        559        976      0.732      0.791      0.745      0.424
+Speed: 5.1ms preprocess, 734.9ms inference, 0.0ms loss, 10.0ms postprocess per image
+Results saved to /home/claude/vision_sentinel_2.0_gmp/training/reports/eval/baseline-v1-yolo11m
+{
+ "person": 0.7452,
+ "head": 0.0,
+ "helmet": 0.0,
+ "vest": 0.0,
+ "gloves": 0.0,
+ "hand": 0.0,
+ "boots": 0.0,
+ "goggles": 0.0,
+ "no_goggles": 0.0,
+ "mean_mAP50": 0.0828
+}

@@ -117,3 +117,15 @@ Short ADRs. Format: context → decision → consequences. Newest at the bottom.
   frame cost about 30 ms more on the CPU (measured in `docs/eval/performance.md`). Grad-CAM for a person box uses
   the trained model's person head, which may explain a slightly different box; EigenCAM is the fallback when no
   anchor matches.
+
+## ADR-0014 — Second CPU stage instead of restarting the full run
+- **Context:** the owner asked for a better model. No GPU is available to the build; the build machine is reclaimed
+  when idle, so one job can run for at most about two hours at a time. Resuming `vs2-y26n-cpu480` would restore its
+  80-epoch schedule (about 8 more hours) with a learning rate still near its peak.
+- **Decision:** a second stage `vs2-y26n-cpu480-ft` starts from `vs2-y26n` with its own short schedule
+  (`training/configs/hyp_cpu_finetune.yaml`: 24 epochs, AdamW lr 0.0008 cosine-decayed to 5 %, 1 warm-up epoch,
+  mosaic off for the last 8 epochs), same data and image size. It runs in chunks of under two hours with
+  `train.py --resume`. The result is promoted only if it beats `vs2-y26n` on the frozen test split; otherwise it is
+  recorded and `vs2-y26n` stays.
+- **Consequences:** about 3.5 hours of CPU. Comparable to the first run (same data, split, image size, evaluation
+  script). A full GPU run (`train_colab.ipynb`) remains the real fix for the under-trained classes.

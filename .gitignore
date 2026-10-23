@@ -5,6 +5,7 @@ __pycache__/
 node_modules/
 dist/
 logs/
+!training/logs/
 data/raw/
 data/merged/
 data/xai/

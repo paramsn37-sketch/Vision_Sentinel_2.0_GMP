@@ -1,0 +1,38 @@
+{
+ "boots": {
+  "false_positives": 73,
+  "false_negatives": 86
+ },
+ "gloves": {
+  "false_positives": 39,
+  "false_negatives": 107
+ },
+ "goggles": {
+  "false_positives": 25,
+  "false_negatives": 114
+ },
+ "hand": {
+  "false_positives": 136,
+  "false_negatives": 212
+ },
+ "head": {
+  "false_positives": 177,
+  "false_negatives": 302
+ },
+ "helmet": {
+  "false_positives": 40,
+  "false_negatives": 36
+ },
+ "no_goggles": {
+  "false_positives": 88,
+  "false_negatives": 46
+ },
+ "person": {
+  "false_positives": 209,
+  "false_negatives": 352
+ },
+ "vest": {
+  "false_positives": 24,
+  "false_negatives": 46
+ }
+}

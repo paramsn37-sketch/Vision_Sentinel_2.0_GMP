@@ -1,0 +1,40 @@
+Ultralytics 8.4.183 🚀 Python-3.12.13 torch-2.14.1+cu130 CPU (Intel Xeon Processor @ 2.10GHz)
+YOLO26n summary (fused): 121 layers, 2,391,679 parameters, 0 gradients, 3.0 GFLOPs
+
+PyTorch: starting from '/home/claude/vision_sentinel_2.0_gmp/models/vs2-y26n.pt' with input shape (1, 3, 480, 480) BCHW and output shape(s) (1, 13, 4725) (5.2 MB)
+
+ONNX: starting export with onnx 1.23.2 opset 18...
+ONNX: slimming with onnxslim 0.1.98...
+ONNX: export success ✅ 1.3s, saved as '/home/claude/vision_sentinel_2.0_gmp/models/vs2-y26n.onnx' (9.3 MB)
+
+Export complete (1.4s)
+Results saved to /home/claude/vision_sentinel_2.0_gmp/models/vs2-y26n.onnx
+Predict:         yolo predict task=detect model=/home/claude/vision_sentinel_2.0_gmp/models/vs2-y26n.onnx imgsz=480
+Validate:        yolo val task=detect model=/home/claude/vision_sentinel_2.0_gmp/models/vs2-y26n.onnx imgsz=480 data=/home/claude/vision_sentinel_2.0_gmp/data/merged/data.resolved.yaml
+Visualize:       https://netron.app
+{
+ "name": "vs2-y26n",
+ "classes": [
+  "person",
+  "head",
+  "helmet",
+  "vest",
+  "gloves",
+  "hand",
+  "boots",
+  "goggles",
+  "no_goggles"
+ ],
+ "imgsz": 480,
+ "thresholds": {
+  "person": 0.361,
+  "head": 0.303,
+  "helmet": 0.287,
+  "vest": 0.317,
+  "gloves": 0.253,
+  "hand": 0.09,
+  "boots": 0.213,
+  "goggles": 0.271,
+  "no_goggles": 0.038
+ }
+}
